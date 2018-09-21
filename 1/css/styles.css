@@ -1,0 +1,49 @@
+#header {
+	color: lightblue;
+	float: top;
+	height: 100px;
+}
+
+#header a{
+	text-decoration:none;
+}
+
+#menubar {
+	float: left;
+	color:blue;
+	background-color:green;
+	width: 200px;
+}
+
+#menubar ul {
+	list-style-type: none;
+	line-height: 1.8;
+	font-family: Sans-serif, Times;
+}
+
+#menubar ul li a {
+	text-decoration: none;
+}
+
+#menubar ul .selected {
+	background-color:red;
+	color:white;
+	
+}
+
+#centralpane {
+	background-color:lightgrey;
+}
+
+#content {
+	float:center;
+	color:red;
+	background-color:violet;
+}
+
+#footer {
+	float: bottom;
+	color:white;
+	background-color:grey;
+	clear:both;
+}

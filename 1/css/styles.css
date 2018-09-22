@@ -12,7 +12,7 @@ a{
 }
 
 h1 {
-	display: inline;
+	display: inline; /* Para que el header no ocupe todo el ancho*/
 }
 
 #header {
@@ -62,7 +62,7 @@ h1 {
 	background-color:  #e74d4d ;
 	padding:10px;
 	height: 100%;
-	overflow: scroll;
+	overflow: scroll; /*Si se superpone algo, crea barra de scroll*/
 }
 
 #footer {

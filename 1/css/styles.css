@@ -1,49 +1,74 @@
-#header {
-	color: lightblue;
-	float: top;
-	height: 100px;
+#globalContainer {
+	background-color:  #e74d4d ;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 100vh;
 }
 
-#header a{
+a{
 	text-decoration:none;
+	color: inherit;
 }
+
+h1 {
+	display: inline;
+}
+
+#header {
+	color: white;
+	background-color: #ff0000;
+	float: top;
+	height: 50px;
+	text-align: center;
+	font-family: sans-serif, courier new, arial;
+}
+
+
+#headerAccount {
+	float:right;
+	text-align: rigth;
+}
+
 
 #menubar {
 	float: left;
-	color:blue;
-	background-color:green;
-	width: 200px;
+	color:white;
+	background-color:#ed2e2e  ;
+	width: 150px;
+	height: 100%;
+	text-align: left;
 }
 
 #menubar ul {
 	list-style-type: none;
 	line-height: 1.8;
-	font-family: Sans-serif, Times;
-}
-
-#menubar ul li a {
-	text-decoration: none;
+	font-family: courier new, arial;
 }
 
 #menubar ul .selected {
-	background-color:red;
-	color:white;
+	font-weight: 1000;
 	
 }
 
 #centralpane {
-	background-color:lightgrey;
+	font-family: garamond, courier new, arial, helvetica;
+	height: 95%;
 }
 
 #content {
 	float:center;
-	color:red;
-	background-color:violet;
+	color:white;
+	background-color:  #e74d4d ;
+	padding:10px;
+	height: 100%;
+	overflow: scroll;
 }
 
 #footer {
 	float: bottom;
-	color:white;
-	background-color:grey;
+	text-align: right;
+	color:red;
+	background-color: #fff;
 	clear:both;
 }

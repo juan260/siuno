@@ -17,11 +17,12 @@ h1 {
 
 #header {
 	color: white;
-	background-color: #ff0000;
+	background-color: #285238;
 	float: top;
 	height: 50px;
 	text-align: center;
 	font-family: sans-serif, courier new, arial;
+	background-image: linear-gradient(to bottom,#285238, #08a045);
 }
 
 
@@ -34,7 +35,11 @@ h1 {
 #menubar {
 	float: left;
 	color:white;
-	background-color:#ed2e2e  ;
+	background-color:#036016;
+	background-image: linear-gradient(to right, #036016, #08a045);
+	/*background-image: linear-gradient(to right, #036016 10%, #08a045);
+	background-image: linear-gradient(to bottom, #036016 10%, #08a045);
+	background-image: linear-gradient(to left, #036016 10%, #08a045);*/
 	width: 150px;
 	height: 100%;
 	text-align: left;
@@ -59,7 +64,7 @@ h1 {
 #content {
 	float:center;
 	color:white;
-	background-color:  #e74d4d ;
+	background-color: #08a045 ;
 	padding:10px;
 	height: 100%;
 	overflow: scroll;
@@ -68,7 +73,7 @@ h1 {
 #footer {
 	float: bottom;
 	text-align: right;
-	color:red;
+	color: #03440c;
 	background-color: #fff;
 	clear:both;
 }

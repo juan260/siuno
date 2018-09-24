@@ -1,9 +1,9 @@
 #globalContainer {
-	background-color:  #e74d4d ;
+	background-color:  #036016 ;
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	height: 100vh;
+	height: 85vh;
 }
 
 a{
@@ -13,6 +13,9 @@ a{
 
 h1 {
 	display: inline-grid; /* Para que el header no ocupe todo el ancho*/
+}
+h2{
+	text-align: center;
 }
 
 #header {
@@ -75,6 +78,7 @@ h1 {
 #menubar {
 	float: left;
 	color:white;
+	padding:10px;
 	background-color:#036016;
 	background-image: linear-gradient(to right, #036016, #08a045);
 	/*background-image: linear-gradient(to right, #036016 10%, #08a045);
@@ -92,10 +96,15 @@ h1 {
 	
 }
 
-#menubar ul li .selected {
+.selected{
 	font-weight: 1000;
-	border: 2px solid green;
 }
+
+#account{
+	padding: 10px;
+	/*display: inline-grid;*/
+	float: right; 
+} 
 
 #menubar ul li {
 	border-bottom: 2px solid white;
@@ -118,6 +127,7 @@ h1 {
 
 #footer {
 	float: bottom;
+	margin: 10px;
 	text-align: right;
 	color: #03440c;
 	background-color: #fff;

@@ -8,7 +8,15 @@
 	<body>
 		<div id="globalContainer">
 			<div id="header">
+				
 				<a href="index.html"><h1>Peordede</h1></a>
+				
+				<div id="searchbar">
+				<form>
+					<input type="text" name="busqueda" placeholder="película">
+					<input type="submit" value="Buscar">
+				</form>
+				</div>
 				<div id="account">
 					Bienvenido Juan Luis!
 					<a href="cuenta.html"><img src="../imgs/iconoUsuario.png"alt="Icono Usuario" height="40"	width="40"></a>
@@ -25,22 +33,30 @@
 						<li> <a href="index.html">Home</a></li>
 						<li> <a href="biblioteca.html">Biblioteca</a></li>
 						<li> <a href="carrito.html">Carrito</a></li>
-						<li   class="selected"> <a href="contacto.html">Contacto y ayuda</a></li>
+						<li> <a href="contacto.html">Contacto y ayuda</a></li>
 					</ul>
 				</div>
 				<div id="content">
-					<p>Peordede es tu página de videoclub favorita, si quieres contactar con nosotros puedes hacerlo de la siguiente manera:</p>
-					<ul>
-						<li> Twitter: peordedeOficial </li>
-						<li> Instagram: peordedeInstagram </li>
-						<li> Correo: peordede@info.com </li>
-					</ul>
-					¿Todo lo que hacemos es legal?
-					<br> ¡Por supuesto!
-					<br> Somos Juan y Luis (Por si no lo habías visto abajo).
-					<br> ¡Siéntete libre de preguntarnos cualquier cosa!
-					<br><br> PD: no nos contactes para pedir bajada de precios, son los estipulados por la ISO
-
+					<h2> Historial de compra: </h2>
+					<table>
+							<tr>
+								<td>
+										<div id="film">
+											<a href="pelicula.html"> 
+												<img src="../imgs/Searching.jpg"
+													alt="Searching"
+													height="400"
+													width="250">
+											</a>
+											<div id="filmtext">
+												<b>Searching</b> (2018) <br>
+												Género: drama <br>
+												7€
+											</div>
+										</div>
+								</td>
+						</tr>
+					</table>
 				</div>
 
 			</div>

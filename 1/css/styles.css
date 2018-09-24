@@ -12,25 +12,65 @@ a{
 }
 
 h1 {
-	display: inline; /* Para que el header no ocupe todo el ancho*/
+	display: inline-grid; /* Para que el header no ocupe todo el ancho*/
 }
 
 #header {
 	color: white;
 	background-color: #285238;
 	float: top;
-	height: 50px;
-	text-align: center;
+	height: 70px;
+	text-align: left;
 	font-family: sans-serif, courier new, arial;
 	background-image: linear-gradient(to bottom,#285238, #08a045);
 }
 
+#searchbar {
+	float: center;
+	padding: 10px;
+	display: inline-grid;
+	text-align: center;
+
+}
+
+#searchbar button {
+	display: inline-block;
+	text-align: right;
+	float: right;
+
+}
+
+#searchbar form {
+	display: inline-block;
+	text-align: left;
+	float: left;
+}
+
+#header a {
+	margin: 20px;
+	vertical-align: -10px;
+}
+
+#headerAccount a {
+	vertical-align: -10px;
+}
 
 #headerAccount {
 	float:right;
-	text-align: rigth;
+	text-align: right;
 }
 
+#film {
+	padding: 20px;
+	width: 300px;
+	text-align: center;
+}
+
+#filmtext {
+	padding: 20px;
+	line-height: 20px;
+	text-align: center;
+}
 
 #menubar {
 	float: left;
@@ -49,11 +89,17 @@ h1 {
 	list-style-type: none;
 	line-height: 1.8;
 	font-family: courier new, arial;
+	
 }
 
-#menubar ul .selected {
+#menubar ul li .selected {
 	font-weight: 1000;
-	
+	border: 2px solid green;
+}
+
+#menubar ul li {
+	border-bottom: 2px solid white;
+	border-top
 }
 
 #centralpane {
@@ -63,8 +109,8 @@ h1 {
 
 #content {
 	float:center;
-	color:white;
-	background-color: #08a045 ;
+	color:rgb(0, 0, 0);
+	background-color: #a9fdcb ;
 	padding:10px;
 	height: 100%;
 	overflow: scroll; /*Si se superpone algo, crea barra de scroll*/

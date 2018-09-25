@@ -26,11 +26,22 @@ h2{
 	text-align: left;
 	font-family: sans-serif, courier new, arial;
 	background-image: linear-gradient(to bottom,#285238, #08a045);
+	display: flex;
+	align-items:center;
+	justify-content: space-between;
 }
+
+#logo {
+	display:flex;
+	direction:row;
+	width: 30%;
+}
+
 
 #searchbar {
 	float: center;
 	padding: 10px;
+	margin-top: 10px;
 	display: inline-grid;
 	text-align: center;
 
@@ -54,6 +65,23 @@ h2{
 	vertical-align: -10px;
 }
 
+#sinopsis {
+	line-height:17px;
+}
+
+#filters {
+	display: flex;
+	align-items:center;
+	padding: 20px;
+	margin: 20px;
+	justify-content: space-around;
+	flex-direction: row;
+	border: solid rgb(119, 179, 119) 1px;
+	border-radius: 10px;
+}
+
+
+
 #headerAccount a {
 	vertical-align: -10px;
 }
@@ -67,6 +95,8 @@ h2{
 	padding: 20px;
 	width: 300px;
 	text-align: center;
+	border: solid rgb(119, 179, 119) 1px;
+	border-radius: 10px;
 }
 
 #filmtext {

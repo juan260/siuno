@@ -60,6 +60,7 @@ h2{
 	float: left;
 }
 
+
 #header a {
 	margin: 20px;
 	vertical-align: -10px;
@@ -79,6 +80,22 @@ h2{
 	border: solid rgb(119, 179, 119) 1px;
 	border-radius: 10px;
 }
+
+#registro {
+	border: solid 1px green;
+	border-radius: 30px;
+	margin-left:40px;
+}
+
+#registro form {
+	margin-left:30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-left:10px;
+	border-left: dotted 3px black;
+	line-height: 35px;
+}
+
 
 
 

@@ -1,11 +1,23 @@
 /*Juan Riera y Luis Cárabe*/
 
+html {
+	overflow-y: auto;
+	padding-right:0px;
+	margin-right:0px;
+	left:0;
+	margin-left:0px;
+	background-color:rgb(53, 53, 53);
+	min-width: 600px;
+	background-color: #a9fdcb ;
+}
+
 #globalContainer {
-	background-color:  #036016 ;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	height: 85vh;
+	left:0;
+	margin-left:0px;
+	margin-right: 0px;
+	padding-right:0px;
+
+	width: 100vw;
 }
 
 a{
@@ -22,12 +34,14 @@ h2{
 
 #header {
 	color: white;
-	background-color: #285238;
-	float: top;
-	height: 70px;
+	background-color: #1c0099;
+	position: fixed;
+	top:0;
+	left:0;
+	height: 80px;
+	width: 100%;
 	text-align: left;
 	font-family: sans-serif, courier new, arial;
-	background-image: linear-gradient(to bottom,#285238, #08a045);
 	display: flex;
 	align-items:center;
 	justify-content: space-between;
@@ -41,23 +55,21 @@ h2{
 
 
 #searchbar {
-	float: center;
 	padding: 10px;
-	margin-top: 10px;
 	display: inline-grid;
 	text-align: center;
 
 }
 
 #searchbar button {
-	display: inline-block;
+	display: flex;
 	text-align: right;
 	float: right;
 
 }
 
 #searchbar form {
-	display: inline-block;
+	display: flex;
 	text-align: left;
 	float: left;
 }
@@ -75,8 +87,11 @@ h2{
 #filters {
 	display: flex;
 	align-items:center;
+	flex-wrap:wrap;
 	padding: 20px;
 	margin: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
 	justify-content: space-around;
 	flex-direction: row;
 	border: solid rgb(119, 179, 119) 1px;
@@ -101,9 +116,7 @@ h2{
 
 
 
-#headerAccount a {
-	vertical-align: -10px;
-}
+
 
 #headerAccount {
 	float:right;
@@ -111,11 +124,14 @@ h2{
 }
 
 #film {
-	padding: 20px;
+	padding: 10px;
+	padding-top:20px;
+	margin-bottom:20px;
 	width: 300px;
 	text-align: center;
 	border: solid rgb(119, 179, 119) 1px;
 	border-radius: 10px;
+	overflow-y: auto;
 }
 
 #filmtext {
@@ -126,16 +142,30 @@ h2{
 
 #menubar {
 	float: left;
-	color:white;
-	padding:10px;
-	background-color:#036016;
-	background-image: linear-gradient(to right, #036016, #08a045);
+	background-color:rgb(255, 108, 123);
+	margin-top:12px;
 	/*background-image: linear-gradient(to right, #036016 10%, #08a045);
 	background-image: linear-gradient(to bottom, #036016 10%, #08a045);
 	background-image: linear-gradient(to left, #036016 10%, #08a045);*/
 	width: 150px;
 	height: 100%;
+	position:fixed;
+	left:0;
 	text-align: left;
+	display: flex;
+}
+
+#menubarlist {
+	color:white;
+	
+
+	padding:10px;
+}
+
+#menubarmargin {
+	width: 40px;
+	height: 100%;
+	background-color:red;
 }
 
 #menubar ul {
@@ -145,40 +175,76 @@ h2{
 	
 }
 
-.selected{
-	font-weight: 1000;
-}
 
-#account{
-	padding: 10px;
-	/*display: inline-grid;*/
-	float: right; 
-} 
 
 #menubar ul li {
 	border-bottom: 2px solid white;
-	border-top
 }
 
+
+#menubar ul .selected{
+	font-weight: 1000;
+	background-color: white;
+	color: black;
+	line-height: 2.2;
+	border: 1px solid black;
+	border-bottom: 1px solid black;
+	border-radius: 10px;
+	padding-left: 10px;
+
+}
+
+
+#account{
+	padding: 10px;
+	padding-top:5px;
+	float: right; 
+	
+} 
+
 #centralpane {
+	padding-top: 60px;
 	font-family: garamond, courier new, arial, helvetica;
 	height: 95%;
+	margin-left:0px;
+
+	left:0px;
 }
 
 #content {
-	float:center;
 	color:rgb(0, 0, 0);
-	background-color: #a9fdcb ;
-	padding:10px;
+	background-color: #B1EDE8 ;
+	
+	left:0px;
+	margin-left:0px;
+	padding-right:0px;
 	height: 100%;
-	overflow: scroll; /*Si se superpone algo, crea barra de scroll*/
+	overflow: auto; /*Si se superpone algo, crea barra de scroll*/
+	padding:10px;
+	padding-left: 190px;
+	
+}
+
+#filmtable {
+	display:flex;
+	flex-wrap: wrap;
+	align-items:center;
+	justify-content: space-between;
 }
 
 #footer {
 	float: bottom;
-	margin: 10px;
+	padding-right: 10px;
+	padding-top:5px;
+	padding-bottom:5px;
+
 	text-align: right;
 	color: #03440c;
 	background-color: #fff;
 	clear:both;
+	position: fixed;
+	bottom: 0;
+	left:0;
+	width: 100%
+
 }

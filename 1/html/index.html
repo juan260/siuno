@@ -1,6 +1,8 @@
 <!--Juan Riera y Luis Carabe-->
 
 <!DOCTYPE html>
+
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -11,14 +13,20 @@
 		<div id="globalContainer">
 			<div id="header">
 					<a href="index.html">
-							<div id="logo">
-							<img src="../imgs/Camera logo.png" width="60px" height="50px">
-							<img src="../imgs/Peordede.png" width="170px" height="50px"></div>
-						</a>
-				<div id="headerAccount">
-					<a href="iniciosesion.html">Inicio sesión</a> 
-					<br>
-					<a href="registro.html">Registro</a>
+						<div id="logo">
+						<img src="../imgs/Camera logo.png" width="60px" height="50px">
+						<img src="../imgs/Peordede.png" width="170px" height="50px"></div>
+					</a>
+					<div id="searchbar">
+						<form>
+							<input type="text" name="busqueda">
+							<input type="image" src="../imgs/Search_icon.png" height="30px" value="Buscar">
+						</form>
+					</div>
+					<div id="account">
+						Bienvenido Juan Luis!
+						<a href="cuenta.html"><img src="../imgs/iconoUsuario.png"alt="Icono Usuario" height="40"	width="40"></a>
+					</div>
 				</div>
 			</div>
 
@@ -26,25 +34,113 @@
 			<div id="centralpane">
 			
 				<div id="menubar">
-				
-					<ul>
+					<div id="menubarmargin">
 						
-						<li class="selected"> 
-							<a href="index.html">Home</a></li>
-						<li> <a href="biblioteca.html">Biblioteca</a></li>
-						<li> <a href="carrito.html">Carrito</a></li>
-						<li> <a href="contacto.html">Contacto y ayuda</a></li>
+					</div>
+					<div id="menubarlist">
+						<ul>
 						
-					</ul>
+							<li   class="selected"> <a href="index.html">Pel&iacuteculas</a></li>
+							<li> <a href="carrito.html">Carrito</a></li>
+							<li> <a href="contacto.html">Contacto y ayuda</a></li>
+						</ul>
+					</div>
 				</div>
 				<div id="content">
-					<h2>Bienvenid@ a Peordede!</h2>
+					<div id="filters">
+						<div>
+							G&eacuteneros:
+							<select>
+								<option value="none">-</option>
+								<option value="drama">Drama</option>
+								<option value="comedia">Comedia</option>
+								<option value="terror">Terror</option>
+							</select>
+						</div>
+						<div>
+							Año:
+							<select>
+								<option value="none">-</option>
+								<option value="2018">2018</option>
+								<option value="2002">2002</option>
+							</select>
+						</div>
+						<div>
+							Inicial:
+							<select>
+								<option value="none">-</option>
+								<option value="am">A-M</option>
+								<option value="nz">N-Z</option>
+							</select>
+						</div>
+						<button>
+							Aplicar
+						</button>
+					</div>
+					<div id="filmtable">
+
+						<div id="film">
+							<a href="pelicula.html"> 
+								<img src="../imgs/Bad reputation.jpg"
+									alt="Bad Reputation"
+										height="400"
+										width="250">
+								</a>
+								<div id="filmtext">
+									<b>Bad Reputation</b> (2018) <br>
+									Género: documental <br>
+									6€
+								</div>
+							</div>
+
+
+							<div id="film">
+								<a href="pelicula.html"> 
+									<img src="../imgs/Hielo.jpg"
+										alt="SmallFoot"
+										height="400"
+										width="250">
+								</a>
+								<div id="filmtext">
+									<b>SmallFoot</b> (2018) <br>
+									Género: infantil <br>
+									11€
+								</div>
+							</div>
+							
+								<div id="film">
+									<a href="pelicula.html"> 
+										<img src="../imgs/The nun.jpg"
+											alt="La monja"
+											height="400"
+											width="250">
+									</a>
+									<div id="filmtext">
+										<b>La monja</b> (2018) <br>
+										Género: terror <br>
+										15€
+									</div>
+								</div>
+								
+							<div id="film">
+								<a href="pelicula.html"> 
+									<img src="../imgs/Searching.jpg"
+										alt="Searching"
+										height="400"
+										width="250">
+								</a>
+								<div id="filmtext">
+									<b>Searching</b> (2018) <br>
+									Género: drama <br>
+									7€
+								</div>
+							</div>
 
 				</div>
 
 			</div>
 			<div id="footer">
-				Juan Riera & Luis Cárabe &copy;
+				Juan Riera & Luis Cárabe &copy; Name by Oscar Pinto &nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
 	</body>

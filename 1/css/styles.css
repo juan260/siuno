@@ -6,9 +6,8 @@ html {
 	margin-right:0px;
 	left:0;
 	margin-left:0px;
-	background-color:rgb(53, 53, 53);
+	background-color:#B1EDE8;
 	min-width: 600px;
-	background-color: #a9fdcb ;
 }
 
 #globalContainer {
@@ -99,6 +98,7 @@ h2{
 }
 
 #registro {
+	display: flex;
 	border: solid 1px green;
 	border-radius: 30px;
 	margin-left:40px;
@@ -142,7 +142,7 @@ h2{
 
 #menubar {
 	float: left;
-	background-color:rgb(255, 108, 123);
+	background-color: #ed6a5a;
 	margin-top:12px;
 	/*background-image: linear-gradient(to right, #036016 10%, #08a045);
 	background-image: linear-gradient(to bottom, #036016 10%, #08a045);
@@ -165,7 +165,7 @@ h2{
 #menubarmargin {
 	width: 40px;
 	height: 100%;
-	background-color:red;
+	background-color:inherit;
 }
 
 #menubar ul {
@@ -218,6 +218,7 @@ h2{
 	left:0px;
 	margin-left:0px;
 	padding-right:0px;
+	margin-bottom:20px;
 	height: 100%;
 	overflow: auto; /*Si se superpone algo, crea barra de scroll*/
 	padding:10px;
@@ -235,8 +236,8 @@ h2{
 #footer {
 	float: bottom;
 	padding-right: 10px;
-	padding-top:5px;
 	padding-bottom:5px;
+
 
 	text-align: right;
 	color: #03440c;

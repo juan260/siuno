@@ -8,6 +8,12 @@ html {
 	margin-left:0px;
 	background-color:#B1EDE8;
 	min-width: 600px;
+	
+}
+
+body {
+	width:100%;
+	margin-left: calc(-50vw + 50%);
 }
 
 #globalContainer {
@@ -15,8 +21,6 @@ html {
 	margin-left:0px;
 	margin-right: 0px;
 	padding-right:0px;
-
-	width: 100vw;
 }
 
 a{
@@ -27,6 +31,7 @@ a{
 h1 {
 	display: inline-grid; /* Para que el header no ocupe todo el ancho*/
 }
+
 h2{
 	text-align: center;
 }
@@ -44,12 +49,14 @@ h2{
 	display: flex;
 	align-items:center;
 	justify-content: space-between;
+	box-shadow: 5px 5px 8px black;
+	
 }
 
 #logo {
 	display:flex;
 	direction:row;
-	width: 30%;
+	
 }
 
 
@@ -102,6 +109,7 @@ h2{
 	border: solid 1px green;
 	border-radius: 30px;
 	margin-left:40px;
+	margin-right:30px;
 }
 
 #registro form {
@@ -147,30 +155,37 @@ h2{
 	/*background-image: linear-gradient(to right, #036016 10%, #08a045);
 	background-image: linear-gradient(to bottom, #036016 10%, #08a045);
 	background-image: linear-gradient(to left, #036016 10%, #08a045);*/
-	width: 150px;
+	
 	height: 100%;
 	position:fixed;
 	left:0;
 	text-align: left;
 	display: flex;
+	
+	box-shadow: 2px 2px 20px black;
 }
 
 #menubarlist {
 	color:white;
-	
-
+	width: 110px;
 	padding:10px;
+	text-align:left;
 }
 
 #menubarmargin {
 	width: 40px;
 	height: 100%;
 	background-color:inherit;
+	background-image: linear-gradient(to right, #a34848 10%, #ed6a5a);
+	padding-right:0px;
+	margin-right:0px;
 }
 
 #menubar ul {
 	list-style-type: none;
 	line-height: 1.8;
+	margin-left: 0px;
+	padding-left: 0px;
 	font-family: courier new, arial;
 	
 }
@@ -191,6 +206,7 @@ h2{
 	border-bottom: 1px solid black;
 	border-radius: 10px;
 	padding-left: 10px;
+	padding-right:10px;
 
 }
 
@@ -207,14 +223,12 @@ h2{
 	font-family: garamond, courier new, arial, helvetica;
 	height: 95%;
 	margin-left:0px;
-
 	left:0px;
 }
 
 #content {
 	color:rgb(0, 0, 0);
 	background-color: #B1EDE8 ;
-	
 	left:0px;
 	margin-left:0px;
 	padding-right:0px;
@@ -223,22 +237,21 @@ h2{
 	overflow: auto; /*Si se superpone algo, crea barra de scroll*/
 	padding:10px;
 	padding-left: 190px;
-	
+	line-height: 20px;
 }
 
 #filmtable {
 	display:flex;
 	flex-wrap: wrap;
 	align-items:center;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 #footer {
 	float: bottom;
-	padding-right: 10px;
+	margin-right: 20px;
 	padding-bottom:5px;
-
-
+	padding-top:5px;
 	text-align: right;
 	color: #03440c;
 	background-color: #fff;
@@ -246,6 +259,8 @@ h2{
 	position: fixed;
 	bottom: 0;
 	left:0;
-	width: 100%
+	width:100%;
+	font-family: sans-serif, courier new, arial;
+	font-size: 15px;
 
 }

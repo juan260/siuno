@@ -1,0 +1,84 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <title> Home</title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="index.html">
+              <div id="logo">
+              <img src="../imgs/Camera_logo.png" alt="P" width="60" height="50">
+              <img src="../imgs/Peordede.png" alt="Peordede" width="170" height="50"></div>
+            </a>
+        <div id="account">
+          Bienvenido Juan Luis!
+          <a href="cuenta.html"><img src="../imgs/iconoUsuario.png" alt="Icono Usuario" height="40" width="40"></a>
+        </div>
+    
+      </div>
+
+    
+      <div id="centralpane">
+      
+          <div id="menubar">
+              <div id="menubarmargin">
+                
+              </div>
+              <div id="menubarlist">
+                <ul>
+                
+                  <li> <a href="index.html">Películas</a></li>
+                  <li   class="selected"> <a class="a-selected" href="carrito.html">Carrito</a></li>
+                  <li> <a href="contacto.html">Contacto y ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+        <div id="content">
+          <h2>Carrito:</h2>
+          <div id="filmtable">
+                <div class="film">
+                  <a href="pelicula.html"> 
+                    <img src="../imgs/Bad_reputation.jpg"
+                      alt="Bad Reputation"
+                      height="400"
+                      width="250">
+                  </a>
+                  <div class="filmtext">
+                    <b>Bad Reputation</b> (2018) <br>
+                    Género: documental <br>
+                    6€
+                  </div>
+                </div>
+                  <div class="film">
+                    <a href="pelicula.html"> 
+                      <img src="../imgs/Hielo.jpg"
+                        alt="SmallFoot"
+                        height="400"
+                        width="250">
+                    </a>
+                    <div class="filmtext">
+                      <b>SmallFoot</b> (2018) <br>
+                      Género: infantil <br>
+                      11€
+                    </div>
+                  </div>
+                </div>
+          <br> <h2 class="h2-left"> Suma: 17€ </h2>
+          <button onclick="location.href='finalizarCompra.html'" type="button">Finalizar compra</button>
+          <br>
+
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>
+

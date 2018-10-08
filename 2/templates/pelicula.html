@@ -1,0 +1,81 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <title> Película </title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+        
+          <a href="/">
+              <div id="logo">
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
+            </a>
+        <div id="account">
+          Bienvenido Juan Luis!
+          <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+        </div>
+      </div>
+
+    
+      <div id="centralpane">
+      
+          <div id="menubar">
+              <div id="menubarmargin">
+                
+              </div>
+              <div id="menubarlist">
+                <ul>
+                
+                  <li> <a href="/">Películas</a></li>
+                  <li> <a href="../carrito">Carrito</a></li>
+                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+        <div id="content">
+
+          <table>
+            <tr>
+                <td>
+                    <div class="film">
+                      <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                        alt="{{ film['titulo'] }}"
+                        height="400"
+                        width="250">
+                      <div class="filmtext">
+                        <b>{{ film['titulo'] }}</b> ({{ film['anno'] }}) <br>
+                        Género: {{ film['genero'] }} <br>
+                        {{ film['precio'] }}€
+                      </div>
+                    </div>
+                  </td>
+                  <td><div id=sinopsis>
+                    <b>Sinopsis:</b> <br>
+                    {{ film['sinopsis'] }}
+                    <br><br>
+                    <b>Director:</b> {{ film['director'] }}
+                    <br><br>
+                    <b>Valoración:</b> {{film['valoracion']}}/5
+                    <br><br>
+                    <button onclick="location.href='../carrito'" type = "button"> Añadir a carrito </button>
+                  </div></td>
+                    
+              </tr>
+          </table>
+
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>
+

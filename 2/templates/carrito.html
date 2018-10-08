@@ -1,0 +1,73 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <title> Carrito </title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="/">
+              <div id="logo">
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" width="170" height="50"></div>
+            </a>
+        <div id="account">
+          Bienvenido Juan Luis!
+          <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+        </div>
+    
+      </div>
+
+    
+      <div id="centralpane">
+      
+          <div id="menubar">
+              <div id="menubarmargin">
+                
+              </div>
+              <div id="menubarlist">
+                <ul>
+                
+                  <li> <a href="/">Películas</a></li>
+                  <li   class="selected"> <a class="a-selected" href="../carrito">Carrito</a></li>
+                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+        <div id="content">
+          <h2>Carrito:</h2>
+          <div id="filmtable">
+            {% for film in films %}
+            <div class="film">
+              <a href="/pelicula/{{ film['url']}}">
+                <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                  alt="{{ film['titulo'] }}"
+                    height="400"
+                    width="250">
+                </a>
+                <div class="filmtext">
+                  <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
+                  Género: {{ film['genero'] }} <br>
+                  {{ film['precio'] }}€
+                </div>
+              </div>
+              {% endfor %}
+        </div>
+          <br> <h2 class="h2-left"> Suma: 17€ </h2>
+          <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
+          <br>
+
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>
+

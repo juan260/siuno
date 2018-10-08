@@ -6,27 +6,27 @@
 <html lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
     <title> Home</title>
   </head>
   <body>
     <div id="globalContainer">
       <div id="header">
-          <a href="index.html">
+          <a href="/">
             <div id="logo">
-            <img src="../imgs/Camera_logo.png" alt="P" width="60" height="50">
-            <img src="../imgs/Peordede.png" alt="Peordede" width="170" height="50"></div>
+            <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+            <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" width="170" height="50"></div>
           </a>
           <div id="searchbar">
             <form>
-              <input type="text" name="busqueda">
-              <input type="image" src="../imgs/Search_icon.png" height="30" alt="Buscar">
+              <input type="text" name="busqueda" placeholder="película">
+              <input type="image" src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
             </form>
           </div>
         <div id="headerAccount">
-          <a href="iniciosesion.html">Inicio sesión</a>
+          <a href="iniciosesion">Inicio sesión</a>
           <br>
-          <a href="registro.html">Registro</a>
+          <a href="registro">Registro</a>
         </div>
         </div>
       </div>
@@ -41,9 +41,9 @@
           <div id="menubarlist">
             <ul>
 
-              <li class="selected"> <a class="a-selected" href="index.html">Películas</a></li>
-              <li> <a href="carrito.html">Carrito</a></li>
-              <li> <a href="contacto.html">Contacto y ayuda</a></li>
+              <li class="selected"> <a class="a-selected" href="/">Películas</a></li>
+              <li> <a href="carrito">Carrito</a></li>
+              <li> <a href="contacto">Contacto y ayuda</a></li>
             </ul>
           </div>
         </div>
@@ -81,19 +81,19 @@
           <div id="filmtable">
             {% for film in films %}
             <div class="film">
-              <a href={{ getlink(film) }}>
-                <img src={{ film['poster'] }}
-                  alt={{ film['titulo'] }}
+              <a href="/pelicula/{{ film['url']}}">
+                <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                  alt="{{ film['titulo'] }}"
                     height="400"
                     width="250">
                 </a>
                 <div class="filmtext">
-                  <b>{{ film['titulo'] }}</b> (2018) <br>
-                  Género: {{ film['categoria'] }} <br>
+                  <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
+                  Género: {{ film['genero'] }} <br>
                   {{ film['precio'] }}€
                 </div>
               </div>
-              {{% endfor %}}
+              {% endfor %}
         </div>
 
       </div>

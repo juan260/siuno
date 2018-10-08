@@ -4,16 +4,16 @@
 <html lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <title> Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <title> Registro </title>
   </head>
   <body>
     <div id="globalContainer">
       <div id="header">
-          <a href="index.html">
+          <a href="/">
               <div id="logo">
-              <img src="../imgs/Camera_logo.png" alt="P" width="60" height="50">
-              <img src="../imgs/Peordede.png" alt="Peordede" width="170" height="50"></div>
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
             </a>
     
       </div>
@@ -28,9 +28,9 @@
               <div id="menubarlist">
                 <ul>
                 
-                  <li> <a href="index.html">Películas</a></li>
-                  <li> <a href="carrito.html">Carrito</a></li>
-                  <li> <a href="contacto.html">Contacto y ayuda</a></li>
+                  <li> <a href="/">Películas</a></li>
+                  <li> <a href="../carrito">Carrito</a></li>
+                  <li> <a href="../contacto">Contacto y ayuda</a></li>
                 </ul>
               </div>
             </div>

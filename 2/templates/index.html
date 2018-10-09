@@ -1,7 +1,5 @@
 <!--Juan Riera y Luis Carabe-->
-
 <!DOCTYPE html>
-
 
 <html lang="es">
   <head>
@@ -20,7 +18,8 @@
           </a>
           <div id="searchbar">
             <form>
-              <input type="text" name="busqueda" placeholder="película" id="searchBarBar" onkeyup="return updateSearch()">
+              <input type="text" name="busqueda" placeholder="película" 
+              id="searchBarBar"  oninput="return updateSearch()">
               <input type="image" src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
             </form>
           </div>
@@ -79,6 +78,14 @@
               Aplicar
             </button>
           </div>
+          <div id="franksearch">
+              <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
+              alt="Frank"
+              height="362"
+              width="644"><br>
+            ¡Oh no! Parece que no hemos encontradoa tu película,
+            pero hemos enviado a fran a buscarla.
+          </div>
           <div id="filmtable">
             {% for film in films %}
             <div class="film" data-title="{{ film['titulo'] }}">
@@ -94,7 +101,10 @@
                 </div>
               </div>
               {% endfor %}
+              
         </div>
+
+
 
       </div>
       <div id="footer">

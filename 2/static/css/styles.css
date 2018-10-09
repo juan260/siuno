@@ -276,6 +276,17 @@ vertical-align: -10px;
   overflow: auto;
 }
 
+#franksearch{
+  margin: 20px;
+  padding: 20px;
+  position: fixed;
+  display:flex;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: space-around;
+  overflow: auto;
+  visibility: hidden;
+}
 
 #footer {
   float: bottom;

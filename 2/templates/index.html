@@ -20,7 +20,7 @@
             <form>
               <input type="text" name="busqueda" placeholder="película" 
               id="searchBarBar"  oninput="return updateSearch()">
-              <input type="image" src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
+              <img  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
             </form>
           </div>
         <div id="headerAccount">
@@ -52,12 +52,14 @@
             <div>
               Géneros:
               <select class="filter">
-                <option value="none">-</option>
-                <option value="drama">Drama</option>
-                <option value="comedia">Comedia</option>
-                <option value="terror">Terror</option>
-              </select>
+                <option value="-">-</option>
+                {% for genre in genres %}
+                  <option value="{{genre}}"">{{genre}}</option>
+                {% endfor %}
+                </select>
             </div>
+
+            <!--
             <div>
               Año:
               <select>
@@ -74,6 +76,7 @@
                 <option value="nz">N-Z</option>
               </select>
             </div>
+          -->
             <button>
               Aplicar
             </button>
@@ -81,10 +84,9 @@
           <div id="franksearch">
               <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
               alt="Frank"
-              height="362"
-              width="644"><br>
-            ¡Oh no! Parece que no hemos encontradoa tu película,
-            pero hemos enviado a fran a buscarla.
+              height="302"
+              width="554"><br>
+            <h2> No hemos encontrado esa película, hemos enviado a Frank de la Jungla a buscarla </h2>
           </div>
           <div id="filmtable">
             {% for film in films %}
@@ -103,8 +105,6 @@
               {% endfor %}
               
         </div>
-
-
 
       </div>
       <div id="footer">

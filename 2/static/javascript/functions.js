@@ -1,9 +1,13 @@
 function updateSearch(){
   var text=document.getElementById("searchBarBar").value;
+  var lcText = text.toLowerCase()
+  console.log(lcText)
   var noResultsFlag = 1;
   var films=document.getElementsByClassName("film")
+  var findPos;
   for(const film of films){
-    if(film.dataset.title.search(text)==0){
+    findPos = film.dataset.title.toLowerCase().search(lcText)
+    if(findPos >=0){
       noResultsFlag = 0;
       film.style.visibility="visible";
       document.getElementById("franksearch").style.visibility="hidden";

@@ -11,7 +11,12 @@ def getlink(film):
 @app.route('/')
 def index():
     films = json.load(open('data/catalogo.json'))['peliculas']
-    return render_template('index.html', films = films)
+    genres = []
+    for film in films:
+    	if film['genero'] not in genres:
+    		genres.append(film['genero'])
+	genres.sort()
+    return render_template('index.html', films = films, genres = genres)
 
 @app.route('/carrito/')
 def carrito():

@@ -85,12 +85,11 @@
               <a href="/pelicula/{{ film['url']}}">
                 <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
                   alt="{{ film['titulo'] }}"
-                    height="400"
-                    width="250">
+                    height="250"
+                    width="175">
                 </a>
                 <div class="filmtext">
                   <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
-                  Género: {{ film['genero'] }} <br>
                   {{ film['precio'] }}€
                 </div>
               </div>

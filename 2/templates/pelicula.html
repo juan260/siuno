@@ -10,7 +10,7 @@
   <body>
     <div id="globalContainer">
       <div id="header">
-        
+
           <a href="/">
               <div id="logo">
               <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
@@ -22,16 +22,16 @@
         </div>
       </div>
 
-    
+
       <div id="centralpane">
-      
+
           <div id="menubar">
               <div id="menubarmargin">
-                
+
               </div>
               <div id="menubarlist">
                 <ul>
-                
+
                   <li> <a href="/">Películas</a></li>
                   <li> <a href="../carrito">Carrito</a></li>
                   <li> <a href="../contacto">Contacto y ayuda</a></li>
@@ -40,10 +40,19 @@
             </div>
         <div id="content">
 
+          {% if film ==None%}
+          <div id ="frank">
+            <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
+              alt="Frank"
+              height="362"
+              width="644"><br>
+              <h2> No hemos encontrado esa película, hemos enviado a Frank de la Jungla a buscarla </h2>
+          </div>
+          {% else %}
           <table>
             <tr>
                 <td>
-                    <div class="film">
+                    <div class="big-film">
                       <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
                         alt="{{ film['titulo'] }}"
                         height="400"
@@ -65,10 +74,10 @@
                     <br><br>
                     <button onclick="location.href='../carrito'" type = "button"> Añadir a carrito </button>
                   </div></td>
-                    
+
               </tr>
           </table>
-
+          {% endif %}
         </div>
 
       </div>
@@ -78,4 +87,3 @@
     </div>
   </body>
 </html>
-

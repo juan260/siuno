@@ -51,8 +51,8 @@ def pelicula(name):
 		if name == film['url']:
 			return render_template('pelicula.html', film = film)
 
-	return "NO HEMOS ENCONTRAO LA PELICULA CON URL " + name
-	
+	return render_template('pelicula.html', film = None)
+
 
 if __name__ == '__main__':
    app.run(debug = True)

@@ -3,8 +3,8 @@ function updateSearch(){
   var noResultsFlag = 1;
   console.log(text);
   for(film in document.getElementsByClassName("film")){
-    console.log(film.childNodes[0].innerHTML);
-    if(film.childNodes[0].innerHTML.search(text)==0){
+    console.log(film.dataset.title);
+    if(film.dataset.title.search(text)==0){
       noResultsFlag = 0;
       film.style.visibility="visible";
     } else {

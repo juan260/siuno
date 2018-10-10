@@ -10,13 +10,21 @@ def getlink(film):
 
 @app.route('/')
 def index():
-    films = json.load(open('data/catalogo.json'))['peliculas']
-    genres = []
-    for film in films:
-    	if film['genero'] not in genres:
-    		genres.append(film['genero'])
+	films = json.load(open('data/catalogo.json'))['peliculas']
+	genres = []
+	for film in films:
+		if film['genero'] not in genres:
+			genres.append(film['genero'])
 	genres.sort()
-    return render_template('index.html', films = films, genres = genres)
+	genre=request.args.get('filters')
+	if(not(genre==None or genre=='-')):
+		genderedFilms = []
+		for film in films:
+			if film['genero']==genre:
+				genderedFilms.append(film)
+		films=genderedFilms				
+
+	return render_template('index.html', films = films, genres = genres)
 
 @app.route('/carrito/')
 def carrito():

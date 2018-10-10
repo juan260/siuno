@@ -1,29 +1,29 @@
 {
 	"peliculas": [
-		{"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
+		{"titulo": "Bad Reputation",
 		"poster": "Bad_reputation.jpg",
-		"director": "George Lucas",
+		"director": "Kevin Kerslake",
 		"precio": 18.99,
-		"genero": "Aventura",
-		"sinopsis": "Donde esta mi sable laser luke",
-		"anno": 1999,
+		"genero": "Documental",
+		"sinopsis": "Documentary about rock star Joan Jett.",
+		"anno": 2018,
 		"actores": [
-			{"nombre": "Jake Lloyd",
-			"personaje": "Anakin Skywalker",
-			"foto": "imagenes/anakin.jpg"},
+			{"nombre": "Billie Joe Armstrong",
+			"personaje": "Himself",
+			"foto": "imagenes/BillieJoeArmstrong.jpg"},
 
-			{"nombre": "Ewan McGregor",
-			"personaje": "Obi-Wan Kenobi",
-			"foto": "imagenes/kenobi.jpg"}
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "imagenes/Rodney Bingenheimer.jpg"}
 			],
-		"url":"SW1",
+		"url":"BadReputation",
 		"valoracion":2.7
 		}, 
-		{"titulo": "La guerra de las galaxias: Episodio 17-La entrega de SI",
+		{"titulo": "La monja",
 		"poster": "The_nun.jpg",
-		"director": "George Lucas",
+		"director": "Corin Hardy",
 		"precio": 18,
-		"genero": "Aventurisima",
+		"genero": "Terror",
 		"anno": 199,
 		"sinopsis": "Vente al lado oscuro Obi-Wan",
 		"actores": [
@@ -35,8 +35,46 @@
 			"personaje": "Obi-Wan Kenobi",
 			"foto": "imagenes/kenobi.jpg"}
 			],
-		"url":"SW2",
+		"url":"TheNun",
 		"valoracion":5
-		}
+		},
+		{"titulo": "Smallfoot",
+			"poster": "Smallfoot.jpg",
+			"director": "Karey Kirkpatrick, Jason Reisig",
+			"precio": 18,
+			"genero": "Aventura",
+			"anno": 2018,
+			"sinopsis": "A Yeti is convinced that the elusive creatures known as hoomans really do exist",
+			"actores": [
+				{"nombre": "Jake Lloyd",
+				"personaje": "Anakin Skywalker",
+				"foto": "imagenes/anakin.jpg"},
+	
+				{"nombre": "Ewan McGregor",
+				"personaje": "Obi-Wan Kenobi",
+				"foto": "imagenes/kenobi.jpg"}
+				],
+			"url":"Smallfoot",
+			"valoracion":5
+			},
+			{"titulo": "Hotel Artemis",
+				"poster": "Hotel_Artemis.jpg",
+				"director": "Drew Pearce",
+				"precio": 19,
+				"genero": "Aventura",
+				"anno": 2018,
+				"sinopsis": "Set in riot-torn, near-future Los Angeles",
+				"actores": [
+					{"nombre": "Jake Lloyd",
+					"personaje": "Anakin Skywalker",
+					"foto": "imagenes/anakin.jpg"},
+		
+					{"nombre": "Ewan McGregor",
+					"personaje": "Obi-Wan Kenobi",
+					"foto": "imagenes/kenobi.jpg"}
+					],
+				"url":"Smallfoot",
+				"valoracion":5
+				}
 	]
 }

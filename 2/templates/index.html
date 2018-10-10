@@ -48,16 +48,19 @@
           </div>
         </div>
         <div id="content">
-          <div id="filters">
+          
+            <form id="filters">
             <div>
               Géneros:
-              <select class="filter">
+              <select class="filter" form="filters" name="filters">
                 <option value="-">-</option>
                 {% for genre in genres %}
                   <option value="{{genre}}"">{{genre}}</option>
                 {% endfor %}
                 </select>
             </div>
+            <input type="submit" value="Aplicar">
+          </form>
 
             <!--
             <div>
@@ -77,10 +80,8 @@
               </select>
             </div>
           -->
-            <button>
-              Aplicar
-            </button>
-          </div>
+
+   
           <div id="franksearch">
               <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
               alt="Frank"

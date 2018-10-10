@@ -5,18 +5,38 @@
 		"director": "Kevin Kerslake",
 		"precio": 18.99,
 		"genero": "Documental",
-		"sinopsis": "Documentary about rock star Joan Jett.",
+		"sinopsis": "Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.",
 		"anno": 2018,
 		"actores": [
 			{"nombre": "Billie Joe Armstrong",
 			"personaje": "Himself",
-			"foto": "imagenes/BillieJoeArmstrong.jpg"},
+			"foto": "BillieJoeArmstrong.jpg"},
 
 			{"nombre": "Rodney Bingenheimer",
 			"personaje": "Himself",
-			"foto": "imagenes/Rodney Bingenheimer.jpg"}
+			"foto": "RodneyBingenheimer.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "RodneyBingenheimer.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "RodneyBingenheimer.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "RodneyBingenheimer.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "RodneyBingenheimer.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "RodneyBingenheimer.jpg"}
 			],
-		"url":"BadReputation",
+		"id":1,
 		"valoracion":2.7
 		}, 
 		{"titulo": "La monja",
@@ -29,13 +49,13 @@
 		"actores": [
 			{"nombre": "Jake Lloyd",
 			"personaje": "Anakin Skywalker",
-			"foto": "imagenes/anakin.jpg"},
+			"foto": "anakin.jpg"},
 
 			{"nombre": "Ewan McGregor",
 			"personaje": "Obi-Wan Kenobi",
-			"foto": "imagenes/kenobi.jpg"}
+			"foto": "kenobi.jpg"}
 			],
-		"url":"TheNun",
+		"id":2,
 		"valoracion":5
 		},
 		{"titulo": "Smallfoot",
@@ -48,16 +68,16 @@
 			"actores": [
 				{"nombre": "Jake Lloyd",
 				"personaje": "Anakin Skywalker",
-				"foto": "imagenes/anakin.jpg"},
+				"foto": "anakin.jpg"},
 	
 				{"nombre": "Ewan McGregor",
 				"personaje": "Obi-Wan Kenobi",
-				"foto": "imagenes/kenobi.jpg"}
+				"foto": "kenobi.jpg"}
 				],
-			"url":"Smallfoot",
+			"id":3,
 			"valoracion":5
 			},
-			{"titulo": "Hotel Artemis",
+		{"titulo": "Hotel Artemis",
 				"poster": "Hotel_Artemis.jpg",
 				"director": "Drew Pearce",
 				"precio": 19,
@@ -67,13 +87,13 @@
 				"actores": [
 					{"nombre": "Jake Lloyd",
 					"personaje": "Anakin Skywalker",
-					"foto": "imagenes/anakin.jpg"},
+					"foto": "anakin.jpg"},
 		
 					{"nombre": "Ewan McGregor",
 					"personaje": "Obi-Wan Kenobi",
-					"foto": "imagenes/kenobi.jpg"}
+					"foto": "kenobi.jpg"}
 					],
-				"url":"Smallfoot",
+				"id":4,
 				"valoracion":5
 				}
 	]

@@ -61,7 +61,8 @@ def historialCompras():
 def pelicula(name):
 	films = json.load(open('data/catalogo.json'))['peliculas']
 	for film in films:
-		if name == film['url']:
+		print(name + str(film['id']))
+		if int(name) == film['id']:
 			return render_template('pelicula.html', film = film)
 
 	return render_template('pelicula.html', film = None)

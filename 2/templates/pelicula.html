@@ -64,8 +64,8 @@
                       </div>
                     </div>
                   </td>
-                  <td><div id=sinopsis>
-                    <b>Sinopsis:</b> <br>
+                  <td><div id="sinopsis">
+                    <b>Sinopsis:</b> <br><br>
                     {{ film['sinopsis'] }}
                     <br><br>
                     <b>Director:</b> {{ film['director'] }}
@@ -74,9 +74,20 @@
                     <br><br>
                     <button onclick="location.href='../carrito'" type = "button"> Añadir a carrito </button>
                   </div></td>
-
               </tr>
-          </table>
+              </table>
+              <div id=actors>
+                {% for actor in film['actores'] %}
+                  <div class=actor>
+                    <img src="{{ url_for('static', filename='imgs/'+actor['foto'])}}"
+                        alt="{{ actor['foto'] }}"
+                        height="150"
+                        width="125"><br>
+                    <b>Nombre: </b>{{actor['nombre']}}<br>
+                    <b>Personaje: </b>{{actor['personaje']}}
+                  </div>
+                {% endfor %}
+              </div>
           {% endif %}
         </div>
 

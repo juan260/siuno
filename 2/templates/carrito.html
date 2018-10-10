@@ -41,23 +41,26 @@
         <div id="content">
           <h2>Carrito:</h2>
           <div id="filmtable">
+            {% set sumPrice = 0 %}
             {% for film in films %}
-            <div class="film">
-              <a href="/pelicula/{{ film['url']}}">
-                <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
-                  alt="{{ film['titulo'] }}"
-                    height="400"
-                    width="250">
-                </a>
-                <div class="filmtext">
-                  <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
-                  Género: {{ film['genero'] }} <br>
-                  {{ film['precio'] }}€
+              <div class="film">
+                <a href="/pelicula/{{ film['id']}}">
+                  <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                    alt="{{ film['titulo'] }}"
+                      height="250"
+                      width="175">
+                  </a>
+                  <div class="filmtext">
+                    <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
+                    Género: {{ film['genero'] }} <br>
+                    {{ film['precio'] }}€<br>
+                     <button  type="button">Quitar</button>
+                  </div>
                 </div>
-              </div>
+                  {% set sumPrice = sumPrice + film['precio'] %}
               {% endfor %}
         </div>
-          <br> <h2 class="h2-left"> Suma: 17€ </h2>
+          <br> <h2 class="h2-left"> Suma: {{sumPrice}}€ O VAIA NO FUNCIONA </h2>
           <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
           <br>
 

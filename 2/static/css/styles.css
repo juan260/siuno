@@ -87,6 +87,9 @@ vertical-align: -10px;
 
 #sinopsis {
   line-height:17px;
+  overflow: auto;
+  height: 500px;
+
 }
 
 #filters {
@@ -194,6 +197,24 @@ vertical-align: -10px;
   border-radius: 10px;
   overflow-y: auto;
   margin:20px;
+}
+
+#actors {
+  padding: 10px;
+  padding-top:20px;
+  margin-bottom:20px;
+  width: 90%;
+  text-align: center;
+  border: solid rgb(119, 179, 119) 1px;
+  border-radius: 10px;
+  overflow: auto;
+  margin:40px;
+  display:inline-flex;
+  flex-wrap: wrap;
+}
+
+.actor{
+  margin:10px;
 }
 
 .filmtext {

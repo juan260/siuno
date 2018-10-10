@@ -92,7 +92,7 @@
           <div id="filmtable">
             {% for film in films %}
             <div class="film" data-title="{{ film['titulo'] }}">
-              <a href="/pelicula/{{ film['url']}}">
+              <a href="/pelicula/{{ film['id']}}">
                 <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
                   alt="{{ film['titulo'] }}"
                     height="250"

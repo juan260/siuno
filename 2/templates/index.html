@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
-    <script src="{{ url_for('static', filename='javascript/functions.js')}}"> </script>
+    <script src="{{ url_for('static', filename='javascript/functionsindex.js')}}"> </script>
     <title> Home</title>
   </head>
   <body>
@@ -18,7 +18,7 @@
           </a>
           <div id="searchbar">
             <form>
-              <input type="text" name="busqueda" placeholder="película" 
+              <input type="text" name="busqueda" placeholder="película"
               id="searchBarBar"  oninput="return updateSearch()">
               <img  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
             </form>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div id="content">
-          
+
             <form id="filters">
             <div>
               Géneros:
@@ -81,7 +81,7 @@
             </div>
           -->
 
-   
+
           <div id="franksearch">
               <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
               alt="Frank"
@@ -104,7 +104,7 @@
                 </div>
               </div>
               {% endfor %}
-              
+
         </div>
 
       </div>

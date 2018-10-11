@@ -20,5 +20,5 @@ function updateSearch(){
     document.getElementById("franksearch").style.visibility="visible";
     noResultsFlag=0;
   }
-  
+
 }

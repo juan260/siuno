@@ -225,7 +225,7 @@ vertical-align: -10px;
 
 #menubar {
   float: left;
-  background-color: #ed6a5a;
+  background-color: #0d324d;
   margin-top:12px;
 
   height: 100%;
@@ -248,7 +248,7 @@ vertical-align: -10px;
   width: 40px;
   height: 100%;
   background-color:inherit;
-  background-image: linear-gradient(to right, #a34848 10%, #ed6a5a);
+  background-image: linear-gradient(to right, #091540, 10%, #0d324d);
   padding-right:0px;
   margin-right:0px;
 }

@@ -1,0 +1,43 @@
+{
+  "peliculas":
+   [{"titulo": "Bad Reputation",
+   "poster": "Bad_reputation.jpg",
+   "director": "Kevin Kerslake",
+   "precio": 18.99,
+   "genero": "Documental",
+   "sinopsis": "Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.",
+   "anno": 2018,
+   "actores": [
+     {"nombre": "Billie Joe Armstrong",
+     "personaje": "Himself",
+     "foto": "BillieJoeArmstrong.jpg"},
+
+     {"nombre": "Rodney Bingenheimer",
+     "personaje": "Himself",
+     "foto": "RodneyBingenheimer.jpg"},
+
+     {"nombre": "Rodney Bingenheimer",
+     "personaje": "Himself",
+     "foto": "RodneyBingenheimer.jpg"},
+
+     {"nombre": "Rodney Bingenheimer",
+     "personaje": "Himself",
+     "foto": "RodneyBingenheimer.jpg"},
+
+     {"nombre": "Rodney Bingenheimer",
+     "personaje": "Himself",
+     "foto": "RodneyBingenheimer.jpg"},
+
+     {"nombre": "Rodney Bingenheimer",
+     "personaje": "Himself",
+     "foto": "RodneyBingenheimer.jpg"},
+
+     {"nombre": "Rodney Bingenheimer",
+     "personaje": "Himself",
+     "foto": "RodneyBingenheimer.jpg"}
+     ],
+   "id":1,
+   "valoracion":2.7
+   }
+ ]
+}

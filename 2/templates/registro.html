@@ -43,7 +43,8 @@
               Nombre: <input id="nombreField" type="text" name="nombre" placeholder="Nombre" required><br>
               Apellidos: <input id="apellidosField" type="text" name="apellidos" placeholder="Apellidos" required><br>
               Correo: <input id="correoField" type="email" name="correo" placeholder="correo" required><br>
-              Contraseña: <input id="contraseniaField" type="password" name="contrasenia" placeholder="contraseña" required><br>
+              Contraseña: <input id="contraseniaField" type="password" name="contrasenia" placeholder="contraseña" oninput="return checkPwd()" required><br>
+              <div id="securityMeter"> </div>
               Confirmar contraseña: <input id="confContraseniaField" type="password" name="contrasenia" placeholder="contraseña" required><br>
               Num tarjeta: <input id="tarjetaField" type="text" name="tarjeta" placeholder="tarjeta" required><br>
               Cod secreto tarjeta: <input id="secretNumField" type="text" name="secretnum" placeholder="codigo secreto" required><br>

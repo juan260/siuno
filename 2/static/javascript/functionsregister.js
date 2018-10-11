@@ -1,28 +1,64 @@
 function checkRegister(){
-  var usuario = document.getElementById('usuarioField').value
-  var nombre = document.getElementById('nombreField').value
-  var apellidos = document.getElementById('apellidosField').value
-  var correo = document.getElementById('correoField').value
-  var contrasenia = document.getElementById('contraseniaField').value
-  var confContrasenia= document.getElementById('confContraseniaField').value
-  var tarjeta = document.getElementById('tarjetaField').value
-  var secretNum = document.getElementById('secretNumField').value
+  var usuario = document.getElementById('usuarioField').value;
+  var nombre = document.getElementById('nombreField').value;
+  var apellidos = document.getElementById('apellidosField').value;
+  var correo = document.getElementById('correoField').value;
+  var contrasenia = document.getElementById('contraseniaField').value;
+  var confContrasenia= document.getElementById('confContraseniaField').value;
+  var tarjeta = document.getElementById('tarjetaField').value;
+  var secretNum = document.getElementById('secretNumField').value;
+  var tarjetaInvalidaFlag = 0;
+  var secretNumInvalidoFlag = 0;
 
+  for(letter in tarjeta){
+    if(isNaN(Number(letter))){
+      tarjetaInvalidaFlag = 1;
+      break;
+    }
+  }
+
+  for(letter in secretNum){
+    if(isNaN(Number(letter))){
+      secretNumInvalidoFlag = 1;
+      break;
+    }
+  }
 
 	if (usuario < 2) {
 		alert('El nombre de usuario debe tener una longitud mayor o igual a dos');
 		return false;
-	} else if (usuario[0] == ' ' || usuario[usuario.len - 1] == ' ') {
+	} else if (usuario[0] == ' ' || usuario[usuario.length - 1] == ' ') {
 	   alert('El nombre de usuario no debe acabar ni empezar con espacios');
 		return false;
-	} else if (nombre[0] == ' ' || nombre[area1Length - 1] == ' ') {
-	   alert('El nombre de usuario no debe acabar ni empezar con espacios');
+  } else if (nombre[0] == ' ' || nombre[nombre.length - 1] == ' ') {
+	   alert('El nombre no debe acabar ni empezar con espacios');
 		return false;
-	} else if ( isNaN(edad) || edad < 0 || edad > 300 ) {
-		alert('Edad no valida');
+	} else if (apellidos[0] == ' ' || apellidos[apellidos.length - 1] == ' ') {
+	   alert('Los apellidos no deben acabar ni empezar con espacios');
 		return false;
-	} else if ((email.indexOf("@") <= 0) || (email.indexOf("@") >= (email.length - 1))) {
-		alert('Email no valido');
+	} else if (contrasenia != confContrasenia) {
+	   alert('Las contraseñas no coinciden');
+		return false;
+	} else if (tarjeta.length != 16 || tarjetaInvalidaFlag == 1) {
+	   alert('Numero de tarjeta inválido');
+		return false;
+	} else if (secretNum.length != 3 || secretNumInvalidoFlag == 1) {
+	   alert('Numero de secreto inválido');
 		return false;
 	}
+}
+
+function checkPwd() {
+    var contrasenia = document.getElementById('contraseniaField').value
+
+    if(contrasenia.length < 8 ){
+       document.getElementById("securityMeter").innerHTML ="Contraseña inválida";
+       document.getElementById("securityMeter").style.color= "red";
+    } else if (contrasenia.length > 15 ){
+      document.getElementById("securityMeter").innerHTML ="Contraseña segura";
+      document.getElementById("securityMeter").style.color= "green";
+    }  else {
+      document.getElementById("securityMeter").innerHTML = "Contraseña aceptable"
+      document.getElementById("securityMeter").style.color= "orange";
+    }
 }

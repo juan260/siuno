@@ -19,19 +19,19 @@
           Bienvenido Juan Luis!
           <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
         </div>
-    
+
       </div>
 
-    
+
       <div id="centralpane">
-      
+
           <div id="menubar">
               <div id="menubarmargin">
-                
+
               </div>
               <div id="menubarlist">
                 <ul>
-                
+
                   <li> <a href="/">Películas</a></li>
                   <li> <a href="../carrito">Carrito</a></li>
                   <li> <a href="../contacto">Contacto y ayuda</a></li>
@@ -45,7 +45,7 @@
             <li> <b>{{ film['titulo'] }}</b>: {{ film['precio'] }}€</li>
             {% endfor %}
           </ul>
-          <br> Suma /NO SE COMO CALCULARLA DINAMICAMENTE EN FLASK, SE USA JAVASCRIPT???/ : 17€
+          <br> Suma: {{sumPrice}}€
           <button type="button">Confirmar compra</button>
           <br>
 
@@ -58,4 +58,3 @@
     </div>
   </body>
 </html>
-

@@ -18,7 +18,7 @@
           </a>
           <div id="searchbar">
             <form>
-              <input type="text" name="busqueda" placeholder="película" 
+              <input type="text" name="busqueda" placeholder="película"
               id="searchBarBar"  oninput="return updateSearch()">
               <img  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
             </form>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div id="content">
-          
+
             <form id="filters">
             <div>
               Géneros:
@@ -81,7 +81,7 @@
             </div>
           -->
 
-   
+
           <div id="franksearch">
               <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
               alt="Frank"
@@ -97,14 +97,14 @@
                   alt="{{ film['titulo'] }}"
                     height="250"
                     width="175">
-                </a>
+                </a><br>
                 <div class="filmtext">
                   <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
                   {{ film['precio'] }}€
                 </div>
               </div>
               {% endfor %}
-              
+
         </div>
 
       </div>

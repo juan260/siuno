@@ -9,10 +9,11 @@ function updateSearch(){
     findPos = film.dataset.title.toLowerCase().search(lcText)
     if(findPos >=0){
       noResultsFlag = 0;
-      film.style.visibility="visible";
+      film.style.display="block";
+      film.style.alignItems="center";
       document.getElementById("franksearch").style.visibility="hidden";
     } else {
-      film.style.visibility="hidden";
+      film.style.display="none";
     }
   }
 
@@ -20,5 +21,5 @@ function updateSearch(){
     document.getElementById("franksearch").style.visibility="visible";
     noResultsFlag=0;
   }
-  
+
 }

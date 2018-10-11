@@ -182,10 +182,13 @@ vertical-align: -10px;
   padding-top:20px;
   margin-bottom:20px;
   width: 200px;
+  height: 350px;
   text-align: center;
   border: solid rgb(119, 179, 119) 1px;
   border-radius: 10px;
   overflow-y: auto;
+  flex-direction: "column";
+  display:"flex";
 }
 .big-film {
   padding: 10px;
@@ -210,7 +213,7 @@ vertical-align: -10px;
   overflow: auto;
   margin:40px;
   display:inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .actor{

@@ -19,19 +19,19 @@
           Bienvenido Juan Luis!
           <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
         </div>
-    
+
       </div>
 
-    
+
       <div id="centralpane">
-      
+
           <div id="menubar">
               <div id="menubarmargin">
-                
+
               </div>
               <div id="menubarlist">
                 <ul>
-                
+
                   <li> <a href="/">Películas</a></li>
                   <li   class="selected"> <a class="a-selected" href="../carrito">Carrito</a></li>
                   <li> <a href="../contacto">Contacto y ayuda</a></li>
@@ -41,7 +41,6 @@
         <div id="content">
           <h2>Carrito:</h2>
           <div id="filmtable">
-            {% set sumPrice = 0 %}
             {% for film in films %}
               <div class="film">
                 <a href="/pelicula/{{ film['id']}}">
@@ -57,10 +56,9 @@
                      <button  type="button">Quitar</button>
                   </div>
                 </div>
-                  {% set sumPrice = sumPrice + film['precio'] %}
               {% endfor %}
         </div>
-          <br> <h2 class="h2-left"> Suma: {{sumPrice}}€ O VAIA NO FUNCIONA </h2>
+          <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
           <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
           <br>
 
@@ -73,4 +71,3 @@
     </div>
   </body>
 </html>
-

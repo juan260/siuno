@@ -22,14 +22,17 @@ def index():
 		for film in films:
 			if film['genero']==genre:
 				genderedFilms.append(film)
-		films=genderedFilms				
+		films=genderedFilms
 
 	return render_template('index.html', films = films, genres = genres)
 
 @app.route('/carrito/')
 def carrito():
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	return render_template('carrito.html', films = films)
+    films = json.load(open('data/catalogo.json'))['peliculas']
+    sumPrice = 0
+    for film in films:
+        sumPrice += film['precio']
+    return render_template('carrito.html', films = films, sumPrice = sumPrice)
 
 @app.route('/contacto/')
 def contacto():
@@ -49,8 +52,11 @@ def cuenta():
 
 @app.route('/finalizarCompra/')
 def finalizarCompra():
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	return render_template('finalizarCompra.html', films = films)
+    films = json.load(open('data/catalogo.json'))['peliculas']
+    sumPrice = 0
+    for film in films:
+        sumPrice += film['precio']
+    return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice)
 
 @app.route('/historialCompras/')
 def historialCompras():

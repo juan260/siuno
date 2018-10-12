@@ -1,0 +1,80 @@
+{
+	"peliculas": [
+		{"titulo": "Bad Reputation",
+		"poster": "Bad_reputation.jpg",
+		"director": "Kevin Kerslake",
+		"precio": 18.99,
+		"genero": "Documental",
+		"sinopsis": "Documentary about rock star Joan Jett.",
+		"anno": 2018,
+		"actores": [
+			{"nombre": "Billie Joe Armstrong",
+			"personaje": "Himself",
+			"foto": "imagenes/BillieJoeArmstrong.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "imagenes/Rodney Bingenheimer.jpg"}
+			],
+		"url":"BadReputation",
+		"valoracion":2.7
+		}, 
+		{"titulo": "La monja",
+		"poster": "The_nun.jpg",
+		"director": "Corin Hardy",
+		"precio": 18,
+		"genero": "Terror",
+		"anno": 199,
+		"sinopsis": "Vente al lado oscuro Obi-Wan",
+		"actores": [
+			{"nombre": "Jake Lloyd",
+			"personaje": "Anakin Skywalker",
+			"foto": "imagenes/anakin.jpg"},
+
+			{"nombre": "Ewan McGregor",
+			"personaje": "Obi-Wan Kenobi",
+			"foto": "imagenes/kenobi.jpg"}
+			],
+		"url":"TheNun",
+		"valoracion":5
+		},
+		{"titulo": "Smallfoot",
+			"poster": "Smallfoot.jpg",
+			"director": "Karey Kirkpatrick, Jason Reisig",
+			"precio": 18,
+			"genero": "Aventura",
+			"anno": 2018,
+			"sinopsis": "A Yeti is convinced that the elusive creatures known as hoomans really do exist",
+			"actores": [
+				{"nombre": "Jake Lloyd",
+				"personaje": "Anakin Skywalker",
+				"foto": "imagenes/anakin.jpg"},
+	
+				{"nombre": "Ewan McGregor",
+				"personaje": "Obi-Wan Kenobi",
+				"foto": "imagenes/kenobi.jpg"}
+				],
+			"url":"Smallfoot",
+			"valoracion":5
+			},
+			{"titulo": "Hotel Artemis",
+				"poster": "Hotel_Artemis.jpg",
+				"director": "Drew Pearce",
+				"precio": 19,
+				"genero": "Aventura",
+				"anno": 2018,
+				"sinopsis": "Set in riot-torn, near-future Los Angeles",
+				"actores": [
+					{"nombre": "Jake Lloyd",
+					"personaje": "Anakin Skywalker",
+					"foto": "imagenes/anakin.jpg"},
+		
+					{"nombre": "Ewan McGregor",
+					"personaje": "Obi-Wan Kenobi",
+					"foto": "imagenes/kenobi.jpg"}
+					],
+				"url":"Smallfoot",
+				"valoracion":5
+				}
+	]
+}

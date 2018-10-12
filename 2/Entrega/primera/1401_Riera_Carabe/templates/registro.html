@@ -1,0 +1,59 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <title> Registro </title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="/">
+              <div id="logo">
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
+            </a>
+
+      </div>
+
+
+      <div id="centralpane">
+
+          <div id="menubar">
+              <div id="menubarmargin">
+
+              </div>
+              <div id="menubarlist">
+                <ul>
+
+                  <li> <a href="/">Películas</a></li>
+                  <li> <a href="../carrito">Carrito</a></li>
+                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+        <div id="content">
+          <h2>Registro</h2>
+          <div id="registro">
+            <form>
+              Nombre usuario: <input type="text" name="nombre" placeholder="nombre" required><br>
+              Correo: <input type="email" name="correo" placeholder="correo" required><br>
+              Contraseña: <input type="password" name="contrasenia" placeholder="contraseña" required><br>
+              Num tarjeta: <input type="text" name="tarjeta" placeholder="tarjeta" required><br>
+              Cod secreto tarjeta: <input type="text" name="secretnum" placeholder="codigo secreto" required><br>
+              <!--Cad tarjeta: <input type="date" name="caducidad" required><br>-->
+
+              <input type="submit" value="Registro">
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>

@@ -87,9 +87,6 @@ vertical-align: -10px;
 
 #sinopsis {
   line-height:17px;
-  overflow: auto;
-  height: 500px;
-
 }
 
 #filters {
@@ -182,13 +179,10 @@ vertical-align: -10px;
   padding-top:20px;
   margin-bottom:20px;
   width: 200px;
-  height: 350px;
   text-align: center;
   border: solid rgb(119, 179, 119) 1px;
   border-radius: 10px;
-  overflow-y: hidden;
-  flex-direction: "column";
-  display:"flex";
+  overflow-y: auto;
 }
 .big-film {
   padding: 10px;
@@ -202,24 +196,6 @@ vertical-align: -10px;
   margin:20px;
 }
 
-#actors {
-  padding: 10px;
-  padding-top:20px;
-  margin-bottom:20px;
-  width: 90%;
-  text-align: center;
-  border: solid rgb(119, 179, 119) 1px;
-  border-radius: 10px;
-  overflow: auto;
-  margin:40px;
-  display:inline-flex;
-  flex-wrap: nowrap;
-}
-
-.actor{
-  margin:10px;
-}
-
 .filmtext {
   padding: 20px;
   line-height: 20px;
@@ -228,7 +204,7 @@ vertical-align: -10px;
 
 #menubar {
   float: left;
-  background-color: #0d324d;
+  background-color: #ed6a5a;
   margin-top:12px;
 
   height: 100%;
@@ -251,7 +227,7 @@ vertical-align: -10px;
   width: 40px;
   height: 100%;
   background-color:inherit;
-  background-image: linear-gradient(to right, #091540, 10%, #0d324d);
+  background-image: linear-gradient(to right, #a34848 10%, #ed6a5a);
   padding-right:0px;
   margin-right:0px;
 }

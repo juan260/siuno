@@ -38,7 +38,7 @@
         <div id="content">
           <h2>Registro</h2>
           <div id="registro">
-            <form onsubmit="return checkRegister()" method="get" >
+            <form onsubmit="return checkRegister()" action ="{{ url_for('registro') }}" method="post" >
               {% if existe %}
                 <div class="red"> Nombre de usuario ya en uso</div>
               {% endif %}

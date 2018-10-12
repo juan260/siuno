@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
-    <script src="{{ url_for('static', filename='javascript/functionsregister.js')}}"> </script>
+    <script  src="{{ url_for('static', filename='javascript/functionsregister.js')}}"> </script>
     <title> Registro </title>
   </head>
   <body>
@@ -38,18 +38,46 @@
         <div id="content">
           <h2>Registro</h2>
           <div id="registro">
-            <form onsubmit="return checkRegister()">
-              Nombre usuario: <input id="usuarioField" type="text" name="usuario" placeholder="Nombre de usuario" required><br>
-              Nombre: <input id="nombreField" type="text" name="nombre" placeholder="Nombre" required><br>
-              Apellidos: <input id="apellidosField" type="text" name="apellidos" placeholder="Apellidos" required><br>
-              Correo: <input id="correoField" type="email" name="correo" placeholder="correo" required><br>
-              Contraseña: <input id="contraseniaField" type="password" name="contrasenia" placeholder="contraseña" oninput="return checkPwd()" required><br>
+            <form onsubmit="return checkRegister()" method="get" >
+              {% if existe %}
+                <div class="red"> Nombre de usuario ya en uso</div>
+              {% endif %}
+            <p>
+              <label for="usuarioField">Nombre usuario: </label>
+              <input id="usuarioField" type="text" name="usuario" placeholder="Nombre de usuario" required>
+            </p>
+            <p>
+              <label for="nombreField">Nombre: </label>
+              <input id="nombreField" type="text" name="nombre" placeholder="Nombre" required>
+            </p>
+            <p>
+              <label for="apellidosField">Apellidos:</label> 
+              <input id="apellidosField" type="text" name="apellidos" placeholder="Apellidos" required><br>
+            </p>
+            <p>
+              <label for="usuarioField">Correo:</label> 
+              <input id="correoField" type="email" name="correo" placeholder="correo" required><br>
+            </p>
+            <p>
+              <label for="contraseniaField">Contraseña: </label>
+              <input id="contraseniaField" type="password" name="contrasenia" placeholder="contraseña" oninput="return checkPwd()" required><br>
+            </p>
               <div id="securityMeter"> </div>
-              Confirmar contraseña: <input id="confContraseniaField" type="password" name="contrasenia" placeholder="contraseña" required><br>
-              Num tarjeta: <input id="tarjetaField" type="text" name="tarjeta" placeholder="tarjeta" required><br>
-              Cod secreto tarjeta: <input id="secretNumField" type="text" name="secretnum" placeholder="codigo secreto" required><br>
-              <!--Cad tarjeta: <input id="caducidadField" type="date" name="caducidad" required><br>-->
-
+            <p>
+               <label for="confContraseniaField">Confirmar contraseña: </label>
+               <input id="confContraseniaField" type="password" name="contrasenia" placeholder="contraseña" required><br>
+            </p>
+            <p>
+               <label for="tarjetaField">Num tarjeta:</label>
+                <input id="tarjetaField" type="text" name="tarjeta" placeholder="tarjeta" required><br>
+            </p>
+            <p>
+               <label for="secretNumField">Cod secreto tarjeta: </label>
+               <input id="secretNumField" type="text" name="secretnum" placeholder="codigo secreto" required><br>
+            </p>
+            <p>
+              <label for="agree"><input type="checkbox" id="agree" value="terminos"> Acepto términos y condiciones</label>
+            </p>
               <input type="submit" value="Registro" >
             </form>
           </div>

@@ -32,6 +32,23 @@ table{
   padding:20px;
 }
 
+label:not(#agree){
+ display: table-cell; 
+}
+
+input:not(#agree){ 
+  display: table-cell; 
+}
+
+form { 
+  display: table;
+}
+
+p:not(#agree) {
+ display: table-row;  
+}
+
+
 #globalContainer {
   left:0;
   margin-left:0px;
@@ -298,6 +315,10 @@ vertical-align: -10px;
   align-items:center;
   justify-content: space-around;
   overflow: auto;
+}
+
+.red{
+  color: red;
 }
 
 #franksearch{

@@ -17,15 +17,15 @@
             </a>
             {% if log==None %}
             <div id="headerAccount">
-              <a href="iniciosesion">Inicio sesión</a>
+              <a href="../iniciosesion">Inicio sesión</a>
               <br>
-              <a href="registro">Registro</a>
+              <a href="../registro">Registro</a>
             </div>
             {% else %}
             <div id="account">
               Bienvenido {{ log }}!
-              <a href="cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
-              <a href="logout">Log out</a>
+              <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+              <a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
             </div>
             {% endif %}
       </div>

@@ -17,16 +17,14 @@
             </a>
             {% if log==None %}
             <div id="headerAccount">
-              <a href="iniciosesion">Inicio sesión</a>
+              <a href="../iniciosesion">Inicio sesión</a>
               <br>
-              <a href="registro">Registro</a>
+              <a href="../registro">Registro</a>
             </div>
             {% else %}
             <div id="account">
-              Bienvenido {{ log }}!
-              <a href="cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
-              <a href="logout">Log out</a>
-            </div>
+              Bienvenido {{ log }}!<a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a><!--
+              --><a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a></div>
             {% endif %}
 
       </div>
@@ -68,7 +66,12 @@
               {% endfor %}
         </div>
           <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
+          {% if log %}
           <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
+          {% else %}
+          <button disabled type="button">Finalizar compra</button> (Identifícate para continuar el proceso de compra)
+          {% endif %}
+
           <br>
 
         </div>

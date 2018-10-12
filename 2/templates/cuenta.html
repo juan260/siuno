@@ -15,14 +15,14 @@
               <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
               <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
             </a>
-
+            {% if log %}
             <div id="account">
-              Bienvenido {{ log }}!
-              <a href="cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
-              <a href="logout">Log out</a>
+              Bienvenido {{ log['username'] }}!
+              <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+              <a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
             </div>
 
-    
+            {% endif %}
       </div>
 
     
@@ -41,16 +41,18 @@
               </div>
             </div>
         <div id="content">
+          {% if log %}
           <p>Qué tal Juan Luis, este es el resumen de tu cuenta:</p>
-          <br> <strong>Nombre</strong>: Juan Luis
-          <br> <strong>Nombre usuario</strong>: jsonluis2
-          <br> <strong>Correo</strong>: juanluispedro@uam.es
-          <br> <strong>Num tarjeta</strong>: 7216541296
-          <br> <br> Puedes...
-            <button onclick="location.href='../historialCompras'" type="button">Consultar historial</button>
-            <button onclick="location.href='/'" type="button">Desconectarte</button>
-
-
+          <br> <strong>Usuario</strong>: {{ log['username'] }}
+          <br> <strong>Nombre</strong>: {{ log['name'] + " " +log['surname']}}
+          <br> <strong>Correo</strong>: {{ log['email'] }}
+          <br> <strong>Num tarjeta</strong>: {{ log['creditcard'] }}
+          <br> <strong>Saldo</strong>: {{ log['saldo'] }}
+          <br> <br> 
+          <button onclick="location.href='../historialCompras'" type="button">Consultar historial</button>
+          {% else %}
+          <h2>Identifícate por favor.</h2>
+          {% endif %}
         </div>
 
       </div>

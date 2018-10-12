@@ -34,13 +34,13 @@ def index(methods = ['POST', 'GET']):
 
 @app.route('/carrito/')
 def carrito():
-    films = json.load(open('data/catalogo.json'))['peliculas']
-    sumPrice = 0
-    for film in films:
-        sumPrice += film['precio']
-	if('username' in session):
+  films = json.load(open('data/catalogo.json'))['peliculas']
+  sumPrice = 0
+  for film in films:
+    sumPrice += film['precio']
+  if('username' in session):
 		return render_template('carrito.html', films = films, sumPrice = sumPrice, log = session['username'])
-	else: 
+  else: 
 		return render_template('carrito.html', films = films, sumPrice = sumPrice,log = None)
 @app.route('/contacto/')
 def contacto():
@@ -60,7 +60,6 @@ def iniciosesion(methods = ['POST', 'GET']):
 			if username in listaUsuarios:
 				ruta = root+username+"/data.json"
 				contrasenia = json.load(open(ruta))['password']
-				print "QUE PASA PENIAA"
 				if contrasenia == md5.new(request.form.get('contrasenia')).hexdigest():
 					session['username']=username
 					return redirect("../")
@@ -117,7 +116,6 @@ def registro(methods = ['POST', 'GET']):
 				session['username']=username
 				print("SI ERA POST4")
 				return redirect("../")
-				#return redirect("../")
 
 		
 		return render_template('registro.html', existe=None)
@@ -127,9 +125,12 @@ def registro(methods = ['POST', 'GET']):
 
 @app.route('/cuenta/')
 def cuenta():
-	if('username' in session):
-		return render_template('cuenta.html',log = session['username'])
-	else:
+  if('username' in session):
+    root='./data/usuarios/'
+    ruta = root+session['username']+"/data.json"
+    datosUsuario = json.load(open(ruta))
+    return render_template('cuenta.html',log = datosUsuario)
+  else:
 		return render_template('cuenta.html',log = None)
 
 @app.route('/finalizarCompra/')
@@ -142,13 +143,18 @@ def finalizarCompra():
 		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'])
 	else: 
 		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None)
+
 @app.route('/historialCompras/')
 def historialCompras():
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	if('username' in session):
-		return render_template('historialCompras.html', films = films, log = session['username'])
-	else:
-		return render_template('historialCompras.html', films = films, log = None)
+  films = json.load(open('data/catalogo.json'))['peliculas']
+  if('username' in session):
+    root='./data/usuarios/'
+    ruta = root+session['username']+"/historial.json"
+    historialUsuario = json.load(open(ruta))['peliculas']
+    print(historialUsuario)
+    return render_template('historialCompras.html', films = historialUsuario, log = session['username'])
+  else:
+		return render_template('historialCompras.html', films = None, log = None)
 
 @app.route('/pelicula/<path:name>')
 def pelicula(name):
@@ -164,6 +170,7 @@ def pelicula(name):
 		return render_template('pelicula.html', film = None, log = session['username'])
 	else:
 		return render_template('pelicula.html', film = None, log = None)
+
 @app.route('/logout/')
 def logout():
 	session.pop('username', None)

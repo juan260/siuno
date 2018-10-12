@@ -149,6 +149,7 @@ vertical-align: -10px;
   padding: 10px;
   padding-top:5px;
   float: right;
+  display:inline-block;
 }
 
 #headerAccount {
@@ -175,6 +176,7 @@ vertical-align: -10px;
   margin-left:0px;
   padding-right:0px;
   margin-bottom:20px;
+  margin-top:20px;
   height: 100%;
   overflow: auto; /*Si se superpone algo, crea barra de scroll*/
   padding:10px;
@@ -199,11 +201,12 @@ vertical-align: -10px;
   padding-top:20px;
   margin-bottom:20px;
   width: 200px;
-  height: 350px;
+  height: 400px;
   text-align: center;
   border: solid rgb(119, 179, 119) 1px;
   border-radius: 10px;
-  overflow-y: hidden;
+  overflow-y: auto;
+  overflow-x:auto;
   flex-direction: "column";
   display:"flex";
 }

@@ -20,8 +20,8 @@
 
             <div id="account">
               Bienvenido {{ log }}!
-              <a href="cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
-              <a href="logout">Log out</a>
+              <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+              <a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
             </div>
       </div>
 
@@ -43,6 +43,8 @@
           </div>
         <div id="content">
           <h2> Historial de compra: </h2>
+
+          {% if log %}
           <div id="filmtable">
             {% for film in films %}
             <div class="film">
@@ -59,9 +61,11 @@
                 </div>
               </div>
               {% endfor %}
-              
           </div>
+          {% else %}
+          <h2> Identifícate por favor. </h2>
 
+          {% endif %}
         </div>
       </div>
       <div id="footer">

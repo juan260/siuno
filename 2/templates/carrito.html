@@ -50,16 +50,17 @@
           <div id="filmtable">
             {% for film in films %}
               <div class="film">
-                <a href="/pelicula/{{ film['id']}}">
-                  <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
-                    alt="{{ film['titulo'] }}"
+                <a href="/pelicula/{{ film[0]['id']}}">
+                  <img src="{{ url_for('static', filename='imgs/'+film[0]['poster'])}}"
+                    alt="{{ film[0]['titulo'] }}"
                       height="250"
                       width="175">
                   </a>
                   <div class="filmtext">
-                    <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
-                    Género: {{ film['genero'] }} <br>
-                    {{ film['precio'] }}€<br>
+                    <b>{{ film[0]['titulo'] }}</b> ({{film[0]['anno']}}) <br>
+                    Género: {{ film[0]['genero'] }} <br>
+                    {{ film[0]['precio'] }}€<br>
+                    Cantidad: {{film[1]}} <br>
                      <button  type="button">Quitar</button>
                   </div>
                 </div>

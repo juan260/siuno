@@ -178,6 +178,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                     auxfilm=film
                     auxfilm['quantity']=1
                     session['carrito']=[auxfilm]
+                    return redirect("../carrito")
                 # Si hay carrito
                 else:
                     # Buscamos la pelicula en el carrito
@@ -188,16 +189,19 @@ def pelicula(name, methods = ['POST', 'GET']):
                             # quantity creado
                             if cfilm['quantity']!=None:
                                 cfilm['quantity']=cfilm['quantity']+1
+                                return redirect("../carrito")
                             else:
                                 cfilm['quantity']=1
+                                return redirect("../carrito")
+
                         # Si no la hemos encontrado en el carrito
                         else:
                             auxfilm=film
                             auxfilm['quantity']=1
                             session['carrito'].append(auxfilm)
+                            return redirect("../carrito")
 
-            print(session['carrito'])
-            return redirect("../carrito")
+
 
 @app.route('/logout/')
 def logout():

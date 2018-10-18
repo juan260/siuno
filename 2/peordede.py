@@ -40,7 +40,7 @@ def carrito():
     sumPrice += film['precio']
   if('username' in session):
 		return render_template('carrito.html', films = films, sumPrice = sumPrice, log = session['username'])
-  else: 
+  else:
 		return render_template('carrito.html', films = films, sumPrice = sumPrice,log = None)
 @app.route('/contacto/')
 def contacto():
@@ -51,7 +51,7 @@ def contacto():
 
 @app.route('/iniciosesion/', methods = ['POST', 'GET'])
 def iniciosesion(methods = ['POST', 'GET']):
-	
+
 	if(request.method=='POST'):
 		username=request.form.get('nombre')
 		if(username!=None):
@@ -91,33 +91,33 @@ def registro(methods = ['POST', 'GET']):
 			with open(dataR,"w") as f:
 				f.write("{\n\t\"username\": ")
 				f.write("\""+username+"\",\n")
-				
+
 				f.write("\t\"name\": ")
 				f.write("\""+request.form.get('nombre')+"\",\n")
-				
+
 				f.write("\t\"surname\": ")
 				f.write("\""+request.form.get('apellidos')+"\",\n")
 
 				contraseniaCifrada = md5.new(request.form.get('contrasenia')).hexdigest()
 				f.write("\t\"password\": ")
 				f.write("\""+contraseniaCifrada+"\",\n")
-				
+
 				f.write("\t\"email\": ")
 				f.write("\""+request.form.get('correo')+"\",\n")
-				
+
 				f.write("\t\"creditcard\": ")
 				f.write("\""+request.form.get('tarjeta')+"\",\n")
-				
+
 				f.write("\t\"secretno\": ")
 				f.write("\""+request.form.get('secretnum')+"\",\n")
-				
+
 				f.write("\t\"saldo\": ")
 				f.write(str(random.randint(1,100))+"\n}")
 				session['username']=username
 				print("SI ERA POST4")
 				return redirect("../")
 
-		
+
 		return render_template('registro.html', existe=None)
 
 	else:
@@ -135,14 +135,17 @@ def cuenta():
 
 @app.route('/finalizarCompra/')
 def finalizarCompra():
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	sumPrice = 0
-	for film in films:
+    films = json.load(open('data/catalogo.json'))['peliculas']
+    root='./data/usuarios/'
+    ruta = root+session['username']+"/data.json"
+    saldo = json.load(open(ruta))['saldo']
+    sumPrice = 0
+    for film in films:
 		sumPrice += film['precio']
-	if('username' in session):
-		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'])
-	else: 
-		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None)
+    if('username' in session):
+		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'], saldo=saldo)
+    else:
+		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None, saldo=None)
 
 @app.route('/historialCompras/')
 def historialCompras():

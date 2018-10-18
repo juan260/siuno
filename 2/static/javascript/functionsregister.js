@@ -28,14 +28,14 @@ function checkRegister(){
 	if (usuario < 2) {
 		alert('El nombre de usuario debe tener una longitud mayor o igual a dos');
 		return false;
-	} else if (usuario.includes(" ") || usuario.includes("/") || usuario.includes("&") || usuario.includes("=") || usuario.includes("%")) {
-	   alert('Nombre de usuario inválido, no se deben incluir espacios, /, &, = o %');
+	} else if (usuario.includes(" ") || usuario.includes("\"") || usuario.includes("\\") || usuario.includes("/") || usuario.includes("&") || usuario.includes("=") || usuario.includes("%")) {
+	   alert('Nombre de usuario inválido, no se deben incluir espacios,\\, /, &, = o %');
 		return false;
-  } else if (nombre[0] == ' ' || nombre[nombre.length - 1] == ' ') {
-	   alert('El nombre no debe acabar ni empezar con espacios');
+  } else if (nombre[0] == ' ' || nombre[nombre.length - 1] == ' ' || nombre.includes("\"") || nombre.includes("\\")) {
+	   alert('El nombre no debe acabar ni empezar con espacios ni contener " o \\');
 		return false;
-	} else if (apellidos[0] == ' ' || apellidos[apellidos.length - 1] == ' ') {
-	   alert('Los apellidos no deben acabar ni empezar con espacios');
+	} else if (apellidos[0] == ' ' || apellidos[apellidos.length - 1] == ' ' || apellidos.includes("\"") || apellidos.includes("\\")) {
+	   alert('Los apellidos no deben acabar ni empezar con espacios ni contener " o \\');
 		return false;
 	} else if(contrasenia.length < 8){
     alert('Contraseña inválida');
@@ -43,11 +43,11 @@ function checkRegister(){
   } else if (contrasenia != confContrasenia) {
 	   alert('Las contraseñas no coinciden');
 		return false;
-	} else if (tarjeta.length != 16 || tarjetaInvalidaFlag == 1) {
-	   alert('Numero de tarjeta inválido (deben ser 16 números sin espacios)');
+	} else if (tarjeta.length > 16 || tarjetaInvalidaFlag == 1) {
+	   alert('Numero de tarjeta inválido (deben ser 16 números o menos sin espacios)');
 		return false;
 	} else if (secretNum.length != 3 || secretNumInvalidoFlag == 1) {
-	   alert('Numero de secreto inválido');
+	   alert('Numero de secreto inválido (deben ser tres digitos)');
 		return false;
 	} else if (acceptTerms != true){
     alert('Por favor, acepte los términos y condiciones');
@@ -58,14 +58,6 @@ acromi,p derecirsovbp
 ￼
 
 }
-/*
-function checkUsr(){
-  var usuario = document.getElementById('usuarioField').value;
-  const folder = "../data/usuarios/"
-  const faux = require("faux")
-
-  faux.readdirSync(folder).forEach(file =>{console.log(file)})
-}*/
 
 function checkPwd() {
     var contrasenia = document.getElementById('contraseniaField').value

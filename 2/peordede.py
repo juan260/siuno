@@ -7,11 +7,6 @@ app = Flask(__name__)
 
 app.secret_key = 'teamoluis'
 
-# Funcion que devuelve el link que dirige
-# a una pelicula concreta TODO
-def getlink(film):
-    return "pelicula.html"
-
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
     session.clear()
@@ -35,15 +30,16 @@ def index(methods = ['POST', 'GET']):
 
 @app.route('/carrito/')
 def carrito():
-  films = json.load(open('data/catalogo.json'))['peliculas']
-  print(session['carrito'])
+  films_cat = json.load(open('data/catalogo.json'))['peliculas']
+  carrito = session['carrito']
   sumPrice = 0
-  for film in films:
-    sumPrice += film['precio']
+  carrito = [x for x in carrito if x[0] not in films_cat]
+  for film in carrito:
+    sumPrice += (film[0]['precio']*film[1])
   if('username' in session):
-		return render_template('carrito.html', films = films, sumPrice = sumPrice, log = session['username'])
+		return render_template('carrito.html', films = carrito, sumPrice = sumPrice, log = session['username'])
   else:
-		return render_template('carrito.html', films = films, sumPrice = sumPrice,log = None)
+		return render_template('carrito.html', films = carrito, sumPrice = sumPrice,log = None)
 @app.route('/contacto/')
 def contacto():
 	if('username' in session):
@@ -136,14 +132,17 @@ def cuenta():
 
 @app.route('/finalizarCompra/')
 def finalizarCompra():
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	sumPrice = 0
-	for film in films:
+    films = json.load(open('data/catalogo.json'))['peliculas']
+    root='./data/usuarios/'
+    ruta = root+session['username']+"/data.json"
+    saldo = json.load(open(ruta))['saldo']
+    sumPrice = 0
+    for film in films:
 		sumPrice += film['precio']
-	if('username' in session):
-		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'])
-	else:
-		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None)
+    if('username' in session):
+		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'], saldo=saldo)
+    else:
+		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None, saldo=None)
 
 @app.route('/historialCompras/')
 def historialCompras():
@@ -191,7 +190,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                             cfilm[1]+=int(request.form['quantity'])
                             print("CANTIDAD ANADIDA: "+ str(request.form['quantity']))
                             print("CANTIDAD FINAL: "+ str(cfilm[1]))
-                            
+
                             return redirect("../carrito")
 
                     # Si no la hemos encontrado en el carrito
@@ -200,6 +199,8 @@ def pelicula(name, methods = ['POST', 'GET']):
                     return redirect("../carrito")
 
 
+            print(session['carrito'])
+            return redirect("../carrito")
 
 @app.route('/logout/')
 def logout():

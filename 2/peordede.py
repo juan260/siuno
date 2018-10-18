@@ -14,27 +14,29 @@ def getlink(film):
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	genres = []
-	for film in films:
-		if film['genero'] not in genres:
-			genres.append(film['genero'])
-	genres.sort()
-	genre=request.args.get('filters')
-	if(not(genre==None or genre=='-')):
-		genderedFilms = []
-		for film in films:
-			if film['genero']==genre:
-				genderedFilms.append(film)
-		films=genderedFilms
-	if('username' in session):
-		return render_template('index.html', films = films, genres = genres, log = session['username'])
-	else:
-		return render_template('index.html', films = films, genres = genres, log = None)
+    session.clear()
+    films = json.load(open('data/catalogo.json'))['peliculas']
+    genres = []
+    for film in films:
+        if film['genero'] not in genres:
+            genres.append(film['genero'])
+        genres.sort()
+    genre=request.args.get('filters')
+    if(not(genre==None or genre=='-')):
+        genderedFilms = []
+        for film in films:
+            if film['genero']==genre:
+                genderedFilms.append(film)
+        films=genderedFilms
+    if('username' in session):
+        return render_template('index.html', films = films, genres = genres, log = session['username'])
+    else:
+        return render_template('index.html', films = films, genres = genres, log = None)
 
 @app.route('/carrito/')
 def carrito():
   films = json.load(open('data/catalogo.json'))['peliculas']
+  print(session['carrito'])
   sumPrice = 0
   for film in films:
     sumPrice += film['precio']
@@ -173,33 +175,29 @@ def pelicula(name, methods = ['POST', 'GET']):
     if request.method=='POST':
         for film in films:
             if(int(name) == film['id']):
+                print("PELI ENCONTRADA")
                 # Si no hay carrito
                 if('carrito' not in session.keys()):
-                    auxfilm=film
-                    auxfilm['quantity']=1
-                    session['carrito']=[auxfilm]
+                    session['carrito']=[[film, int(request.form['quantity'])]]
                     return redirect("../carrito")
                 # Si hay carrito
                 else:
                     # Buscamos la pelicula en el carrito
                     for cfilm in session['carrito']:
-                        # Si la encontramos en el carrito
-                        if cfilm['id']==film['id']:
-                            # Comprobamos por si acaso que hay un campo
-                            # quantity creado
-                            if cfilm['quantity']!=None:
-                                cfilm['quantity']=cfilm['quantity']+1
-                                return redirect("../carrito")
-                            else:
-                                cfilm['quantity']=1
-                                return redirect("../carrito")
-
-                        # Si no la hemos encontrado en el carrito
-                        else:
-                            auxfilm=film
-                            auxfilm['quantity']=1
-                            session['carrito'].append(auxfilm)
+                        # Si la encontramos en el carritos
+                        if cfilm[0]['id']==film['id']:
+                            print("YE EN EL CARRITO")
+                            print("CANTIDAD ACTUAL: "+ str(cfilm[1]))
+                            cfilm[1]+=int(request.form['quantity'])
+                            print("CANTIDAD ANADIDA: "+ str(request.form['quantity']))
+                            print("CANTIDAD FINAL: "+ str(cfilm[1]))
+                            
                             return redirect("../carrito")
+
+                    # Si no la hemos encontrado en el carrito
+
+                    session['carrito'].append([film, int(request.form['quantity'])])
+                    return redirect("../carrito")
 
 
 

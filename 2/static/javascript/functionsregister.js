@@ -9,7 +9,7 @@ function checkRegister(){
   var secretNum = document.getElementById('secretNumField').value;
   var tarjetaInvalidaFlag = 0;
   var secretNumInvalidoFlag = 0;
-  var acceptTerms = document.getElementById("agree").checked; 
+  var acceptTerms = document.getElementById("agree").checked;
 
   for(letter in tarjeta){
     if(isNaN(Number(letter))){
@@ -52,7 +52,11 @@ function checkRegister(){
 	} else if (acceptTerms != true){
     alert('Por favor, acepte los términos y condiciones');
     return false;
-  }
+  }￼
+acromi,p derecirsovbp
+￼
+￼
+
 }
 /*
 function checkUsr(){

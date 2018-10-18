@@ -40,7 +40,7 @@ def carrito():
     sumPrice += film['precio']
   if('username' in session):
 		return render_template('carrito.html', films = films, sumPrice = sumPrice, log = session['username'])
-  else: 
+  else:
 		return render_template('carrito.html', films = films, sumPrice = sumPrice,log = None)
 @app.route('/contacto/')
 def contacto():
@@ -51,7 +51,7 @@ def contacto():
 
 @app.route('/iniciosesion/', methods = ['POST', 'GET'])
 def iniciosesion(methods = ['POST', 'GET']):
-	
+
 	if(request.method=='POST'):
 		username=request.form.get('nombre')
 		if(username!=None):
@@ -91,33 +91,32 @@ def registro(methods = ['POST', 'GET']):
 			with open(dataR,"w") as f:
 				f.write("{\n\t\"username\": ")
 				f.write("\""+username+"\",\n")
-				
+
 				f.write("\t\"name\": ")
 				f.write("\""+request.form.get('nombre')+"\",\n")
-				
+
 				f.write("\t\"surname\": ")
 				f.write("\""+request.form.get('apellidos')+"\",\n")
 
 				contraseniaCifrada = md5.new(request.form.get('contrasenia')).hexdigest()
 				f.write("\t\"password\": ")
 				f.write("\""+contraseniaCifrada+"\",\n")
-				
+
 				f.write("\t\"email\": ")
 				f.write("\""+request.form.get('correo')+"\",\n")
-				
+
 				f.write("\t\"creditcard\": ")
 				f.write("\""+request.form.get('tarjeta')+"\",\n")
-				
+
 				f.write("\t\"secretno\": ")
 				f.write("\""+request.form.get('secretnum')+"\",\n")
-				
+
 				f.write("\t\"saldo\": ")
 				f.write(str(random.randint(1,100))+"\n}")
 				session['username']=username
-				print("SI ERA POST4")
 				return redirect("../")
 
-		
+
 		return render_template('registro.html', existe=None)
 
 	else:
@@ -141,7 +140,7 @@ def finalizarCompra():
 		sumPrice += film['precio']
 	if('username' in session):
 		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'])
-	else: 
+	else:
 		return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None)
 
 @app.route('/historialCompras/')
@@ -156,20 +155,49 @@ def historialCompras():
   else:
 		return render_template('historialCompras.html', films = None, log = None)
 
-@app.route('/pelicula/<path:name>')
-def pelicula(name):
-	films = json.load(open('data/catalogo.json'))['peliculas']
-	for film in films:
-		print(name + str(film['id']))
-		if int(name) == film['id']:
-			if('username' in session):
-				return render_template('pelicula.html', film = film, log = session['username'])
-			else:
-				return render_template('pelicula.html', film = film, log = None)
-	if('username' in session):
-		return render_template('pelicula.html', film = None, log = session['username'])
-	else:
-		return render_template('pelicula.html', film = None, log = None)
+@app.route('/pelicula/<path:name>', methods = ['POST', 'GET'])
+def pelicula(name, methods = ['POST', 'GET']):
+    films = json.load(open('data/catalogo.json'))['peliculas']
+    if request.method=='GET':
+    	for film in films:
+    		print(name + str(film['id']))
+    		if int(name) == film['id']:
+    			if('username' in session):
+    				return render_template('pelicula.html', film = film, log = session['username'])
+    			else:
+    				return render_template('pelicula.html', film = film, log = None)
+    	if('username' in session):
+    		return render_template('pelicula.html', film = None, log = session['username'])
+    	else:
+    		return render_template('pelicula.html', film = None, log = None)
+    if request.method=='POST':
+        for film in films:
+            if(int(name) == film['id']):
+                # Si no hay carrito
+                if('carrito' not in session.keys()):
+                    auxfilm=film
+                    auxfilm['quantity']=1
+                    session['carrito']=[auxfilm]
+                # Si hay carrito
+                else:
+                    # Buscamos la pelicula en el carrito
+                    for cfilm in session['carrito']:
+                        # Si la encontramos en el carrito
+                        if cfilm['id']==film['id']:
+                            # Comprobamos por si acaso que hay un campo
+                            # quantity creado
+                            if cfilm['quantity']!=None:
+                                cfilm['quantity']=cfilm['quantity']+1
+                            else:
+                                cfilm['quantity']=1
+                        # Si no la hemos encontrado en el carrito
+                        else:
+                            auxfilm=film
+                            auxfilm['quantity']=1
+                            session['carrito'].append(auxfilm)
+
+            print(session['carrito'])
+            return redirect("../carrito")
 
 @app.route('/logout/')
 def logout():

@@ -61,10 +61,11 @@
                     Género: {{ film[0]['genero'] }} <br>
                     {{ film[0]['precio'] }}€<br>
                     Cantidad: {{film[1]}} <br>
-                     <button  type="button">Quitar</button>
+                    <button  type="button">Quitar</button>
                   </div>
                 </div>
               {% endfor %}
+              
         </div>
           <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
           {% if log %}

@@ -3,6 +3,7 @@ import json
 import os
 import random
 import md5
+import sys
 app = Flask(__name__)
 
 app.secret_key = 'teamoluis'
@@ -28,21 +29,26 @@ def index(methods = ['POST', 'GET']):
   else:
     return render_template('index.html', films = films, genres = genres, log = None)
 
-@app.route('/carrito/')
+@app.route('/carrito/', methods=['GET','POST'])
 def carrito():
   films_cat = json.load(open('data/catalogo.json'))['peliculas']
   try:
     carrito = session['carrito']
   except KeyError:
-    print("NO HAY CARRITO")
     carrito=[]
     sumPrice=0
   else:
-    print(carrito)
     sumPrice = 0
-    carrito = [x for x in carrito if x[0] not in films_cat]
+    carrito = [x for x in carrito if x[0] in films_cat]
     for film in carrito:
       sumPrice += (film[0]['precio']*film[1])
+  if(request.method=='POST'):
+    del_film_id=request.form.get('id')
+    carrito = [x for x in carrito if x[0]['id'] != int(del_film_id)]
+    print(carrito)
+    session['carrito']=carrito
+    return redirect("./carrito/")
+
 
   if('username' in session):
     return render_template('carrito.html', films = carrito, sumPrice = sumPrice, log = session['username'])
@@ -141,17 +147,24 @@ def cuenta():
 
 @app.route('/finalizarCompra/')
 def finalizarCompra():
-  films = json.load(open('data/catalogo.json'))['peliculas']
+  films_cat = json.load(open('data/catalogo.json'))['peliculas']
+  try:
+    carrito = session['carrito']
+  except KeyError:
+    carrito=[]
+    sumPrice=0
+  else:
+    sumPrice = 0
+    carrito = [x for x in carrito if x[0] in films_cat]
+    for film in carrito:
+      sumPrice += (film[0]['precio']*film[1])
   root='./data/usuarios/'
   ruta = root+session['username']+"/data.json"
   saldo = json.load(open(ruta))['saldo']
-  sumPrice = 0
-  for film in films:
-    sumPrice += film['precio']
   if('username' in session):
-    return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = session['username'], saldo=saldo)
+    return render_template('finalizarCompra.html', films = carrito, sumPrice = sumPrice, log = session['username'], saldo=saldo)
   else:
-    return render_template('finalizarCompra.html', films = films, sumPrice = sumPrice, log = None, saldo=None)
+    return render_template('finalizarCompra.html', films = carrito, sumPrice = sumPrice, log = None, saldo=None)
 
 @app.route('/historialCompras/')
 def historialCompras():

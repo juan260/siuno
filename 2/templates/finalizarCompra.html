@@ -50,18 +50,24 @@
             </div>
         <div id="content">
           <h2> Finalizar compra:</h2>
-          {% if log %}
+          {% if not log %}
+          <h2> Identifícate por favor</h2>
+          {% elif not films %}
+          <h2> ¡Añade algo al carrito!</h2>
+          {% else %}
           <ul>
             {% for film in films %}
-            <li> <b>{{ film['titulo'] }}</b>: {{ film['precio'] }}€</li>
+            <li> <b>{{ film[0]['titulo'] }}</b>: {{ film[0]['precio'] }}€ * {{ film[1] }} </li>
             {% endfor %}
           </ul>
           <br> Suma: {{sumPrice}}€
-          <br> Saldo: {{saldo}}€
-          <button type="button">Confirmar compra</button>
-          <br>
+          <br> Saldo: {{saldo}}€<br>
+          {% if sumPrice > saldo %}
+          <button disabled type="button">Confirmar compra</button> Saldo insuficiente.
           {% else %}
-          <h2> Identifícate por favor</h2>
+          <button type="button">Confirmar compra</button>
+          {% endif %}
+          <br>
 
           {% endif %}
 

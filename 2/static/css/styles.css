@@ -36,8 +36,12 @@ label:not(#agree){
  display: table-cell; 
 }
 
-input:not(#agree){ 
+input:not(#agree, .quitar){ 
   display: table-cell; 
+}
+
+.quitar{
+  text-align: center
 }
 
 form { 

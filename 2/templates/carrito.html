@@ -62,17 +62,22 @@
                     Género: {{ film[0]['genero'] }} <br>
                     {{ film[0]['precio'] }}€<br>
                     Cantidad: {{film[1]}} <br>
-                    <button  type="button">Quitar</button>
+                    <form method = "POST">
+                      <input class="quitar" type="text" name="id" hidden=true value="{{film[0]['id']}}">
+                      <button class="quitar" type="submit">Quitar</button>
+                    </form>
                   </div>
                 </div>
               {% endfor %}
 
         </div>
           <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
-          {% if log %}
-          <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
-          {% else %}
+          {% if not log %}
           <button disabled type="button">Finalizar compra</button> (Identifícate para continuar el proceso de compra)
+          {% elif not films%}
+          <button disabled type="button">Finalizar compra</button> ¡Añade películas al carrito!
+          {% else %}
+          <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
           {% endif %}
 
           <br>

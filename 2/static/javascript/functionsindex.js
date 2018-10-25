@@ -1,7 +1,6 @@
 function updateSearch(){
   var text=document.getElementById("searchBarBar").value;
   var lcText = text.toLowerCase()
-  console.log(lcText)
   var noResultsFlag = 1;
   var films=document.getElementsByClassName("film")
   var findPos;

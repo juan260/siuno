@@ -30,7 +30,7 @@ def index(methods = ['POST', 'GET']):
     return render_template('index.html', films = films, genres = genres, log = None)
 
 @app.route('/carrito/', methods=['GET','POST'])
-def carrito():
+def carrito(methods=['GET','POST']):
   films_cat = json.load(open('data/catalogo.json'))['peliculas']
   try:
     carrito = session['carrito']
@@ -241,6 +241,36 @@ def contador():
     for muda in range(4):
         number+=str(random.randint(0,9))
     return number
-    
+
+@app.route('/confirmar/')
+def confirmar():
+    films_cat = json.load(open('data/catalogo.json'))['peliculas']
+    try:
+        carrito = session['carrito']
+    except KeyError:
+        carrito=[]
+        sumPrice=0
+    else:
+        sumPrice = 0
+        carrito = [x for x in carrito if x[0] in films_cat]
+    for film in carrito:
+        sumPrice += (film[0]['precio']*film[1])
+        root='./data/usuarios/'
+        ruta = root+session['username']+"/data.json"
+        saldo = json.load(open(ruta))['saldo']
+        if sumPrice > saldo:
+            return redirect("../")
+
+    saldo = saldo-sumPrice
+    session['carrito']=[]
+
+    usuario = json.load(open(ruta))
+    usuario['saldo'] = saldo
+    with open(ruta, "w") as jfile:
+        json.dump(usuario, jfile)
+
+    return redirect("../")
+
+
 if __name__ == '__main__':
   app.run(debug = True)

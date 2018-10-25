@@ -52,11 +52,8 @@ function checkRegister(){
 	} else if (acceptTerms != true){
     alert('Por favor, acepte los términos y condiciones');
     return false;
-  }￼
-acromi,p derecirsovbp
-￼
-￼
-
+  }
+  return true;
 }
 
 function checkPwd() {

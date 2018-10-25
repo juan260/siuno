@@ -30,7 +30,7 @@ def index(methods = ['POST', 'GET']):
     return render_template('index.html', films = films, genres = genres, log = None)
 
 @app.route('/carrito/', methods=['GET','POST'])
-def carrito():
+def carrito(methods=['GET','POST']):
   films_cat = json.load(open('data/catalogo.json'))['peliculas']
   try:
     carrito = session['carrito']
@@ -193,7 +193,7 @@ def pelicula(name, methods = ['POST', 'GET']):
       return render_template('pelicula.html', film = None, log = session['username'])
     else:
       return render_template('pelicula.html', film = None, log = None)
-  
+
   if request.method=='POST':
     print("POST RECIBIDO")
     for film in films:
@@ -209,7 +209,7 @@ def pelicula(name, methods = ['POST', 'GET']):
           carrito=session['carrito']
           print("CARRITO CREADO")
         # Buscamos la pelicula en el carrito
-        
+
         for i in range(len(carrito)):
           # Si la encontramos en el carritos
           if carrito[i][0]['id']==film['id']:
@@ -227,13 +227,42 @@ def pelicula(name, methods = ['POST', 'GET']):
         return redirect("../carrito")
 
 
-      
+
     return redirect("../carrito")
 
 @app.route('/logout/')
 def logout():
   session.clear()
   return redirect("../")
+
+@app.route('/confirmar/')
+def confirmar():
+    films_cat = json.load(open('data/catalogo.json'))['peliculas']
+    try:
+        carrito = session['carrito']
+    except KeyError:
+        carrito=[]
+        sumPrice=0
+    else:
+        sumPrice = 0
+        carrito = [x for x in carrito if x[0] in films_cat]
+    for film in carrito:
+        sumPrice += (film[0]['precio']*film[1])
+        root='./data/usuarios/'
+        ruta = root+session['username']+"/data.json"
+        saldo = json.load(open(ruta))['saldo']
+        if sumPrice > saldo:
+            return redirect("../")
+
+    saldo = saldo-sumPrice
+    session['carrito']=[]
+
+    usuario = json.load(open(ruta))
+    usuario['saldo'] = saldo
+    with open(ruta, "w") as jfile:
+        json.dump(usuario, jfile)
+
+    return redirect("../")
 
 
 if __name__ == '__main__':

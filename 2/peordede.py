@@ -245,6 +245,12 @@ def contador():
 @app.route('/confirmar/')
 def confirmar():
     films_cat = json.load(open('data/catalogo.json'))['peliculas']
+    root='./data/usuarios/'
+    ruta = root+session['username']+"/data.json"
+    rutaHistorial = root+session['username']+"/historial.json"
+    saldo = json.load(open(ruta))['saldo']
+    usuario = json.load(open(ruta))
+    historial = json.load(open(rutaHistorial))
     try:
         carrito = session['carrito']
     except KeyError:
@@ -255,19 +261,17 @@ def confirmar():
         carrito = [x for x in carrito if x[0] in films_cat]
     for film in carrito:
         sumPrice += (film[0]['precio']*film[1])
-        root='./data/usuarios/'
-        ruta = root+session['username']+"/data.json"
-        saldo = json.load(open(ruta))['saldo']
+        historial['peliculas'].append(film[0])
         if sumPrice > saldo:
             return redirect("../")
 
     saldo = saldo-sumPrice
     session['carrito']=[]
-
-    usuario = json.load(open(ruta))
     usuario['saldo'] = saldo
     with open(ruta, "w") as jfile:
         json.dump(usuario, jfile)
+    with open(rutaHistorial, "w") as jfile:
+        json.dump(historial, jfile)
 
     return redirect("../")
 

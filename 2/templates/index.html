@@ -1,4 +1,4 @@
-<!--Juan Riera y Luis Carabe-->
+ <!--Juan Riera y Luis Carabe-->
 <!DOCTYPE html>
 
 <html lang="es">
@@ -56,6 +56,12 @@
               <li> <a href="contacto">Contacto y ayuda</a></li>
             </ul>
           </div>
+          <div id="contador">
+            <img id="contador0" src="{{ url_for('static', filename='imgs/Number/0.png')}}">
+            <img id="contador1" src="{{ url_for('static', filename='imgs/Number/0.png')}}">
+            <img id="contador2" src="{{ url_for('static', filename='imgs/Number/0.png')}}">
+            <img id="contador3" src="{{ url_for('static', filename='imgs/Number/0.png')}}">
+          </div>
         </div>
         <div id="content">
 
@@ -101,18 +107,19 @@
           </div>
           <div id="filmtable">
             {% for film in films %}
-            <div class="film" data-title="{{ film['titulo'] }}">
-              <a href="/pelicula/{{ film['id']}}">
+            <!-- <div class="film" data-title="{{ film['titulo'] }}"> -->
+              <a href="/pelicula/{{ film['id']}}" class="film" data-title="{{ film['titulo'] }}">
                 <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
                   alt="{{ film['titulo'] }}"
                     height="250"
                     width="175">
-                </a><br>
+                <br>
                 <div class="filmtext">
                   <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
                   {{ film['precio'] }}€
                 </div>
-              </div>
+              </a>
+            <!--  </div> -->
               {% endfor %}
 
         </div>

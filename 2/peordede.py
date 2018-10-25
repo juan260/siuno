@@ -193,7 +193,7 @@ def pelicula(name, methods = ['POST', 'GET']):
       return render_template('pelicula.html', film = None, log = session['username'])
     else:
       return render_template('pelicula.html', film = None, log = None)
-  
+
   if request.method=='POST':
     print("POST RECIBIDO")
     for film in films:
@@ -209,7 +209,7 @@ def pelicula(name, methods = ['POST', 'GET']):
           carrito=session['carrito']
           print("CARRITO CREADO")
         # Buscamos la pelicula en el carrito
-        
+
         for i in range(len(carrito)):
           # Si la encontramos en el carritos
           if carrito[i][0]['id']==film['id']:
@@ -227,7 +227,7 @@ def pelicula(name, methods = ['POST', 'GET']):
         return redirect("../carrito")
 
 
-      
+
     return redirect("../carrito")
 
 @app.route('/logout/')
@@ -235,6 +235,12 @@ def logout():
   session.clear()
   return redirect("../")
 
-
+@app.route('/contador/', methods=['POST'])
+def contador():
+    number=''
+    for muda in range(4):
+        number+=str(random.randint(0,9))
+    return number
+    
 if __name__ == '__main__':
   app.run(debug = True)

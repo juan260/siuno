@@ -33,23 +33,23 @@ table{
 }
 
 label:not(#agree){
- display: table-cell; 
+ display: table-cell;
 }
 
-input:not(#agree, .quitar){ 
-  display: table-cell; 
+input:not(#agree, .quitar){
+  display: table-cell;
 }
 
 .quitar{
   text-align: center
 }
 
-form { 
+form {
   display: table;
 }
 
 p:not(#agree) {
- display: table-row;  
+ display: table-row;
 }
 
 
@@ -338,6 +338,12 @@ vertical-align: -10px;
   justify-content: space-around;
   overflow: auto;
   visibility: hidden;
+}
+
+#contador{
+  width:200px;
+  height:20px;
+  vertical-align: bottom;
 }
 
 #footer {

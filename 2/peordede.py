@@ -240,7 +240,7 @@ def logout():
   session.clear()
   return redirect("../")
 
-@app.route('/contador/', methods=['POST'])
+@app.route('/contador', methods=['POST'])
 def contador():
     number=''
     for muda in range(4):

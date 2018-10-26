@@ -10,18 +10,22 @@
     <script>
 
       function getNumber(n) {
-        return "{{ url_for('static', filename='/imgs/Number') }}/" + n
+        console.log(n)
+        return "{{ url_for('static', filename='imgs/Number') }}/" + n + ".png"
       }
 
-      /*function contador() {
+      function contador() {
         console.log("HOLA")
         			var xhttp = new XMLHttpRequest();
         			xhttp.onreadystatechange = function() {
                 var i = 0;
+                var letter
           			if (xhttp.readyState == 4 && xhttp.status == 200) {
-                  for(letter in xhttp.responseText){
-                    console.log(xhttp.responseText)
-                    document.getElementById("contador"+i).src=getNumber(letter);
+
+                  for(var i = 0; i< xhttp.responseText.length ; i++){
+                    letter = xhttp.responseText.charAt(i)
+                    console.log(letter)
+                    document.getElementById("contador"+String(i)).src=getNumber(letter);
                     i+=1;
                   }
           			}
@@ -29,9 +33,9 @@
         			var dir = "../contador";
         			xhttp.open("POST", dir, true);
         			xhttp.send();
-              window.setInterval(contador, 1000);
+
       		}
-*/
+
 
     </script>
 
@@ -39,7 +43,7 @@
     <title> Registro </title>
   </head>
   <body>
-    <script> contador() </script>
+    <script> window.setInterval(contador, 1000); </script>
     <div id="globalContainer">
       <div id="header">
           <a href="/">

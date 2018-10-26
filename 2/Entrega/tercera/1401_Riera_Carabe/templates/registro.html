@@ -5,41 +5,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
-
-    <script src="{{ url_for('static', filename='javascript/functionsregister.js')}}"> </script>
-    <script>
-
-      function getNumber(n) {
-        return "{{ url_for('static', filename='/imgs/Number') }}/" + n
-      }
-
-      /*function contador() {
-        console.log("HOLA")
-        			var xhttp = new XMLHttpRequest();
-        			xhttp.onreadystatechange = function() {
-                var i = 0;
-          			if (xhttp.readyState == 4 && xhttp.status == 200) {
-                  for(letter in xhttp.responseText){
-                    console.log(xhttp.responseText)
-                    document.getElementById("contador"+i).src=getNumber(letter);
-                    i+=1;
-                  }
-          			}
-        			}
-        			var dir = "../contador";
-        			xhttp.open("POST", dir, true);
-        			xhttp.send();
-              window.setInterval(contador, 1000);
-      		}
-*/
-
-    </script>
-
+    <script  src="{{ url_for('static', filename='javascript/functionsregister.js')}}"> </script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title> Registro </title>
   </head>
   <body>
-    <script> contador() </script>
     <div id="globalContainer">
       <div id="header">
           <a href="/">
@@ -47,6 +17,7 @@
               <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
               <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
             </a>
+
       </div>
 
 
@@ -63,16 +34,6 @@
                   <li> <a href="../carrito">Carrito</a></li>
                   <li> <a href="../contacto">Contacto y ayuda</a></li>
                 </ul>
-                <div id="contador">
-                  <img id="contador0" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
-                    height="20px" width="20px">
-                  <img id="contador1" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
-                    height="20px" width="20px">
-                  <img id="contador2" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
-                    height="20px" width="20px">
-                  <img id="contador3" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
-                    height="20px" width="20px">
-                </div>
               </div>
             </div>
         <div id="content">
@@ -91,11 +52,11 @@
               <input id="nombreField" type="text" name="nombre" placeholder="Nombre" required>
             </p>
             <p>
-              <label for="apellidosField">Apellidos:</label>
+              <label for="apellidosField">Apellidos:</label> 
               <input id="apellidosField" type="text" name="apellidos" placeholder="Apellidos" required><br>
             </p>
             <p>
-              <label for="usuarioField">Correo:</label>
+              <label for="usuarioField">Correo:</label> 
               <input id="correoField" type="email" name="correo" placeholder="correo" required><br>
             </p>
             <p>

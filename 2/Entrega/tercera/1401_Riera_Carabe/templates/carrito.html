@@ -62,12 +62,10 @@
                     Género: {{ film[0]['genero'] }} <br>
                     {{ film[0]['precio'] }}€<br>
                     Cantidad: {{film[1]}} <br>
-                    <div class="quitardiv">
-                      <form class="formquitar" method = "POST">
-                        <input class="quitar" type="text" name="id" hidden=true value="{{film[0]['id']}}">
-                        <button class="quitar" type="submit">Quitar</button>
-                      </form>
-                    </div>
+                    <form method = "POST">
+                      <input class="quitar" type="text" name="id" hidden=true value="{{film[0]['id']}}">
+                      <button class="quitar" type="submit">Quitar</button>
+                    </form>
                   </div>
                 </div>
               {% endfor %}

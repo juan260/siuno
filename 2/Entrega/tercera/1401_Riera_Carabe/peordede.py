@@ -4,7 +4,6 @@ import os
 import random
 import md5
 import sys
-import datetime
 app = Flask(__name__)
 
 app.secret_key = 'teamoluis'
@@ -31,7 +30,7 @@ def index(methods = ['POST', 'GET']):
     return render_template('index.html', films = films, genres = genres, log = None)
 
 @app.route('/carrito/', methods=['GET','POST'])
-def carrito(methods=['GET','POST']):
+def carrito():
   films_cat = json.load(open('data/catalogo.json'))['peliculas']
   try:
     carrito = session['carrito']
@@ -174,12 +173,8 @@ def historialCompras():
     root='./data/usuarios/'
     ruta = root+session['username']+"/historial.json"
     historialUsuario = json.load(open(ruta))['peliculas']
-    fechas = []
-    for film in historialUsuario:
-      if film['fechaCompra'] not in fechas:
-        fechas.append(film['fechaCompra'])
-
-    return render_template('historialCompras.html', films = historialUsuario, log = session['username'], fechas=fechas)
+    print(historialUsuario)
+    return render_template('historialCompras.html', films = historialUsuario, log = session['username'])
   else:
     return render_template('historialCompras.html', films = None, log = None)
 
@@ -198,7 +193,7 @@ def pelicula(name, methods = ['POST', 'GET']):
       return render_template('pelicula.html', film = None, log = session['username'])
     else:
       return render_template('pelicula.html', film = None, log = None)
-
+  
   if request.method=='POST':
     print("POST RECIBIDO")
     for film in films:
@@ -214,7 +209,7 @@ def pelicula(name, methods = ['POST', 'GET']):
           carrito=session['carrito']
           print("CARRITO CREADO")
         # Buscamos la pelicula en el carrito
-
+        
         for i in range(len(carrito)):
           # Si la encontramos en el carritos
           if carrito[i][0]['id']==film['id']:
@@ -232,63 +227,13 @@ def pelicula(name, methods = ['POST', 'GET']):
         return redirect("../carrito")
 
 
-
+      
     return redirect("../carrito")
 
 @app.route('/logout/')
 def logout():
   session.clear()
   return redirect("../")
-
-@app.route('/contador/', methods=['POST'])
-def contador():
-    number=''
-    for muda in range(4):
-        number+=str(random.randint(0,9))
-    return number
-
-@app.route('/confirmar/')
-def confirmar():
-    films_cat = json.load(open('data/catalogo.json'))['peliculas']
-    root='./data/usuarios/'
-    ruta = root+session['username']+"/data.json"
-    rutaHistorial = root+session['username']+"/historial.json"
-    saldo = json.load(open(ruta))['saldo']
-    usuario = json.load(open(ruta))
-    historial = json.load(open(rutaHistorial))
-    fecha = datetime.date.today()
-    try:
-        carrito = session['carrito']
-    except KeyError:
-        carrito=[]
-        sumPrice=0
-    else:
-        sumPrice = 0
-        carrito = [x for x in carrito if x[0] in films_cat]
-    for film in carrito:
-        sumPrice += (film[0]['precio']*film[1])
-        flag=0
-        for peli in historial['peliculas']:
-          if film[0]['id'] == peli['id'] and peli['fechaCompra'] == str(fecha):
-            peli['cantidad'] += film[1]
-            flag=1
-            break
-        if flag== 0:
-          film[0]['cantidad'] = film[1]
-          film[0]['fechaCompra']=str(fecha)
-          historial['peliculas'].append(film[0])
-        if sumPrice > saldo:
-            return redirect("../")
-
-    saldo = saldo-sumPrice
-    session['carrito']=[]
-    usuario['saldo'] = saldo
-    with open(ruta, "w") as jfile:
-        json.dump(usuario, jfile)
-    with open(rutaHistorial, "w") as jfile:
-        json.dump(historial, jfile)
-
-    return redirect("../")
 
 
 if __name__ == '__main__':

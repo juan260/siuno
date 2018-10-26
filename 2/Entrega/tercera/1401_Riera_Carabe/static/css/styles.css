@@ -33,26 +33,23 @@ table{
 }
 
 label:not(#agree){
- display: table-cell;
+ display: table-cell; 
 }
 
-input:not(#agree, .quitar){
-  display: table-cell;
+input:not(#agree, .quitar){ 
+  display: table-cell; 
 }
 
-.quitardiv{
-  text-align: center;
-  align-items: center;
-  align-content: center;
+.quitar{
+  text-align: center
 }
 
-
-form {
+form { 
   display: table;
 }
 
 p:not(#agree) {
- display: table-row;
+ display: table-row;  
 }
 
 
@@ -135,20 +132,6 @@ vertical-align: -10px;
   background-color:pink;
 }
 
-#fechaSelec {
-  display: flex;
-  align-items:center;
-  flex-wrap:wrap;
-  padding: 20px;
-  margin: 20px;
-  margin-left: 0px;
-  margin-right: 0px;
-  justify-content: space-around;
-  flex-direction: row;
-  border: solid rgb(119, 179, 119) 1px;
-  border-radius: 10px;
-}
-
 #registro {
   display: flex;
   border: solid 1px green;
@@ -221,7 +204,7 @@ vertical-align: -10px;
   padding: 10px;
   padding-top:20px;
   margin-bottom:20px;
-  width: 230px;
+  width: 200px;
   height: 400px;
   text-align: center;
   border: solid rgb(119, 179, 119) 1px;
@@ -355,12 +338,6 @@ vertical-align: -10px;
   justify-content: space-around;
   overflow: auto;
   visibility: hidden;
-}
-
-#contador{
-  width:200px;
-  height:20px;
-  vertical-align: bottom;
 }
 
 #footer {

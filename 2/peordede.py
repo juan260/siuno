@@ -46,7 +46,6 @@ def carrito(methods=['GET','POST']):
   if(request.method=='POST'):
     del_film_id=request.form.get('id')
     carrito = [x for x in carrito if x[0]['id'] != int(del_film_id)]
-    print(carrito)
     session['carrito']=carrito
     return redirect("./carrito/")
 
@@ -92,7 +91,6 @@ def registro(methods = ['POST', 'GET']):
       root='./data/usuarios/'
       listaUsuarios = [ item for item in os.listdir(root) if os.path.isdir(os.path.join(root, item)) ]
       if username in listaUsuarios:
-        print("Already existing user")
         return render_template('registro.html', existe=1)
       dataR = root+username+"/data.json"
       historialR = root+username+"/historial.json"
@@ -188,7 +186,6 @@ def pelicula(name, methods = ['POST', 'GET']):
   films = json.load(open('data/catalogo.json'))['peliculas']
   if request.method=='GET':
     for film in films:
-      print(name + str(film['id']))
       if int(name) == film['id']:
         if('username' in session):
           return render_template('pelicula.html', film = film, log = session['username'])
@@ -200,11 +197,8 @@ def pelicula(name, methods = ['POST', 'GET']):
       return render_template('pelicula.html', film = None, log = None)
 
   if request.method=='POST':
-    print("POST RECIBIDO")
     for film in films:
-      print("BUSCANDO PELI")
       if(int(name) == film['id']):
-        print("PELI ENCONTRADA")
         # Si no hay carrito
         try:
           carrito=session['carrito']
@@ -212,17 +206,12 @@ def pelicula(name, methods = ['POST', 'GET']):
           # Si no hay carrito
           session['carrito']=[]
           carrito=session['carrito']
-          print("CARRITO CREADO")
         # Buscamos la pelicula en el carrito
 
         for i in range(len(carrito)):
           # Si la encontramos en el carritos
           if carrito[i][0]['id']==film['id']:
-            print("YE EN EL CARRITO")
-            print("CANTIDAD ACTUAL: "+ str(carrito[i][1]))
             carrito[i][1]+=int(request.form['quantity'])
-            print("CANTIDAD ANADIDA: "+ str(request.form['quantity']))
-            print("CANTIDAD FINAL: "+ str(carrito[i][1]))
             session['carrito']=carrito
             return redirect("../carrito")
 

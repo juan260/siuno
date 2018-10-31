@@ -87,6 +87,10 @@
           <br> <strong>Correo</strong>: {{ log['email'] }}
           <br> <strong>Num tarjeta</strong>: {{ log['creditcard'] }}
           <br> <strong>Saldo</strong>: {{ log['saldo'] }}€
+          <form method='post'>
+            <input type="number" name="quantity" min="1" value="1">
+            <input type = "submit" value="Añadir saldo">
+          </form>
           <br> <br>
           <button onclick="location.href='{{ url_for('historialCompras') }}'" type="button">Consultar historial</button>
           {% else %}

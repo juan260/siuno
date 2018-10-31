@@ -149,12 +149,17 @@ def registro():
   else:
     return render_template('registro.html', existe=None)
 
-@app.route('/cuenta/')
+@app.route('/cuenta/', methods = ['POST', 'GET'])
 def cuenta():
   if('username' in session):
     root=app.root_path + '/data/usuarios/'
     ruta = root+session['username']+"/data.json"
     datosUsuario = json.load(open(ruta))
+    if(request.method=='POST'):
+      incr=int(request.form.get('quantity'))
+      datosUsuario['saldo']+=incr
+      with open(ruta, "w") as jfile:
+        json.dump(datosUsuario, jfile)
     return render_template('cuenta.html',log = datosUsuario)
   else:
     return render_template('cuenta.html',log = None)

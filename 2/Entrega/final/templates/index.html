@@ -1,0 +1,148 @@
+ <!--Juan Riera y Luis Carabe-->
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <script src="{{ url_for('static', filename='javascript/functionsindex.js')}}"> </script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script>
+
+      function getNumber(n) {
+        return "{{ url_for('static', filename='imgs/Number') }}/" + n + ".png"
+      }
+
+      function contador() {
+        			var xhttp = new XMLHttpRequest();
+        			xhttp.onreadystatechange = function() {
+                var i = 0;
+                var letter
+          			if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                  for(var i = 0; i< xhttp.responseText.length ; i++){
+                    letter = xhttp.responseText.charAt(i)
+                    document.getElementById("contador"+String(i)).src=getNumber(letter);
+                  }
+          			}
+        			}
+        			var dir = "./contador";
+        			xhttp.open("POST", dir, true);
+        			xhttp.send();
+
+      		}
+
+
+    </script>
+    <script> window.setInterval(contador, 3000); </script>
+    <title> Home</title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="{{ url_for('index') }}">
+            <div id="logo">
+            <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+            <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
+          </a>
+          <div id="searchbar">
+            <form>
+              <input type="text" name="busqueda" placeholder="película"
+              id="searchBarBar"  oninput="return updateSearch()">
+              <img  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
+            </form>
+          </div>
+        {% if log==None %}
+        <div id="headerAccount">
+          <a href="{{ url_for('iniciosesion') }}">Inicio sesión</a>
+          <br>
+          <a href="{{ url_for('registro') }}">Registro</a>
+        </div>
+        {% else %}
+        <div id="account">
+          Bienvenido {{ log }}!
+          <a href="{{ url_for('cuenta') }}"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+          <a href="{{ url_for('logout') }}"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
+        </div>
+        {% endif %}
+        </div>
+      </div>
+
+
+
+      <div id="centralpane">
+
+        <div id="menubar">
+          <div id="menubarmargin">
+
+          </div>
+          <div id="menubarlist">
+            <ul>
+
+              <li class="selected"> <a class="a-selected" href="{{ url_for('index') }}">Películas</a></li>
+              <li> <a href="{{ url_for('carrito') }}">Carrito</a></li>
+              <li> <a href="{{ url_for('contacto') }}">Contacto y ayuda</a></li>
+            </ul>
+            <div id="contador">
+              <img alt="n" id="contador0" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                height="20" width="20">
+              <img alt="n" id="contador1" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                height="20" width="20">
+              <img alt="n" id="contador2" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                height="20" width="20">
+              <img alt="n" id="contador3" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                height="20" width="20">
+            </div>
+            <script>
+              contador();
+              window.setInterval(contador, 3000);
+            </script>
+          </div>
+        </div>
+        <div id="content">
+
+            <form id="filters" method = "get">
+            <div>
+              Géneros:
+              <select class="filter" form="filters" name="filters">
+                <option value="-">-</option>
+                {% for genre in genres %}
+                  <option value="{{genre}}">{{genre}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Aplicar">
+          </form>
+
+          <div id="franksearch">
+              <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
+              alt="Frank"
+              height="302"
+              width="554"><br>
+            <h2> No hemos encontrado esa película, hemos enviado a Frank de la Jungla a buscarla </h2>
+          </div>
+          <div id="filmtable">
+            {% for film in films %}
+              <a href="{{ url_for('pelicula', name=film['id']) }}" class="film" data-title="{{ film['titulo'] }}">
+                <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                  alt="{{ film['titulo'] }}"
+                    height="250"
+                    width="175">
+                <br>
+                <div class="filmtext">
+                  <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
+                  {{ film['precio'] }}€
+                </div>
+              </a>
+              {% endfor %}
+
+        </div>
+
+      </div>
+      <div id="footer">
+        Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+
+  </body>
+</html>

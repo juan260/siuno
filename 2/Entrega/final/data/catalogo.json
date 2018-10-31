@@ -1,0 +1,195 @@
+{
+	"peliculas": [
+		{"titulo": "Bad Reputation",
+		"poster": "Bad_reputation.jpg",
+		"director": "Kevin Kerslake",
+		"precio": 18.99,
+		"genero": "Documental",
+		"sinopsis": "Bad reputation es una pelicula que va de...",
+		"anno": 2018,
+		"actores": [
+			{"nombre": "Billie Joe Armstrong",
+			"personaje": "Himself",
+			"foto": "BillieJoeArmstrong.jpg"},
+
+			{"nombre": "Rodney Bingenheimer",
+			"personaje": "Himself",
+			"foto": "RodneyBingenheimer.jpg"}
+			],
+		"id":1,
+		"valoracion":2.7
+		},
+		{"titulo": "La monja2",
+			"poster": "The_nun.jpg",
+			"director": "Corin Hardy",
+			"precio": 18,
+			"genero": "Terror",
+			"anno": 1999,
+			"sinopsis": "Descripcion de la monja.",
+			"actores": [
+				{"nombre": "Jake Lloyd",
+				"personaje": "Anakin Skywalker",
+				"foto": "anakin.jpg"},
+
+				{"nombre": "Ewan McGregor",
+				"personaje": "Obi-Wan Kenobi",
+				"foto": "kenobi.jpg"}
+				],
+			"id":2,
+			"valoracion":5
+			},
+		{"titulo": "Smallfoot",
+			"poster": "Smallfoot.jpg",
+			"director": "Karey Kirkpatrick, Jason Reisig",
+			"precio": 18,
+			"genero": "Aventura",
+			"anno": 2018,
+			"sinopsis": "A Yeti is convinced that the elusive creatures known as hoomans really do exist",
+			"actores": [
+				{"nombre": "Jake Lloyd",
+				"personaje": "Anakin Skywalker",
+				"foto": "anakin.jpg"},
+
+				{"nombre": "Ewan McGregor",
+				"personaje": "Obi-Wan Kenobi",
+				"foto": "kenobi.jpg"}
+				],
+			"id":3,
+			"valoracion":5
+			},
+		{"titulo": "Hotel Artemis",
+				"poster": "Hotel_Artemis.jpg",
+				"director": "Drew Pearce",
+				"precio": 19,
+				"genero": "Aventura",
+				"anno": 2018,
+				"sinopsis": "Set in riot-torn, near-future Los Angeles",
+				"actores": [
+					{"nombre": "Jake Lloyd",
+					"personaje": "Anakin Skywalker",
+					"foto": "anakin.jpg"},
+
+					{"nombre": "Ewan McGregor",
+					"personaje": "Obi-Wan Kenobi",
+					"foto": "kenobi.jpg"}
+					],
+				"id":4,
+				"valoracion":5
+			},
+			{"titulo": "Bad Reputation2",
+			"poster": "Bad_reputation.jpg",
+			"director": "Kevin Kerslake",
+			"precio": 18.99,
+			"genero": "Documental",
+			"sinopsis": "Documentary about rock star Joan Jett.",
+			"anno": 2018,
+			"actores": [
+				{"nombre": "Billie Joe Armstrong",
+				"personaje": "Himself",
+				"foto": "BillieJoeArmstrong.jpg"},
+
+				{"nombre": "Rodney Bingenheimer",
+				"personaje": "Himself",
+				"foto": "RodneyBingenheimer.jpg"}
+				],
+			"id":5,
+			"valoracion":2.7
+			},
+			{"titulo": "La monja2",
+			"poster": "The_nun.jpg",
+			"director": "Corin Hardy",
+			"precio": 18,
+			"genero": "Terror",
+			"anno": 1999,
+			"sinopsis": "Descripcion de la monja.",
+			"actores": [
+				{"nombre": "Jake Lloyd",
+				"personaje": "Anakin Skywalker",
+				"foto": "anakin.jpg"},
+
+				{"nombre": "Ewan McGregor",
+				"personaje": "Obi-Wan Kenobi",
+				"foto": "kenobi.jpg"}
+				],
+			"id":6,
+			"valoracion":5
+			},
+			{"titulo": "Smallfoot2",
+				"poster": "Smallfoot.jpg",
+				"director": "Karey Kirkpatrick, Jason Reisig",
+				"precio": 18,
+				"genero": "Aventura",
+				"anno": 2018,
+				"sinopsis": "A Yeti is convinced that the elusive creatures known as hoomans really do exist",
+				"actores": [
+					{"nombre": "Jake Lloyd",
+					"personaje": "Anakin Skywalker",
+					"foto": "anakin.jpg"},
+
+					{"nombre": "Ewan McGregor",
+					"personaje": "Obi-Wan Kenobi",
+					"foto": "kenobi.jpg"}
+					],
+				"id":7,
+				"valoracion":5
+				},
+			{"titulo": "Hotel Artemis2",
+					"poster": "Hotel_Artemis.jpg",
+					"director": "Drew Pearce",
+					"precio": 19,
+					"genero": "Drama",
+					"anno": 2018,
+					"sinopsis": "Set in riot-torn, near-future Los Angeles",
+					"actores": [
+						{"nombre": "Jake Lloyd",
+						"personaje": "Anakin Skywalker",
+						"foto": "anakin.jpg"},
+
+						{"nombre": "Ewan McGregor",
+						"personaje": "Obi-Wan Kenobi",
+						"foto": "kenobi.jpg"}
+						],
+					"id":8,
+					"valoracion":5
+				},
+				{"titulo": "Bad Reputation3",
+				"poster": "Bad_reputation.jpg",
+				"director": "Kevin Kerslake",
+				"precio": 18.99,
+				"genero": "Documental",
+				"sinopsis": "Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.Documentary about rock star Joan Jett.",
+				"anno": 2018,
+				"actores": [
+					{"nombre": "Billie Joe Armstrong",
+					"personaje": "Himself",
+					"foto": "BillieJoeArmstrong.jpg"},
+
+					{"nombre": "Rodney Bingenheimer",
+					"personaje": "Himself",
+					"foto": "RodneyBingenheimer.jpg"},
+
+					{"nombre": "Rodney Bingenheimer",
+					"personaje": "Himself",
+					"foto": "RodneyBingenheimer.jpg"},
+
+					{"nombre": "Rodney Bingenheimer",
+					"personaje": "Himself",
+					"foto": "RodneyBingenheimer.jpg"},
+
+					{"nombre": "Rodney Bingenheimer",
+					"personaje": "Himself",
+					"foto": "RodneyBingenheimer.jpg"},
+
+					{"nombre": "Rodney Bingenheimer",
+					"personaje": "Himself",
+					"foto": "RodneyBingenheimer.jpg"},
+
+					{"nombre": "Rodney Bingenheimer",
+					"personaje": "Himself",
+					"foto": "RodneyBingenheimer.jpg"}
+					],
+				"id":9,
+				"valoracion":2.7
+				}
+	]
+}

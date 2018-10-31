@@ -36,7 +36,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/juan/apache2/var/www/html/si1pyenv"
+set -gx VIRTUAL_ENV "/home/luis/apache2/var/www/html/si1pyenv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

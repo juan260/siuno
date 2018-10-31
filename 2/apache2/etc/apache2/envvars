@@ -13,14 +13,14 @@ fi
 # Since there is no sane way to get the parsed apache2 config in scripts, some
 # settings are defined via environment variables and then used in apache2ctl,
 # /etc/init.d/apache2, /etc/logrotate.d/apache2, etc.
-export APACHE_RUN_USER=juan
-export APACHE_RUN_GROUP=juan
+export APACHE_RUN_USER=luis
+export APACHE_RUN_GROUP=luis
 # temporary state file location. This might be changed to /run in Wheezy+1
-export APACHE_PID_FILE=/home/juan/apache2/var/run/apache2$SUFFIX/apache2.pid
-export APACHE_RUN_DIR=/home/juan/apache2/var/run/apache2$SUFFIX
-export APACHE_LOCK_DIR=/home/juan/apache2/var/lock/apache2$SUFFIX
+export APACHE_PID_FILE=/home/luis/apache2/var/run/apache2$SUFFIX/apache2.pid
+export APACHE_RUN_DIR=/home/luis/apache2/var/run/apache2$SUFFIX
+export APACHE_LOCK_DIR=/home/luis/apache2/var/lock/apache2$SUFFIX
 # Only /var/log/apache2 is handled by /etc/logrotate.d/apache2.
-export APACHE_LOG_DIR=/home/juan/apache2/var/log/apache2$SUFFIX
+export APACHE_LOG_DIR=/home/luis/apache2/var/log/apache2$SUFFIX
 
 ## The locale used by some modules like mod_dav
 export LANG=C

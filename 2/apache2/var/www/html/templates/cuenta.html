@@ -39,7 +39,7 @@
   <body>
     <div id="globalContainer">
       <div id="header">
-          <a href="/">
+          <a href="{{ url_for('index') }}">
               <div id="logo">
               <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
               <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
@@ -47,8 +47,8 @@
             {% if log %}
             <div id="account">
               Bienvenido {{ log['username'] }}!
-              <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
-              <a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
+              <a href="{{ url_for('cuenta') }}"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+              <a href="{{ url_for('logout') }}"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
             </div>
 
             {% endif %}
@@ -63,9 +63,9 @@
               <div id="menubarlist">
                 <ul>
 
-                  <li> <a href="/">Películas</a></li>
-                  <li> <a href="../carrito">Carrito</a></li>
-                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                  <li> <a href="{{ url_for('index') }}">Películas</a></li>
+                  <li> <a href="{{ url_for('carrito') }}">Carrito</a></li>
+                  <li> <a href="{{ url_for('contacto') }}">Contacto y ayuda</a></li>
                 </ul>
                 <div id="contador">
                   <img alt="n" id="contador0" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
@@ -88,7 +88,7 @@
           <br> <strong>Num tarjeta</strong>: {{ log['creditcard'] }}
           <br> <strong>Saldo</strong>: {{ log['saldo'] }}€
           <br> <br>
-          <button onclick="location.href='../historialCompras'" type="button">Consultar historial</button>
+          <button onclick="location.href='{{ url_for('historialCompras') }}'" type="button">Consultar historial</button>
           {% else %}
           <h2>Identifícate por favor.</h2>
           {% endif %}
@@ -98,9 +98,9 @@
       <div id="footer">
           Juan Riera & Luis Cárabe &copy;</div>
     </div>
-    <script> 
+    <script>
       contador();
-      window.setInterval(contador, 3000); 
+      window.setInterval(contador, 3000);
     </script>
   </body>
 </html>

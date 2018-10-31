@@ -401,3 +401,15 @@
 [Wed Oct 31 02:43:36.582016 2018] [authz_core:error] [pid 8648] [client 127.0.0.1:50102] AH01630: client denied by server configuration: /home/juan/public_html/peordede.wsgi
 [Wed Oct 31 02:43:44.084876 2018] [wsgi:error] [pid 10374] [client 127.0.0.1:50110] mod_wsgi (pid=10374): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede.wsgi'., referer: http://localhost:8080/peordede.wsgi/
 [Wed Oct 31 02:43:44.085009 2018] [wsgi:error] [pid 10374] [client 127.0.0.1:50110] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede.wsgi/
+[Wed Oct 31 12:13:36.968516 2018] [core:warn] [pid 3170] AH00098: pid file /home/luis/apache2/var/run/apache2/apache2.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 31 12:13:36.971831 2018] [mpm_prefork:notice] [pid 3170] AH00163: Apache/2.4.29 (Ubuntu) mod_wsgi/4.5.17 Python/2.7 configured -- resuming normal operations
+[Wed Oct 31 12:13:36.971865 2018] [core:notice] [pid 3170] AH00094: Command line: '/usr/sbin/apache2 -d /home/luis/apache2/etc/apache2 -f /home/luis/apache2/etc/apache2/apache2.conf'
+[Wed Oct 31 12:14:46.185345 2018] [wsgi:error] [pid 3286] [client 127.0.0.1:55004] mod_wsgi (pid=3286): Exception occurred processing WSGI script '/home/luis/apache2/var/www/html/peordede5.wsgi'., referer: http://localhost:8080/peordede5.wsgi/
+[Wed Oct 31 12:14:46.185401 2018] [wsgi:error] [pid 3286] [client 127.0.0.1:55004] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede5.wsgi/
+[Wed Oct 31 12:14:55.794081 2018] [wsgi:error] [pid 3310] [client 127.0.0.1:55012] mod_wsgi (pid=3310): Exception occurred processing WSGI script '/home/luis/apache2/var/www/html/peordede5.wsgi'., referer: http://localhost:8080/peordede5.wsgi/contacto/
+[Wed Oct 31 12:14:55.794117 2018] [wsgi:error] [pid 3310] [client 127.0.0.1:55012] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede5.wsgi/contacto/
+[Wed Oct 31 12:48:18.532047 2018] [wsgi:error] [pid 3286] [client 127.0.0.1:55788] Target WSGI script not found or unable to stat: /home/luis/apache2/var/www/html/peordede.wsgi
+[Wed Oct 31 12:48:23.137908 2018] [wsgi:error] [pid 3286] [client 127.0.0.1:55788] Target WSGI script not found or unable to stat: /home/luis/apache2/var/www/html/peordede.wsgi
+[Wed Oct 31 13:38:56.156554 2018] [wsgi:error] [pid 3286] [client 127.0.0.1:60374] Target WSGI script not found or unable to stat: /home/luis/apache2/var/www/html/peordede.wsgi
+[Wed Oct 31 14:54:20.148900 2018] [wsgi:error] [pid 3178] [client 127.0.0.1:37768] Target WSGI script not found or unable to stat: /home/luis/apache2/var/www/html/peordede.wsgi
+[Wed Oct 31 14:54:45.112932 2018] [wsgi:error] [pid 3174] [client 127.0.0.1:37808] Target WSGI script not found or unable to stat: /home/luis/apache2/var/www/html/peordede.wsgi

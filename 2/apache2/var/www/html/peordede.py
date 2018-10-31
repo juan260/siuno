@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, session,url_for
+from flask import Flask, request, render_template, redirect, session, url_for
 import json
 import os
 import random
@@ -21,7 +21,7 @@ def index(methods = ['POST', 'GET']):
     return "No se pudieron cargar las peliculas"
   films=json.load(jsonFile)['peliculas']
   genres = []
-  
+
   for film in films:
     if film['genero'] not in genres:
       genres.append(film['genero'])
@@ -59,7 +59,7 @@ def carrito(methods=['GET','POST']):
     del_film_id=request.form.get('id')
     carrito = [x for x in carrito if x[0]['id'] != int(del_film_id)]
     session['carrito']=carrito
-    return redirect("./carrito/")
+    return redirect(url_for("carrito"))
 
 
   if('username' in session):
@@ -87,7 +87,7 @@ def iniciosesion(methods = ['POST', 'GET']):
         contrasenia = json.load(open(ruta))['password']
         if contrasenia == md5.new(request.form.get('contrasenia')).hexdigest():
           session['username']=username
-          return redirect("../")
+          return redirect(url_for("index"))
         return render_template('iniciosesion.html', usrNoexiste=None, pswEquivocada=1)
       return render_template('iniciosesion.html', usrNoexiste=1, pswEquivocada=None)
 
@@ -104,16 +104,16 @@ def registro():
       listaUsuarios = [ item for item in os.listdir(root) if os.path.isdir(os.path.join(root, item)) ]
       if username in listaUsuarios:
         return render_template('registro.html', existe=1)
-      
+
       dataR = root+username+"/data.json"
       historialR = root+username+"/historial.json"
       os.makedirs(os.path.dirname(dataR))
-      
+
       #Creamos historial.json
       f = open(historialR, "w+")
       f.write("{\n\t\"peliculas\": []\n}")
       f = None
-      
+
       #Creamos data.json
       with open(dataR,"w") as f:
         f.write("{\n\t\"username\": ")
@@ -141,7 +141,7 @@ def registro():
         f.write("\t\"saldo\": ")
         f.write(str(random.randint(1,100))+"\n}")
         session['username']=username
-        return redirect("../")
+        return index()
 
 
     return render_template('registro.html', existe=None)
@@ -228,21 +228,21 @@ def pelicula(name, methods = ['POST', 'GET']):
           if carrito[i][0]['id']==film['id']:
             carrito[i][1]+=int(request.form['quantity'])
             session['carrito']=carrito
-            return redirect("../carrito")
+            return redirect(url_for("carrito"))
 
           # Si no la hemos encontrado en el carrito
 
         session['carrito']=carrito + [[film, int(request.form['quantity'])]]
-        return redirect("../carrito")
+        return redirect(url_for("carrito"))
 
 
 
-    return redirect("../carrito")
+    return redirect(url_for("carrito"))
 
 @app.route('/logout/')
 def logout():
   session.clear()
-  return redirect("../")
+  return redirect(url_for("index"))
 
 @app.route('/contador', methods=['POST'])
 def contador():
@@ -282,7 +282,7 @@ def confirmar():
           film[0]['fechaCompra']=str(fecha)
           historial['peliculas'].append(film[0])
         if sumPrice > saldo:
-            return redirect("../")
+            return redirect(url_for("index"))
 
     saldo = saldo-sumPrice
     session['carrito']=[]
@@ -292,7 +292,7 @@ def confirmar():
     with open(rutaHistorial, "w") as jfile:
         json.dump(historial, jfile)
 
-    return redirect("../")
+    return redirect(url_for("index"))
 
 
 if __name__ == '__main__':

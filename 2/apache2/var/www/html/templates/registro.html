@@ -43,7 +43,7 @@
 
     <div id="globalContainer">
       <div id="header">
-          <a href="/">
+          <a href="{{ url_for('index') }}">
               <div id="logo">
               <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
               <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
@@ -60,9 +60,9 @@
               <div id="menubarlist">
                 <ul>
 
-                  <li> <a href="/">Películas</a></li>
-                  <li> <a href="../carrito">Carrito</a></li>
-                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                  <li> <a href="{{ url_for('index') }}">Películas</a></li>
+                  <li> <a href="{{ url_for('carrito') }}">Carrito</a></li>
+                  <li> <a href="{{ url_for('contacto') }}">Contacto y ayuda</a></li>
                 </ul>
                 <div id="contador">
                   <img alt="n" id="contador0" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
@@ -129,9 +129,9 @@
           Juan Riera & Luis Cárabe &copy;
       </div>
     </div>
-    <script> 
+    <script>
       contador();
-      window.setInterval(contador, 3000); 
+      window.setInterval(contador, 3000);
     </script>
   </body>
 </html>

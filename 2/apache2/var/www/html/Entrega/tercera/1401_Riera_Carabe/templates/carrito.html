@@ -1,0 +1,93 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title> Carrito </title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="/">
+              <div id="logo">
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" width="170" height="50"></div>
+            </a>
+            {% if log==None %}
+            <div id="headerAccount">
+              <a href="../iniciosesion">Inicio sesión</a>
+              <br>
+              <a href="../registro">Registro</a>
+            </div>
+            {% else %}
+            <div id="account">
+              Bienvenido {{ log }}!<a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a><!--
+              --><a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a></div>
+            {% endif %}
+
+      </div>
+
+
+      <div id="centralpane">
+
+          <div id="menubar">
+              <div id="menubarmargin">
+
+              </div>
+              <div id="menubarlist">
+                <ul>
+
+                  <li> <a href="/">Películas</a></li>
+                  <li   class="selected"> <a class="a-selected" href="../carrito">Carrito</a></li>
+                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+        <div id="content">
+          <h2>Carrito:</h2>
+          <div id="filmtable">
+            {% for film in films %}
+              <div class="film">
+                <a href="/pelicula/{{ film[0]['id']}}">
+                  <img src="{{ url_for('static', filename='imgs/'+film[0]['poster'])}}"
+                    alt="{{ film[0]['titulo'] }}"
+                      height="250"
+                      width="175">
+                  </a>
+                  <div class="filmtext">
+                    <b>{{ film[0]['titulo'] }}</b> ({{film[0]['anno']}}) <br>
+                    Género: {{ film[0]['genero'] }} <br>
+                    {{ film[0]['precio'] }}€<br>
+                    Cantidad: {{film[1]}} <br>
+                    <form method = "POST">
+                      <input class="quitar" type="text" name="id" hidden=true value="{{film[0]['id']}}">
+                      <button class="quitar" type="submit">Quitar</button>
+                    </form>
+                  </div>
+                </div>
+              {% endfor %}
+
+        </div>
+          <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
+          {% if not log %}
+          <button disabled type="button">Finalizar compra</button> (Identifícate para continuar el proceso de compra)
+          {% elif not films%}
+          <button disabled type="button">Finalizar compra</button> ¡Añade películas al carrito!
+          {% else %}
+          <button onclick="location.href='../finalizarCompra'" type="button">Finalizar compra</button>
+          {% endif %}
+
+          <br>
+
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>

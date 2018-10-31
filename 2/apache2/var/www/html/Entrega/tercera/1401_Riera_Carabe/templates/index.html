@@ -1,0 +1,126 @@
+<!--Juan Riera y Luis Carabe-->
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <script src="{{ url_for('static', filename='javascript/functionsindex.js')}}"> </script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title> Home</title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="/">
+            <div id="logo">
+            <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+            <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" width="170" height="50"></div>
+          </a>
+          <div id="searchbar">
+            <form>
+              <input type="text" name="busqueda" placeholder="película"
+              id="searchBarBar"  oninput="return updateSearch()">
+              <img  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
+            </form>
+          </div>
+        {% if log==None %}
+        <div id="headerAccount">
+          <a href="iniciosesion">Inicio sesión</a>
+          <br>
+          <a href="registro">Registro</a>
+        </div>
+        {% else %}
+        <div id="account">
+          Bienvenido {{ log }}!
+          <a href="cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+          <a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
+        </div>
+        {% endif %}
+        </div>
+      </div>
+
+
+
+      <div id="centralpane">
+
+        <div id="menubar">
+          <div id="menubarmargin">
+
+          </div>
+          <div id="menubarlist">
+            <ul>
+
+              <li class="selected"> <a class="a-selected" href="/">Películas</a></li>
+              <li> <a href="carrito">Carrito</a></li>
+              <li> <a href="contacto">Contacto y ayuda</a></li>
+            </ul>
+          </div>
+        </div>
+        <div id="content">
+
+            <form id="filters" method = "get">
+            <div>
+              Géneros:
+              <select class="filter" form="filters" name="filters">
+                <option value="-">-</option>
+                {% for genre in genres %}
+                  <option value="{{genre}}">{{genre}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Aplicar">
+          </form>
+
+            <!--
+            <div>
+              Año:
+              <select>
+                <option value="none">-</option>
+                <option value="2018">2018</option>
+                <option value="2002">2002</option>
+              </select>
+            </div>
+            <div>
+              Inicial:
+              <select>
+                <option value="none">-</option>
+                <option value="am">A-M</option>
+                <option value="nz">N-Z</option>
+              </select>
+            </div>
+          -->
+
+
+          <div id="franksearch">
+              <img src="{{ url_for('static', filename='imgs/frank.jpg')}}"
+              alt="Frank"
+              height="302"
+              width="554"><br>
+            <h2> No hemos encontrado esa película, hemos enviado a Frank de la Jungla a buscarla </h2>
+          </div>
+          <div id="filmtable">
+            {% for film in films %}
+            <div class="film" data-title="{{ film['titulo'] }}">
+              <a href="/pelicula/{{ film['id']}}">
+                <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                  alt="{{ film['titulo'] }}"
+                    height="250"
+                    width="175">
+                </a><br>
+                <div class="filmtext">
+                  <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
+                  {{ film['precio'] }}€
+                </div>
+              </div>
+              {% endfor %}
+
+        </div>
+
+      </div>
+      <div id="footer">
+        Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title> Finalizar Compra</title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="/">
+              <div id="logo">
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
+            </a>
+            {% if log==None %}
+            <div id="headerAccount">
+              <a href="../iniciosesion">Inicio sesión</a>
+              <br>
+              <a href="../registro">Registro</a>
+            </div>
+            {% else %}
+            <div id="account">
+              Bienvenido {{ log }}!
+              <a href="../cuenta"><img src="{{ url_for('static', filename='imgs/iconoUsuario.png')}}" alt="Icono Usuario" height="40" width="40"></a>
+              <a href="../logout"><img src="{{ url_for('static', filename='imgs/logout.png')}}" alt="Desconectar" height="25" width="25"></a>
+            </div>
+            {% endif %}
+
+      </div>
+
+
+      <div id="centralpane">
+
+          <div id="menubar">
+              <div id="menubarmargin">
+
+              </div>
+              <div id="menubarlist">
+                <ul>
+
+                  <li> <a href="/">Películas</a></li>
+                  <li> <a href="../carrito">Carrito</a></li>
+                  <li> <a href="../contacto">Contacto y ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+        <div id="content">
+          <h2> Finalizar compra:</h2>
+          {% if not log %}
+          <h2> Identifícate por favor</h2>
+          {% elif not films %}
+          <h2> ¡Añade algo al carrito!</h2>
+          {% else %}
+          <ul>
+            {% for film in films %}
+            <li> <b>{{ film[0]['titulo'] }}</b>: {{ film[0]['precio'] }}€ * {{ film[1] }} </li>
+            {% endfor %}
+          </ul>
+          <br> Suma: {{sumPrice}}€
+          <br> Saldo: {{saldo}}€<br>
+          {% if sumPrice > saldo %}
+          <button disabled type="button">Confirmar compra</button> Saldo insuficiente.
+          {% else %}
+          <button type="button">Confirmar compra</button>
+          {% endif %}
+          <br>
+
+          {% endif %}
+
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+    </div>
+  </body>
+</html>

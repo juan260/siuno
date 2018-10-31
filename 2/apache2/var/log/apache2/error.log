@@ -1,0 +1,403 @@
+[Wed Oct 31 00:24:24.964424 2018] [core:warn] [pid 3511] AH00098: pid file /home/juan/apache2/var/run/apache2/apache2.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 31 00:24:24.967289 2018] [mpm_prefork:notice] [pid 3511] AH00163: Apache/2.4.29 (Ubuntu) mod_wsgi/4.5.17 Python/2.7 configured -- resuming normal operations
+[Wed Oct 31 00:24:24.967331 2018] [core:notice] [pid 3511] AH00094: Command line: '/usr/sbin/apache2 -d /home/juan/apache2/etc/apache2 -f /home/juan/apache2/etc/apache2/apache2.conf'
+[Wed Oct 31 00:25:58.727187 2018] [wsgi:error] [pid 3516] [client ::1:41900] [2018-10-31 00:25:58,717] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727213 2018] [wsgi:error] [pid 3516] [client ::1:41900] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727219 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727223 2018] [wsgi:error] [pid 3516] [client ::1:41900]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727226 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727230 2018] [wsgi:error] [pid 3516] [client ::1:41900]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727233 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727237 2018] [wsgi:error] [pid 3516] [client ::1:41900]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727240 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727244 2018] [wsgi:error] [pid 3516] [client ::1:41900]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727247 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727250 2018] [wsgi:error] [pid 3516] [client ::1:41900]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727253 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727257 2018] [wsgi:error] [pid 3516] [client ::1:41900]     films=json.load('/data/catalogo.json'), referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727260 2018] [wsgi:error] [pid 3516] [client ::1:41900]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727263 2018] [wsgi:error] [pid 3516] [client ::1:41900]     return loads(fp.read(),, referer: http://localhost:8080/
+[Wed Oct 31 00:25:58.727266 2018] [wsgi:error] [pid 3516] [client ::1:41900] AttributeError: 'str' object has no attribute 'read', referer: http://localhost:8080/
+[Wed Oct 31 00:44:18.422041 2018] [wsgi:error] [pid 4131] [client ::1:42048] [2018-10-31 00:44:18,421] ERROR in app: Exception on / [GET]
+[Wed Oct 31 00:44:18.422084 2018] [wsgi:error] [pid 4131] [client ::1:42048] Traceback (most recent call last):
+[Wed Oct 31 00:44:18.422091 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 00:44:18.422096 2018] [wsgi:error] [pid 4131] [client ::1:42048]     response = self.full_dispatch_request()
+[Wed Oct 31 00:44:18.422111 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 00:44:18.422115 2018] [wsgi:error] [pid 4131] [client ::1:42048]     rv = self.handle_user_exception(e)
+[Wed Oct 31 00:44:18.422120 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 00:44:18.422124 2018] [wsgi:error] [pid 4131] [client ::1:42048]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 00:44:18.422127 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 00:44:18.422131 2018] [wsgi:error] [pid 4131] [client ::1:42048]     rv = self.dispatch_request()
+[Wed Oct 31 00:44:18.422134 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 00:44:18.422138 2018] [wsgi:error] [pid 4131] [client ::1:42048]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 00:44:18.422141 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index
+[Wed Oct 31 00:44:18.422145 2018] [wsgi:error] [pid 4131] [client ::1:42048]     films=json.load('/data/catalogo.json')
+[Wed Oct 31 00:44:18.422148 2018] [wsgi:error] [pid 4131] [client ::1:42048]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load
+[Wed Oct 31 00:44:18.422152 2018] [wsgi:error] [pid 4131] [client ::1:42048]     return loads(fp.read(),
+[Wed Oct 31 00:44:18.422155 2018] [wsgi:error] [pid 4131] [client ::1:42048] AttributeError: 'str' object has no attribute 'read'
+[Wed Oct 31 00:44:33.375033 2018] [wsgi:error] [pid 3516] [client ::1:42050] [2018-10-31 00:44:33,374] ERROR in app: Exception on / [GET]
+[Wed Oct 31 00:44:33.375062 2018] [wsgi:error] [pid 3516] [client ::1:42050] Traceback (most recent call last):
+[Wed Oct 31 00:44:33.375067 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 00:44:33.375072 2018] [wsgi:error] [pid 3516] [client ::1:42050]     response = self.full_dispatch_request()
+[Wed Oct 31 00:44:33.375076 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 00:44:33.375080 2018] [wsgi:error] [pid 3516] [client ::1:42050]     rv = self.handle_user_exception(e)
+[Wed Oct 31 00:44:33.375083 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 00:44:33.375087 2018] [wsgi:error] [pid 3516] [client ::1:42050]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 00:44:33.375091 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 00:44:33.375095 2018] [wsgi:error] [pid 3516] [client ::1:42050]     rv = self.dispatch_request()
+[Wed Oct 31 00:44:33.375098 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 00:44:33.375102 2018] [wsgi:error] [pid 3516] [client ::1:42050]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 00:44:33.375106 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index
+[Wed Oct 31 00:44:33.375109 2018] [wsgi:error] [pid 3516] [client ::1:42050]     films=json.load('/data/catalogo.json')
+[Wed Oct 31 00:44:33.375124 2018] [wsgi:error] [pid 3516] [client ::1:42050]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load
+[Wed Oct 31 00:44:33.375129 2018] [wsgi:error] [pid 3516] [client ::1:42050]     return loads(fp.read(),
+[Wed Oct 31 00:44:33.375133 2018] [wsgi:error] [pid 3516] [client ::1:42050] AttributeError: 'str' object has no attribute 'read'
+[Wed Oct 31 00:49:55.102097 2018] [wsgi:error] [pid 5045] [client ::1:42154] [2018-10-31 00:49:55,101] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102158 2018] [wsgi:error] [pid 5045] [client ::1:42154] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102168 2018] [wsgi:error] [pid 5045] [client ::1:42154]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102176 2018] [wsgi:error] [pid 5045] [client ::1:42154]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102181 2018] [wsgi:error] [pid 5045] [client ::1:42154]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102186 2018] [wsgi:error] [pid 5045] [client ::1:42154]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102190 2018] [wsgi:error] [pid 5045] [client ::1:42154]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102194 2018] [wsgi:error] [pid 5045] [client ::1:42154]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102198 2018] [wsgi:error] [pid 5045] [client ::1:42154]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102202 2018] [wsgi:error] [pid 5045] [client ::1:42154]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102206 2018] [wsgi:error] [pid 5045] [client ::1:42154]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102210 2018] [wsgi:error] [pid 5045] [client ::1:42154]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102214 2018] [wsgi:error] [pid 5045] [client ::1:42154]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102218 2018] [wsgi:error] [pid 5045] [client ::1:42154]     films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:49:55.102222 2018] [wsgi:error] [pid 5045] [client ::1:42154] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493560 2018] [wsgi:error] [pid 3517] [client ::1:42156] [2018-10-31 00:49:57,492] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493592 2018] [wsgi:error] [pid 3517] [client ::1:42156] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493598 2018] [wsgi:error] [pid 3517] [client ::1:42156]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493615 2018] [wsgi:error] [pid 3517] [client ::1:42156]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493619 2018] [wsgi:error] [pid 3517] [client ::1:42156]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493634 2018] [wsgi:error] [pid 3517] [client ::1:42156]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493638 2018] [wsgi:error] [pid 3517] [client ::1:42156]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493642 2018] [wsgi:error] [pid 3517] [client ::1:42156]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493646 2018] [wsgi:error] [pid 3517] [client ::1:42156]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493650 2018] [wsgi:error] [pid 3517] [client ::1:42156]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493654 2018] [wsgi:error] [pid 3517] [client ::1:42156]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493657 2018] [wsgi:error] [pid 3517] [client ::1:42156]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493661 2018] [wsgi:error] [pid 3517] [client ::1:42156]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493665 2018] [wsgi:error] [pid 3517] [client ::1:42156]     films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:49:57.493668 2018] [wsgi:error] [pid 3517] [client ::1:42156] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924362 2018] [wsgi:error] [pid 4131] [client ::1:42220] [2018-10-31 00:53:35,923] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924407 2018] [wsgi:error] [pid 4131] [client ::1:42220] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924418 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924427 2018] [wsgi:error] [pid 4131] [client ::1:42220]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924434 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924442 2018] [wsgi:error] [pid 4131] [client ::1:42220]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924450 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924457 2018] [wsgi:error] [pid 4131] [client ::1:42220]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924464 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924472 2018] [wsgi:error] [pid 4131] [client ::1:42220]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924480 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924487 2018] [wsgi:error] [pid 4131] [client ::1:42220]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924507 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924514 2018] [wsgi:error] [pid 4131] [client ::1:42220]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924520 2018] [wsgi:error] [pid 4131] [client ::1:42220]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924527 2018] [wsgi:error] [pid 4131] [client ::1:42220]     return loads(fp.read(),, referer: http://localhost:8080/
+[Wed Oct 31 00:53:35.924533 2018] [wsgi:error] [pid 4131] [client ::1:42220] AttributeError: 'str' object has no attribute 'read', referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458495 2018] [wsgi:error] [pid 3517] [client ::1:42260] [2018-10-31 00:55:18,457] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458550 2018] [wsgi:error] [pid 3517] [client ::1:42260] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458566 2018] [wsgi:error] [pid 3517] [client ::1:42260]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458579 2018] [wsgi:error] [pid 3517] [client ::1:42260]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458590 2018] [wsgi:error] [pid 3517] [client ::1:42260]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458601 2018] [wsgi:error] [pid 3517] [client ::1:42260]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458612 2018] [wsgi:error] [pid 3517] [client ::1:42260]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458623 2018] [wsgi:error] [pid 3517] [client ::1:42260]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458634 2018] [wsgi:error] [pid 3517] [client ::1:42260]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458646 2018] [wsgi:error] [pid 3517] [client ::1:42260]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458657 2018] [wsgi:error] [pid 3517] [client ::1:42260]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458668 2018] [wsgi:error] [pid 3517] [client ::1:42260]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458680 2018] [wsgi:error] [pid 3517] [client ::1:42260]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458690 2018] [wsgi:error] [pid 3517] [client ::1:42260]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:55:18.458701 2018] [wsgi:error] [pid 3517] [client ::1:42260] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669475 2018] [wsgi:error] [pid 3516] [client ::1:42320] [2018-10-31 00:59:00,669] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669512 2018] [wsgi:error] [pid 3516] [client ::1:42320] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669518 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669535 2018] [wsgi:error] [pid 3516] [client ::1:42320]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669539 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669543 2018] [wsgi:error] [pid 3516] [client ::1:42320]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669546 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669550 2018] [wsgi:error] [pid 3516] [client ::1:42320]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669554 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669557 2018] [wsgi:error] [pid 3516] [client ::1:42320]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669561 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669565 2018] [wsgi:error] [pid 3516] [client ::1:42320]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669569 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669573 2018] [wsgi:error] [pid 3516] [client ::1:42320]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669576 2018] [wsgi:error] [pid 3516] [client ::1:42320]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669581 2018] [wsgi:error] [pid 3516] [client ::1:42320]     return loads(fp.read(),, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.669584 2018] [wsgi:error] [pid 3516] [client ::1:42320] AttributeError: 'str' object has no attribute 'read', referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858129 2018] [wsgi:error] [pid 5045] [client ::1:42322] [2018-10-31 00:59:00,857] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858208 2018] [wsgi:error] [pid 5045] [client ::1:42322] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858246 2018] [wsgi:error] [pid 5045] [client ::1:42322]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858261 2018] [wsgi:error] [pid 5045] [client ::1:42322]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858270 2018] [wsgi:error] [pid 5045] [client ::1:42322]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858279 2018] [wsgi:error] [pid 5045] [client ::1:42322]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858286 2018] [wsgi:error] [pid 5045] [client ::1:42322]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858293 2018] [wsgi:error] [pid 5045] [client ::1:42322]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858299 2018] [wsgi:error] [pid 5045] [client ::1:42322]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858398 2018] [wsgi:error] [pid 5045] [client ::1:42322]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858419 2018] [wsgi:error] [pid 5045] [client ::1:42322]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858431 2018] [wsgi:error] [pid 5045] [client ::1:42322]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858438 2018] [wsgi:error] [pid 5045] [client ::1:42322]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858444 2018] [wsgi:error] [pid 5045] [client ::1:42322]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:59:00.858452 2018] [wsgi:error] [pid 5045] [client ::1:42322] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030773 2018] [wsgi:error] [pid 3517] [client ::1:42324] [2018-10-31 00:59:01,030] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030803 2018] [wsgi:error] [pid 3517] [client ::1:42324] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030811 2018] [wsgi:error] [pid 3517] [client ::1:42324]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030818 2018] [wsgi:error] [pid 3517] [client ::1:42324]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030824 2018] [wsgi:error] [pid 3517] [client ::1:42324]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030830 2018] [wsgi:error] [pid 3517] [client ::1:42324]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030838 2018] [wsgi:error] [pid 3517] [client ::1:42324]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030845 2018] [wsgi:error] [pid 3517] [client ::1:42324]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030853 2018] [wsgi:error] [pid 3517] [client ::1:42324]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030861 2018] [wsgi:error] [pid 3517] [client ::1:42324]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030868 2018] [wsgi:error] [pid 3517] [client ::1:42324]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030875 2018] [wsgi:error] [pid 3517] [client ::1:42324]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030882 2018] [wsgi:error] [pid 3517] [client ::1:42324]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030888 2018] [wsgi:error] [pid 3517] [client ::1:42324]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.030894 2018] [wsgi:error] [pid 3517] [client ::1:42324] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.233968 2018] [wsgi:error] [pid 6052] [client ::1:42326] mod_wsgi (pid=6052): Target WSGI script '/home/juan/apache2/var/www/html/peordede.wsgi' cannot be loaded as Python module., referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234015 2018] [wsgi:error] [pid 6052] [client ::1:42326] mod_wsgi (pid=6052): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede.wsgi'., referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234034 2018] [wsgi:error] [pid 6052] [client ::1:42326] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234054 2018] [wsgi:error] [pid 6052] [client ::1:42326]   File "/home/juan/apache2/var/www/html/peordede.wsgi", line 15, in <module>, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234094 2018] [wsgi:error] [pid 6052] [client ::1:42326]     from peordede import app as application, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234138 2018] [wsgi:error] [pid 6052] [client ::1:42326]   File "/home/juan/apache2/var/www/html/peordede.py", line 20, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234146 2018] [wsgi:error] [pid 6052] [client ::1:42326]     jsonFile = open(os.path.join((app.root_path) '/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234152 2018] [wsgi:error] [pid 6052] [client ::1:42326]                                                                      ^, referer: http://localhost:8080/
+[Wed Oct 31 00:59:01.234158 2018] [wsgi:error] [pid 6052] [client ::1:42326] SyntaxError: invalid syntax, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295578 2018] [wsgi:error] [pid 5045] [client ::1:42344] [2018-10-31 01:00:14,294] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295647 2018] [wsgi:error] [pid 5045] [client ::1:42344] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295667 2018] [wsgi:error] [pid 5045] [client ::1:42344]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295684 2018] [wsgi:error] [pid 5045] [client ::1:42344]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295700 2018] [wsgi:error] [pid 5045] [client ::1:42344]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295717 2018] [wsgi:error] [pid 5045] [client ::1:42344]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295733 2018] [wsgi:error] [pid 5045] [client ::1:42344]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295749 2018] [wsgi:error] [pid 5045] [client ::1:42344]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295764 2018] [wsgi:error] [pid 5045] [client ::1:42344]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295779 2018] [wsgi:error] [pid 5045] [client ::1:42344]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295793 2018] [wsgi:error] [pid 5045] [client ::1:42344]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295808 2018] [wsgi:error] [pid 5045] [client ::1:42344]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295823 2018] [wsgi:error] [pid 5045] [client ::1:42344]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295837 2018] [wsgi:error] [pid 5045] [client ::1:42344]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 01:00:14.295870 2018] [wsgi:error] [pid 5045] [client ::1:42344] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688659 2018] [wsgi:error] [pid 3517] [client ::1:42346] [2018-10-31 01:00:15,687] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688718 2018] [wsgi:error] [pid 3517] [client ::1:42346] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688733 2018] [wsgi:error] [pid 3517] [client ::1:42346]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688742 2018] [wsgi:error] [pid 3517] [client ::1:42346]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688750 2018] [wsgi:error] [pid 3517] [client ::1:42346]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688759 2018] [wsgi:error] [pid 3517] [client ::1:42346]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688767 2018] [wsgi:error] [pid 3517] [client ::1:42346]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688788 2018] [wsgi:error] [pid 3517] [client ::1:42346]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688793 2018] [wsgi:error] [pid 3517] [client ::1:42346]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688798 2018] [wsgi:error] [pid 3517] [client ::1:42346]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688802 2018] [wsgi:error] [pid 3517] [client ::1:42346]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688808 2018] [wsgi:error] [pid 3517] [client ::1:42346]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688812 2018] [wsgi:error] [pid 3517] [client ::1:42346]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688817 2018] [wsgi:error] [pid 3517] [client ::1:42346]     #films=json.load(open('/data/catalogo.json')), referer: http://localhost:8080/
+[Wed Oct 31 01:00:15.688820 2018] [wsgi:error] [pid 3517] [client ::1:42346] IOError: [Errno 2] No such file or directory: '/data/catalogo.json', referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700715 2018] [wsgi:error] [pid 4131] [client ::1:42358] [2018-10-31 01:00:52,700] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700766 2018] [wsgi:error] [pid 4131] [client ::1:42358] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700778 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700786 2018] [wsgi:error] [pid 4131] [client ::1:42358]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700794 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700802 2018] [wsgi:error] [pid 4131] [client ::1:42358]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700809 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700830 2018] [wsgi:error] [pid 4131] [client ::1:42358]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700837 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700843 2018] [wsgi:error] [pid 4131] [client ::1:42358]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700849 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700856 2018] [wsgi:error] [pid 4131] [client ::1:42358]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700862 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700869 2018] [wsgi:error] [pid 4131] [client ::1:42358]     try:, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700875 2018] [wsgi:error] [pid 4131] [client ::1:42358]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700881 2018] [wsgi:error] [pid 4131] [client ::1:42358]     return loads(fp.read(),, referer: http://localhost:8080/
+[Wed Oct 31 01:00:52.700888 2018] [wsgi:error] [pid 4131] [client ::1:42358] AttributeError: 'str' object has no attribute 'read', referer: http://localhost:8080/
+[Wed Oct 31 01:01:34.538861 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886] [2018-10-31 01:01:34,538] ERROR in app: Exception on / [GET]
+[Wed Oct 31 01:01:34.563783 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886] Traceback (most recent call last):
+[Wed Oct 31 01:01:34.563813 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 01:01:34.563825 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     response = self.full_dispatch_request()
+[Wed Oct 31 01:01:34.563836 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 01:01:34.563847 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     rv = self.handle_user_exception(e)
+[Wed Oct 31 01:01:34.563857 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 01:01:34.563867 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 01:01:34.563877 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 01:01:34.563888 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     rv = self.dispatch_request()
+[Wed Oct 31 01:01:34.563901 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 01:01:34.563912 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 01:01:34.563923 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index
+[Wed Oct 31 01:01:34.563933 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     try:
+[Wed Oct 31 01:01:34.563959 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load
+[Wed Oct 31 01:01:34.563969 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886]     return loads(fp.read(),
+[Wed Oct 31 01:01:34.563978 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:47886] AttributeError: 'str' object has no attribute 'read'
+[Wed Oct 31 01:01:36.687475 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902] [2018-10-31 01:01:36,686] ERROR in app: Exception on / [GET]
+[Wed Oct 31 01:01:36.687531 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902] Traceback (most recent call last):
+[Wed Oct 31 01:01:36.687560 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 01:01:36.687573 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]     response = self.full_dispatch_request()
+[Wed Oct 31 01:01:36.687584 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 01:01:36.687597 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]     rv = self.handle_user_exception(e)
+[Wed Oct 31 01:01:36.687609 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 01:01:36.687622 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 01:01:36.687634 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 01:01:36.687647 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]     rv = self.dispatch_request()
+[Wed Oct 31 01:01:36.687658 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 01:01:36.687670 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 01:01:36.687682 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index
+[Wed Oct 31 01:01:36.687692 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902]     try:
+[Wed Oct 31 01:01:36.687703 2018] [wsgi:error] [pid 5045] [client 127.0.0.1:47902] IOError: [Errno 2] No such file or directory: '/data/catalogo.json'
+[Wed Oct 31 01:01:36.912407 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904] [2018-10-31 01:01:36,911] ERROR in app: Exception on / [GET]
+[Wed Oct 31 01:01:36.912474 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904] Traceback (most recent call last):
+[Wed Oct 31 01:01:36.912494 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 01:01:36.912512 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]     response = self.full_dispatch_request()
+[Wed Oct 31 01:01:36.912528 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 01:01:36.912546 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]     rv = self.handle_user_exception(e)
+[Wed Oct 31 01:01:36.912569 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 01:01:36.912575 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 01:01:36.912581 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 01:01:36.912600 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]     rv = self.dispatch_request()
+[Wed Oct 31 01:01:36.912608 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 01:01:36.912614 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 01:01:36.912620 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index
+[Wed Oct 31 01:01:36.912627 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904]     try:
+[Wed Oct 31 01:01:36.912633 2018] [wsgi:error] [pid 3517] [client 127.0.0.1:47904] IOError: [Errno 2] No such file or directory: '/data/catalogo.json'
+[Wed Oct 31 01:01:37.439891 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908] [2018-10-31 01:01:37,439] ERROR in app: Exception on / [GET]
+[Wed Oct 31 01:01:37.439944 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908] Traceback (most recent call last):
+[Wed Oct 31 01:01:37.439957 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 01:01:37.439967 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     response = self.full_dispatch_request()
+[Wed Oct 31 01:01:37.439976 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 01:01:37.439985 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     rv = self.handle_user_exception(e)
+[Wed Oct 31 01:01:37.439994 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 01:01:37.440002 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 01:01:37.440011 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 01:01:37.440019 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     rv = self.dispatch_request()
+[Wed Oct 31 01:01:37.440027 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 01:01:37.440036 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 01:01:37.440045 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/home/juan/apache2/var/www/html/peordede.py", line 18, in index
+[Wed Oct 31 01:01:37.440053 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     try:
+[Wed Oct 31 01:01:37.440060 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]   File "/usr/lib/python2.7/json/__init__.py", line 287, in load
+[Wed Oct 31 01:01:37.440068 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908]     return loads(fp.read(),
+[Wed Oct 31 01:01:37.440076 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:47908] AttributeError: 'str' object has no attribute 'read'
+[Wed Oct 31 01:19:00.931602 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610] [2018-10-31 01:19:00,923] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952419 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952444 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952468 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952474 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952479 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952483 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952488 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952492 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952496 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952500 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952504 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952509 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]   File "/home/juan/apache2/var/www/html/peordede.py", line 25, in index, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952513 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610]     if film['genero'] not in genres:, referer: http://localhost:8080/
+[Wed Oct 31 01:19:00.952517 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48610] TypeError: string indices must be integers, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141099 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624] [2018-10-31 01:20:33,140] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141136 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141142 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141147 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141151 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141156 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141160 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141164 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141168 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141173 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141187 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141192 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141195 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]   File "/home/juan/apache2/var/www/html/peordede.py", line 26, in index, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141199 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624]     if film['genero'] not in genres:, referer: http://localhost:8080/
+[Wed Oct 31 01:20:33.141205 2018] [wsgi:error] [pid 4131] [client 127.0.0.1:48624] TypeError: string indices must be integers, referer: http://localhost:8080/
+[Wed Oct 31 01:41:33.012902 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904] [2018-10-31 01:41:32,992] ERROR in app: Exception on /registro/ [POST], referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086463 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904] Traceback (most recent call last):, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086483 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086491 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]     response = self.full_dispatch_request(), referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086514 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086526 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]     rv = self.handle_user_exception(e), referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086536 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086547 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086557 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086566 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]     rv = self.dispatch_request(), referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086576 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086585 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086595 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]   File "/home/juan/apache2/var/www/html/peordede.py", line 99, in registro, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086605 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904]     def registro(methods = ['POST', 'GET']):, referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:41:33.086615 2018] [wsgi:error] [pid 6052] [client 127.0.0.1:48904] OSError: [Errno 2] No such file or directory: '/data/usuarios/', referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:45:07.826300 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952] [2018-10-31 01:45:07,825] ERROR in app: Exception on / [GET], referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826407 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952] Traceback (most recent call last):, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826417 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826422 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]     response = self.full_dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826427 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826435 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]     rv = self.handle_user_exception(e), referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826442 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826449 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]     reraise(exc_type, exc_value, tb), referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826464 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826475 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]     rv = self.dispatch_request(), referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826487 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826498 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]     return self.view_functions[rule.endpoint](**req.view_args), referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826510 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]   File "/home/juan/apache2/var/www/html/peordede.py", line 25, in index, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826522 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952]     for film in films:, referer: http://localhost:8080/
+[Wed Oct 31 01:45:07.826533 2018] [wsgi:error] [pid 3516] [client 127.0.0.1:48952] TypeError: string indices must be integers, referer: http://localhost:8080/
+[Wed Oct 31 01:47:40.611020 2018] [wsgi:error] [pid 9200] [client 127.0.0.1:49030] mod_wsgi (pid=9200): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:47:40.611118 2018] [wsgi:error] [pid 9200] [client 127.0.0.1:49030] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:47:46.611462 2018] [wsgi:error] [pid 3519] [client 127.0.0.1:49034] mod_wsgi (pid=3519): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:47:46.611629 2018] [wsgi:error] [pid 3519] [client 127.0.0.1:49034] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:44.466194 2018] [wsgi:error] [pid 8649] [client 127.0.0.1:49062] mod_wsgi (pid=8649): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:44.466286 2018] [wsgi:error] [pid 8649] [client 127.0.0.1:49062] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:47.466621 2018] [wsgi:error] [pid 8650] [client 127.0.0.1:49064] mod_wsgi (pid=8650): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:47.466706 2018] [wsgi:error] [pid 8650] [client 127.0.0.1:49064] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:47.468116 2018] [wsgi:error] [pid 3515] [client 127.0.0.1:49066] mod_wsgi (pid=3515): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:47.468189 2018] [wsgi:error] [pid 3515] [client 127.0.0.1:49066] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:50.462842 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49068] mod_wsgi (pid=7902): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:50.462996 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49068] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:53.464079 2018] [wsgi:error] [pid 8807] [client 127.0.0.1:49070] mod_wsgi (pid=8807): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede2.wsgi'., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:49:53.464206 2018] [wsgi:error] [pid 8807] [client 127.0.0.1:49070] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede2.wsgi/registro/
+[Wed Oct 31 01:59:09.778800 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49158] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/peordede3.wsgi, referer: http://localhost:8080/peordede3.wsgi/registro/
+[Wed Oct 31 01:59:12.765771 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49158] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/peordede3.wsgi, referer: http://localhost:8080/peordede3.wsgi/registro/
+[Wed Oct 31 01:59:15.766663 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49158] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/peordede3.wsgi, referer: http://localhost:8080/peordede3.wsgi/registro/
+[Wed Oct 31 01:59:18.766634 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49158] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/peordede3.wsgi, referer: http://localhost:8080/peordede3.wsgi/registro/
+[Wed Oct 31 02:10:33.769867 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542] [2018-10-31 02:10:33,761] ERROR in app: Exception on /pelicula/1 [GET]
+[Wed Oct 31 02:10:33.769923 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542] Traceback (most recent call last):
+[Wed Oct 31 02:10:33.769934 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 02:10:33.769942 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]     response = self.full_dispatch_request()
+[Wed Oct 31 02:10:33.769950 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 02:10:33.769959 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]     rv = self.handle_user_exception(e)
+[Wed Oct 31 02:10:33.769966 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 02:10:33.769984 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 02:10:33.769991 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 02:10:33.769996 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]     rv = self.dispatch_request()
+[Wed Oct 31 02:10:33.770002 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 02:10:33.770008 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 02:10:33.770014 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]   File "/home/juan/apache2/var/www/html/peordede.py", line 201, in pelicula
+[Wed Oct 31 02:10:33.770021 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542]     films = json.load(open(app.root_path + 'data/catalogo.json'))['peliculas']
+[Wed Oct 31 02:10:33.770027 2018] [wsgi:error] [pid 8648] [client 127.0.0.1:49542] IOError: [Errno 2] No such file or directory: '/home/juan/apache2/var/www/htmldata/catalogo.json'
+[Wed Oct 31 02:12:52.578282 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560] [2018-10-31 02:12:52,577] ERROR in app: Exception on /pelicula/1 [GET]
+[Wed Oct 31 02:12:52.578313 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560] Traceback (most recent call last):
+[Wed Oct 31 02:12:52.578319 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+[Wed Oct 31 02:12:52.578323 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]     response = self.full_dispatch_request()
+[Wed Oct 31 02:12:52.578328 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+[Wed Oct 31 02:12:52.578349 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]     rv = self.handle_user_exception(e)
+[Wed Oct 31 02:12:52.578357 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+[Wed Oct 31 02:12:52.578362 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]     reraise(exc_type, exc_value, tb)
+[Wed Oct 31 02:12:52.578366 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+[Wed Oct 31 02:12:52.578379 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]     rv = self.dispatch_request()
+[Wed Oct 31 02:12:52.578384 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]   File "/home/juan/apache2/var/www/html/si1pyenv/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+[Wed Oct 31 02:12:52.578388 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]     return self.view_functions[rule.endpoint](**req.view_args)
+[Wed Oct 31 02:12:52.578393 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]   File "/home/juan/apache2/var/www/html/peordede.py", line 201, in pelicula
+[Wed Oct 31 02:12:52.578397 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560]     films = json.load(open(app.root_path + '/data/catalogo.json'))['peliculas']
+[Wed Oct 31 02:12:52.578402 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49560] IOError: [Errno 2] No such file or directory: '/home/juan/apache2/var/www/htmldata/catalogo.json'
+[Wed Oct 31 02:13:18.530421 2018] [wsgi:error] [pid 9450] [client 127.0.0.1:49580] mod_wsgi (pid=9450): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede5.wsgi'., referer: http://localhost:8080/peordede5.wsgi/pelicula/1
+[Wed Oct 31 02:13:18.530496 2018] [wsgi:error] [pid 9450] [client 127.0.0.1:49580] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede5.wsgi/pelicula/1
+[Wed Oct 31 02:14:28.467850 2018] [wsgi:error] [pid 7902] [client 127.0.0.1:49642] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/start.wsgi, referer: http://localhost:8080/start.wsgi/login
+[Wed Oct 31 02:14:28.495221 2018] [wsgi:error] [pid 8650] [client 127.0.0.1:49644] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/start.wsgi, referer: http://localhost:8080/start.wsgi/informacion
+[Wed Oct 31 02:14:31.554497 2018] [wsgi:error] [pid 9450] [client 127.0.0.1:49646] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/start.wsgi, referer: http://localhost:8080/start.wsgi/informacion
+[Wed Oct 31 02:14:34.554423 2018] [wsgi:error] [pid 9450] [client 127.0.0.1:49646] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/start.wsgi, referer: http://localhost:8080/start.wsgi/informacion
+[Wed Oct 31 02:14:37.554317 2018] [wsgi:error] [pid 9450] [client 127.0.0.1:49646] Target WSGI script not found or unable to stat: /home/juan/apache2/var/www/html/start.wsgi, referer: http://localhost:8080/start.wsgi/informacion
+[Wed Oct 31 02:43:18.331355 2018] [authz_core:error] [pid 10858] [client 127.0.0.1:50096] AH01630: client denied by server configuration: /home/juan/public_html
+[Wed Oct 31 02:43:29.013669 2018] [authz_core:error] [pid 9728] [client 127.0.0.1:50098] AH01630: client denied by server configuration: /home/juan/public_html/
+[Wed Oct 31 02:43:36.582016 2018] [authz_core:error] [pid 8648] [client 127.0.0.1:50102] AH01630: client denied by server configuration: /home/juan/public_html/peordede.wsgi
+[Wed Oct 31 02:43:44.084876 2018] [wsgi:error] [pid 10374] [client 127.0.0.1:50110] mod_wsgi (pid=10374): Exception occurred processing WSGI script '/home/juan/apache2/var/www/html/peordede.wsgi'., referer: http://localhost:8080/peordede.wsgi/
+[Wed Oct 31 02:43:44.085009 2018] [wsgi:error] [pid 10374] [client 127.0.0.1:50110] IOError: Apache/mod_wsgi failed to write response data: Broken pipe., referer: http://localhost:8080/peordede.wsgi/

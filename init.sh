@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 dropdb -U alumnodb si1
 createdb -U alumnodb si1
 

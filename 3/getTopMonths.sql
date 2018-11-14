@@ -1,9 +1,10 @@
 ﻿
 
 CREATE OR REPLACE FUNCTION getTopMonths (integer, integer) RETURNS table(
-	date_part1 double precision,
-	movietitle1 VARCHAR(255),
-	sum1 BIGINT
+	year1 double precision,
+	month1 text,
+	quantity BIGINT,
+	money numeric
 
 )
 	
@@ -11,16 +12,15 @@ CREATE OR REPLACE FUNCTION getTopMonths (integer, integer) RETURNS table(
 	declare
 	BEGIN	
 		
-		return query select year1, month1, sum(quantity) as quant, sum(money) as price
-                	from (select extract(YEAR from orderdate) as year1, extract(MONTH from orderdate) as month1, 
-					movieid, quantity
-                        	from (select ORD.orderdate, quantity, price as money
+		return query select * from (select extract(YEAR from orderdate) as year, 
+				      to_char(orderdate, 'Month') as month,  
+					sum(ORDET.quantity) as quantity, sum(price) as money
                                 	from orders as ORD,
                                         	orderdetail as ORDET
-	                                where ORD.orderid = ORDET.orderid)
-        	                		as YearMovIdAndQuantity,
-                                	group by year1, month1
-					where quant>$1 or price>$2;
+	                                where ORD.orderid = ORDET.orderid 
+					group by year, month) as OrdersWithPrizesAndQuantities
+					where OrdersWithPrizesAndQuantities.money > $2 or 
+						OrdersWithPrizesAndQuantities.quantity > $1;
 
 	
 	END;

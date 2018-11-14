@@ -68,9 +68,18 @@ ALTER TABLE orders
    FOREIGN KEY (customerid) 
    REFERENCES customers(customerid);
 
+-- ACTORS
+
+ALTER TABLE imdb_actormovies
+  ADD CONSTRAINT actoridmov
+  FOREIGN KEY (actorid)
+  REFERENCES imdb_actors(actorid),
+
+  ADD CONSTRAINT movieidmov
+  FOREIGN KEY (movieid)
+  REFERENCES imdb_movies(movieid);
 
 -- Create languages
--- Extra information??
 SELECT language
 INTO languages
 FROM imdb_movielanguages
@@ -79,6 +88,11 @@ GROUP BY (language);
 ALTER TABLE languages
 ADD CONSTRAINT lansid
 PRIMARY KEY(language);
+
+ALTER TABLE imdb_movielanguages
+ADD CONSTRAINT movieforid
+   FOREIGN KEY (language) 
+   REFERENCES languages(language);
 
 -- Create countries
 SELECT country
@@ -90,6 +104,11 @@ ALTER TABLE countries
 ADD CONSTRAINT coountid
 PRIMARY KEY(country);
 
+ALTER TABLE imdb_moviecountries
+ADD CONSTRAINT countryforid
+   FOREIGN KEY (country) 
+   REFERENCES countries(country);
+
 -- Create genres
 SELECT genre
 INTO genres
@@ -100,9 +119,8 @@ ALTER TABLE genres
 ADD CONSTRAINT genrid
 PRIMARY KEY(genre);
 
-
-
-DROP TABLE imdb_moviegenres;
-DROP TABLE imdb_moviecountries;
-DROP TABLE imdb_movielanguages;
+ALTER TABLE imdb_moviegenres
+ADD CONSTRAINT genreforid
+   FOREIGN KEY (genre) 
+   REFERENCES genres(genre);
 

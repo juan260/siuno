@@ -10,7 +10,8 @@ CREATE OR REPLACE FUNCTION getTopVentas (integer) RETURNS table(
 	as $$
 	declare
 	BEGIN	
-		CREATE VIEW dateMovieQuantity as
+		--DROP IF EXISTS VIEW dateMovieQuantity;
+		CREATE OR REPLACE VIEW dateMovieQuantity as
 			select date_part, movietitle, sum(quantity) as quant
         --      return query select 1 as caca
                 	from (select extract(YEAR from orderdate), movieid, quantity
@@ -38,7 +39,7 @@ CREATE OR REPLACE FUNCTION getTopVentas (integer) RETURNS table(
 
 select getTopVentas(2015);
 
-DROP FUNCTION gettopventas(integer);
-DROP VIEW dateMovieQuantity;
+--DROP FUNCTION gettopventas(integer);
+
 
 

@@ -3,26 +3,22 @@
 -- al menos, los campos price de orderdetail
 -- estan bien
 
--- NOTA 2: ESTA FUNCION ESTA SIN TERMINAR
-
-CREATE OR REPLACE FUNCTION seOrderAmount () RETURNS void
+CREATE OR REPLACE FUNCTION setOrderAmount () RETURNS void
 	as $$
 	declare
 	BEGIN
+        CREATE OR REPLACE VIEW ordersWithPrices as
+            select orderid, sum(price) as total
+            from orderdetail
+            group by orderid;
+
         update
-            orderdetail as DET
+            orders as ORD
         set
-            price=PROD.price/(power(1.02, 
-                -- Current year
-                    date_part('year', current_timestamp)
-                    -
-                -- Order year
-                    extract(YEAR from orderdate)))
+            netamount=total,
+            totalamount=total+tax
         from
-            products as PROD,
-            orders as ORD 
-        where DET.prod_id=PROD.prod_id and
-            ORD.orderid = DET.orderid;
+            ordersWithPrices
+        where ORD.orderid=ordersWithPrices.orderid;
     END;
     $$ LANGUAGE 'plpgsql';
-

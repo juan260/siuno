@@ -12,25 +12,97 @@ ALTER TABLE customers
  DROP COLUMN age,
  DROP COLUMN gender;
 
+-- INVENTORY
+
+-- Fusion de inventory y orders
+
+SELECT *
+INTO productsAUX
+FROM products NATURAL JOIN inventory;
+
+DROP TABLE products;
+
+DROP TABLE inventory;
+
+ALTER TABLE productsAUX
+RENAME TO products;
+
 
 -- ORDER DETAIL
 -- Aniadir clave extranjera para la relacion de ordendetail - product
 
 UPDATE orderdetail SET price= 0 WHERE price IS NULL;
+UPDATE orderdetail SET quantity= 0 WHERE quantity IS NULL;
+
+SELECT orderid, prod_id, SUM(price) as price , SUM(quantity) as quantity 
+INTO orderdetailAUX
+FROM orderdetail
+GROUP BY (orderid, prod_id);
+
+DROP TABLE orderdetail;
+
+ALTER TABLE orderdetailAUX
+RENAME TO orderdetail;
 
 ALTER TABLE orderdetail 
    ADD CONSTRAINT prodid_key
    FOREIGN KEY (prod_id) 
    REFERENCES products(prod_id),
+
    ADD CONSTRAINT orderid_key
    FOREIGN KEY (orderid) 
    REFERENCES orders(orderid),
+
    ALTER COLUMN price SET NOT NULL,
+
+   ALTER COLUMN quantity SET NOT NULL,
+ 
    ADD CONSTRAINT ordetail_id
    PRIMARY KEY (orderid, prod_id);
+
+-- ORDERS
 
 -- Aniadir clave extranjera para relacion de orden - cliente
 ALTER TABLE orders 
    ADD CONSTRAINT customerid_key
    FOREIGN KEY (customerid) 
    REFERENCES customers(customerid);
+
+
+-- Create languages
+-- Extra information??
+SELECT language
+INTO languages
+FROM imdb_movielanguages
+GROUP BY (language);
+
+ALTER TABLE languages
+ADD CONSTRAINT lansid
+PRIMARY KEY(language);
+
+-- Create countries
+SELECT country
+INTO countries
+FROM imdb_moviecountries
+GROUP BY (country);
+
+ALTER TABLE countries
+ADD CONSTRAINT coountid
+PRIMARY KEY(country);
+
+-- Create genres
+SELECT genre
+INTO genres
+FROM imdb_moviegenres
+GROUP BY (genre);
+
+ALTER TABLE genres
+ADD CONSTRAINT genrid
+PRIMARY KEY(genre);
+
+
+
+DROP TABLE imdb_moviegenres;
+DROP TABLE imdb_moviecountries;
+DROP TABLE imdb_movielanguages;
+

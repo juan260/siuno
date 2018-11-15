@@ -35,6 +35,28 @@ ALTER TABLE products
    FOREIGN KEY (movieid) 
    REFERENCES imdb_movies(movieid);
 
+  --
+-- Name: products_prod_id_seq; Type: SEQUENCE; Schema: public; Owner: alumnodb
+--
+
+CREATE SEQUENCE public.products_prod_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_prod_id_seq OWNER TO alumnodb;
+
+--
+-- Name: products_prod_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alumnodb
+--
+
+ALTER SEQUENCE public.products_prod_id_seq OWNED BY public.products.prod_id;
+
+ALTER TABLE ONLY public.products ALTER COLUMN prod_id SET DEFAULT nextval('public.products_prod_id_seq'::regclass);
+
 
 -- ORDER DETAIL
 -- Aniadir clave extranjera para la relacion de ordendetail - product
@@ -131,4 +153,43 @@ ALTER TABLE imdb_moviegenres
 ADD CONSTRAINT genreforid
    FOREIGN KEY (genre) 
    REFERENCES genres(genre);
+
+-- Crear tabla alertas
+
+CREATE TABLE alertas(
+  alertaid integer NOT NULL,
+  prod_id integer NOT NULL,
+  description character varying(255));
+
+  --
+-- Name: alertas_alertaid_seq; Type: SEQUENCE; Schema: public; Owner: alumnodb
+--
+
+CREATE SEQUENCE public.alertas_alertaid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.alertas_alertaid_seq OWNER TO alumnodb;
+
+--
+-- Name: alertas_alertaid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alumnodb
+--
+
+ALTER SEQUENCE public.alertas_alertaid_seq OWNED BY public.alertas.alertaid;
+
+ALTER TABLE ONLY public.alertas ALTER COLUMN alertaid SET DEFAULT nextval('public.alertas_alertaid_seq'::regclass);
+
+
+
+ALTER TABLE alertas
+  ADD CONSTRAINT alertaprodcons
+  FOREIGN KEY (prod_id) 
+  REFERENCES products(prod_id),
+
+  ADD CONSTRAINT alertaid
+  PRIMARY KEY (alertaid);
 

@@ -49,9 +49,26 @@ CREATE OR REPLACE FUNCTION updSubtractOrders () RETURNS TRIGGER
 
 
 CREATE TRIGGER subOrdersTrig
-    BEFORE INSERT ON orderdetail
+    BEFORE DELETE ON orderdetail
     FOR EACH ROW
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updSubtractOrders();
+
+
+
+
+CREATE TRIGGER updAddOrdersTrig
+    BEFORE UPDATE ON orderdetail
+    FOR EACH ROW
+    WHERE OLD.quantity < NEW.quantity
+    --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
+    EXECUTE PROCEDURE updAddOrders();
+
+CREATE TRIGGER updSubOrdersTrig
+    BEFORE UPDATE ON orderdetail
+    FOR EACH ROW
+    WHERE OLD.quantity > NEW.quantity
+    --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
+    EXECUTE PROCEDURE updSubOrders();
 
 

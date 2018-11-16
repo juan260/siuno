@@ -18,14 +18,18 @@ CREATE OR REPLACE FUNCTION checkOrders (integer, integer) RETURNS void
 CREATE OR REPLACE FUNCTION isCarrito (id integer)
     as $$
     BEGIN
-        
+        update 
+            orders
+        set
+            totalAmount = orders.totalAmount + 
+        where
 
     END;
     $$ LANGUAGE 'plpgsql';
 
 
 CREATE OR REPLACE TRIGGER updOrders
-    BEFORE UPDATE ON orderdetail
+    BEFORE INSERT ON orderdetail
     FOR EACH ROW
     WHEN isCarrito(NEW.orderid)
     EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);

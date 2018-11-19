@@ -3,14 +3,16 @@
 -- al menos, los campos price de orderdetail
 -- estan bien
 
+CREATE OR REPLACE VIEW ordersWithPrices as
+		select orderid, sum(price) as total
+		from orderdetail
+		group by orderid;
+
+
 CREATE OR REPLACE FUNCTION setOrderAmount () RETURNS void
 	as $$
 	declare
 	BEGIN
-        CREATE OR REPLACE VIEW ordersWithPrices as
-            select orderid, sum(price) as total
-            from orderdetail
-            group by orderid;
 
         update
             orders as ORD

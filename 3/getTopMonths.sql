@@ -3,7 +3,7 @@
 CREATE OR REPLACE FUNCTION getTopMonths (integer, integer) RETURNS table(
 	year1 double precision,
 	month1 text,
-	quantity BIGINT,
+	quantity numeric,
 	money numeric
 
 )
@@ -27,7 +27,7 @@ CREATE OR REPLACE FUNCTION getTopMonths (integer, integer) RETURNS table(
 	$$ LANGUAGE 'plpgsql';
 
 
-select getTopMonths(1, 2);
+select * from getTopMonths(1, 2);
 
 DROP FUNCTION gettopmonths(integer, integer);
 

@@ -1,0 +1,104 @@
+<!--Juan Riera y Luis Carabe-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script>
+
+      function getNumber(n) {
+        return "{{ url_for('static', filename='imgs/Number') }}/" + n + ".png"
+      }
+
+      function contador() {
+        			var xhttp = new XMLHttpRequest();
+        			xhttp.onreadystatechange = function() {
+                var i = 0;
+                var letter
+          			if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                  for(var i = 0; i< xhttp.responseText.length ; i++){
+                    letter = xhttp.responseText.charAt(i)
+                    document.getElementById("contador"+String(i)).src=getNumber(letter);
+                  }
+          			}
+        			}
+        			var dir = "../contador";
+        			xhttp.open("POST", dir, true);
+        			xhttp.send();
+
+      		}
+
+
+    </script>
+    <script> window.setInterval(contador, 3000); </script>
+    <title> Inicio Sesión </title>
+  </head>
+  <body>
+    <div id="globalContainer">
+      <div id="header">
+          <a href="{{ url_for('index') }}">
+              <div id="logo">
+              <img src="{{ url_for('static', filename='imgs/Camera_logo.png')}}" alt="P" width="60" height="50">
+              <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
+            </a>
+      </div>
+
+      <div id="centralpane">
+          <div id="menubar">
+              <div id="menubarmargin">
+              </div>
+              <div id="menubarlist">
+                <ul>
+                  <li> <a href="{{ url_for('index') }}">Películas</a></li>
+                  <li> <a href="{{ url_for('carrito') }}">Carrito</a></li>
+                  <li> <a href="{{ url_for('contacto') }}">Contacto y ayuda</a></li>
+                </ul>
+                <div id="contador">
+                  <img alt="n" id="contador0" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                    height="20" width="20">
+                  <img alt="n" id="contador1" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                    height="20" width="20">
+                  <img alt="n" id="contador2" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                    height="20" width="20">
+                  <img alt="n" id="contador3" src="{{ url_for('static', filename='imgs/Number/0.png')}}"
+                    height="20" width="20">
+                </div>
+              </div>
+            </div>
+        <div id="content">
+          <h2>Inicio Sesión</h2>
+          <div id="registro">
+          <form method="post">
+            <p>
+              <label for="nameField">Nombre usuario:</label>
+              <input id="nameField" type="text" name="nombre" placeholder="nombre" required>
+              {% if usrNoexiste %}
+              <div class="red"> El usuario no existe</div>
+              {% endif %}
+            <p>
+              <label for="contraseniaField">Contraseña: </label>
+              <input id="contraseniaField" type="password" name="contrasenia" placeholder="contraseña" required><br>
+              {% if pswEquivocada %}
+              <div class="red"> Contraseña incorrecta.</div>
+              {% endif %}
+              <p>
+            <input type="submit" value="Iniciar sesión">
+          </form>
+          </div>
+
+        </div>
+
+      </div>
+      <div id="footer">
+          Juan Riera & Luis Cárabe &copy;
+      </div>
+      <script>
+        contador();
+        window.setInterval(contador, 3000);
+      </script>
+    </div>
+  </body>
+</html>

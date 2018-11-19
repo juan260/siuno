@@ -5,15 +5,21 @@ import random
 import md5
 import sys
 import datetime
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alumnodb@localhost/si1'
 db = SQLAlchemy(app)
 Base = automap_base()
 engine = create_engine("postgres://alumnodb@localhost/si1")
 Base.prepare(engine, reflect=True)
+connection = engine.connect()
 sys.path.append('~/apache2/var/www/html/')
 app.secret_key = 'teamoluis'
 app.root_path=os.path.dirname(os.path.abspath(__file__))
+
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
@@ -85,11 +91,14 @@ def iniciosesion(methods = ['POST', 'GET']):
   if(request.method=='POST'):
     username=request.form.get('nombre')
     if(username!=None):
-      root=app.root_path + '/data/usuarios/'
-      listaUsuarios = [ item for item in os.listdir(root) if os.path.isdir(os.path.join(root, item)) ]
-      if username in listaUsuarios:
-        ruta = root+username+"/data.json"
-        contrasenia = json.load(open(ruta))['password']
+      # Obtenemos la contraseña asociada al usuario,
+      # la lista passwords tendra longitud 1 o 0
+      passwords = list(connection\
+        .execute("select password from customers where username = " + \
+        username + ";"))
+      # Si existe la password, existe el usuario
+      if len(passwords) > 0:
+        contrasenia=passwords[0][0]
         if contrasenia == md5.new(request.form.get('contrasenia')).hexdigest():
           session['username']=username
           return redirect(url_for("index"))
@@ -105,48 +114,56 @@ def registro():
   if(request.method=='POST'):
     username=request.form.get('usuario')
     if (username!=None):
-      root=app.root_path +'/data/usuarios/'
-      listaUsuarios = [ item for item in os.listdir(root) if os.path.isdir(os.path.join(root, item)) ]
-      if username in listaUsuarios:
+      
+      existeUser = len(list(connection\
+        .execute("select username from customers where username = " + \
+        username + ";")))
+      if existeUser > 0:
         return render_template('registro.html', existe=1)
 
-      dataR = root+username+"/data.json"
-      historialR = root+username+"/historial.json"
-      os.makedirs(os.path.dirname(dataR))
+      connection.execute("insert into customers "
+        "(username, firstname, lastname, password, "
+        "email, creditcard) "
+        " values (\'" + username + "\', \'" + \
+        request.form.get('nombre') + "\', \'" +\
+        request.form.get('apellidos') + "\', \'" + \
+        md5.new(request.form.get('contrasenia')).hexdigest() + \
+        "\', \'" + request.form.get('correo') + "\', \'" + \
+        request.form.get('tarjeta') + "\');")
 
       #Creamos historial.json
-      f = open(historialR, "w+")
-      f.write("{\n\t\"peliculas\": []\n}")
-      f = None
-
+      # f = open(historialR, "w+")
+      # f.write("{\n\t\"peliculas\": []\n}")
+      # f = None
+      session['username']=username
       #Creamos data.json
-      with open(dataR,"w") as f:
-        f.write("{\n\t\"username\": ")
-        f.write("\""+username+"\",\n")
+      # with open(dataR,"w") as f:
+      #   f.write("{\n\t\"username\": ")
+      #   f.write("\""+username+"\",\n")
 
-        f.write("\t\"name\": ")
-        f.write("\""+request.form.get('nombre')+"\",\n")
+      #   f.write("\t\"name\": ")
+      #   f.write("\""+request.form.get('nombre')+"\",\n")
 
-        f.write("\t\"surname\": ")
-        f.write("\""+request.form.get('apellidos')+"\",\n")
+      #   f.write("\t\"surname\": ")
+      #   f.write("\""+request.form.get('apellidos')+"\",\n")
 
-        contraseniaCifrada = md5.new(request.form.get('contrasenia')).hexdigest()
-        f.write("\t\"password\": ")
-        f.write("\""+contraseniaCifrada+"\",\n")
+      #   contraseniaCifrada = md5.new(request.form.get('contrasenia')).hexdigest()
+      #   f.write("\t\"password\": ")
+      #   f.write("\""+contraseniaCifrada+"\",\n")
 
-        f.write("\t\"email\": ")
-        f.write("\""+request.form.get('correo')+"\",\n")
+      #   f.write("\t\"email\": ")
+      #   f.write("\""+request.form.get('correo')+"\",\n")
 
-        f.write("\t\"creditcard\": ")
-        f.write("\""+request.form.get('tarjeta')+"\",\n")
+      #   f.write("\t\"creditcard\": ")
+      #   f.write("\""+request.form.get('tarjeta')+"\",\n")
 
-        f.write("\t\"secretno\": ")
-        f.write("\""+request.form.get('secretnum')+"\",\n")
+      #   f.write("\t\"secretno\": ")
+      #   f.write("\""+request.form.get('secretnum')+"\",\n")
 
-        f.write("\t\"saldo\": ")
-        f.write(str(random.randint(1,100))+"\n}")
-        session['username']=username
-        return index()
+      #   f.write("\t\"saldo\": ")
+      #   f.write(str(random.randint(1,100))+"\n}")
+      #   session['username']=username
+      return index()
 
 
     return render_template('registro.html', existe=None)

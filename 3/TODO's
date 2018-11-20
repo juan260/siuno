@@ -1,0 +1,5 @@
+Añadir sinopsis a las movies
+Añadir imagen a las movies LLAMAR AL CAMPO 'poster'
+Cambiar el campo income de la 
+    tabla customers de integer
+    a numeric

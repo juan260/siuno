@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alumnodb@localhost/si1'
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 Base = automap_base()
 engine = create_engine("postgres://alumnodb@localhost/si1")
 Base.prepare(engine, reflect=True)
@@ -26,17 +26,9 @@ def index(methods = ['POST', 'GET']):
   #films = json.load(open(os.path.join(app.root_path,'data/catalogo.json')))['peliculas']
   #films = json.load(join(dirname(realpath(__file__)), 'data/catalogo.json'))
   #films=json.load(open('/data/catalogo.json'))
-  try:
-    jsonFile = open(app.root_path + '/data/catalogo.json')
-  except IOError:
-    return "No se pudieron cargar las peliculas"
-  films=json.load(jsonFile)['peliculas']
-  genres = []
-
-  for film in films:
-    if film['genero'] not in genres:
-      genres.append(film['genero'])
-    genres.sort()
+  films = connection.execute("select * from imdb_movies;").fetchall()
+  genres = list(connection.execute("select distinct(movietype) from imdb_movies;"))
+  genres.sort()
   genre=request.args.get('filters')
   if(not(genre==None or genre=='-')):
     genderedFilms = []
@@ -280,14 +272,18 @@ def contador():
 
 @app.route('/confirmar/')
 def confirmar():
-    films_cat = json.load(open(app.root_path +'/data/catalogo.json'))['peliculas']
-    root=app.root_path +'/data/usuarios/'
-    ruta = root+session['username']+"/data.json"
-    rutaHistorial = root+session['username']+"/historial.json"
-    saldo = json.load(open(ruta))['saldo']
-    usuario = json.load(open(ruta))
-    historial = json.load(open(rutaHistorial))
+    # films_cat = json.load(open(app.root_path +'/data/catalogo.json'))['peliculas']
+    # root=app.root_path +'/data/usuarios/'
+    # ruta = root+session['username']+"/data.json"
+    # rutaHistorial = root+session['username']+"/historial.json"
+    #saldo = list(connection.execute("select income from customers where username = \'" + \
+    #  session['username'] + "\';"))[0]
+    #usuario = json.load(open(ruta))
+    usuario = connection.execute("select * from customers where username = \'" + \
+      session['username'] + "\';").fetchone()
+    saldo = usuario['income']
     fecha = datetime.date.today()
+    films_cat = list
     try:
         carrito = session['carrito']
     except KeyError:

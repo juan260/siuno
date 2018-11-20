@@ -123,14 +123,14 @@
           </div>
           <div id="filmtable">
             {% for film in films %}
-              <a href="{{ url_for('pelicula', name=film['id']) }}" class="film" data-title="{{ film['titulo'] }}">
+              <a href="{{ url_for('pelicula', name=film['movieid']) }}" class="film" data-title="{{ film['movietitle'] }}">
                 <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
-                  alt="{{ film['titulo'] }}"
+                  alt="{{ film['movietitle'] }}"
                     height="250"
                     width="175">
                 <br>
                 <div class="filmtext">
-                  <b>{{ film['titulo'] }}</b> ({{film['anno']}}) <br>
+                  <b>{{ film['movietitle'] }}</b> ({{film['movierelease']}}) <br>
                   {{ film['precio'] }}€
                 </div>
               </a>

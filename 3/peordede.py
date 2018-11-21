@@ -83,11 +83,11 @@ def iniciosesion(methods = ['POST', 'GET']):
   if(request.method=='POST'):
     username=request.form.get('nombre')
     if(username!=None):
-      # Obtenemos la contraseña asociada al usuario,
+      # Obtenemos la contrasenia asociada al usuario,
       # la lista passwords tendra longitud 1 o 0
       passwords = list(connection\
-        .execute("select password from customers where username = " + \
-        username + ";"))
+        .execute("select password from customers where username = \'" + \
+        username + "\';"))
       # Si existe la password, existe el usuario
       if len(passwords) > 0:
         contrasenia=passwords[0][0]
@@ -108,20 +108,28 @@ def registro():
     if (username!=None):
       
       existeUser = len(list(connection\
-        .execute("select username from customers where username = " + \
-        username + ";")))
+        .execute("select username from customers where username = \'" + \
+        username + "\';")))
       if existeUser > 0:
         return render_template('registro.html', existe=1)
 
       connection.execute("insert into customers "
         "(username, firstname, lastname, password, "
-        "email, creditcard) "
+        "email, creditcard, creditcardtype, creditcardexpiration, address1, "
+        "country, zip, city) "
         " values (\'" + username + "\', \'" + \
         request.form.get('nombre') + "\', \'" +\
         request.form.get('apellidos') + "\', \'" + \
         md5.new(request.form.get('contrasenia')).hexdigest() + \
         "\', \'" + request.form.get('correo') + "\', \'" + \
-        request.form.get('tarjeta') + "\');")
+        request.form.get('tarjeta') + "\', \'" + \
+        request.form.get('tarjetaTipo') + "\', \'" + \
+        request.form.get('expiration') + "\', \'" + \
+        request.form.get('direccion') + "\', \'" + \
+        request.form.get('country') + "\', \'" + \
+        request.form.get('zip') + "\', \'" + \
+        request.form.get('city') + \
+        "\');")
 
       #Creamos historial.json
       # f = open(historialR, "w+")
@@ -166,14 +174,23 @@ def registro():
 @app.route('/cuenta/', methods = ['POST', 'GET'])
 def cuenta():
   if('username' in session):
-    root=app.root_path + '/data/usuarios/'
-    ruta = root+session['username']+"/data.json"
-    datosUsuario = json.load(open(ruta))
+    #root=app.root_path + '/data/usuarios/'
+    #ruta = root+session['username']+"/data.json"
+    #datosUsuario = json.load(open(ruta))
+    datosUsuario = connection.execute("select * " + \
+      "from customers where username = \'" + \
+      session['username'] + "\'").fetchone()
+
     if(request.method=='POST'):
       incr=int(request.form.get('quantity'))
-      datosUsuario['saldo']+=incr
-      with open(ruta, "w") as jfile:
-        json.dump(datosUsuario, jfile)
+      newSaldo=datosUsuario['income']+incr
+      #with open(ruta, "w") as jfile:
+      #  json.dump(datosUsuario, jfile)
+      connection.execute("update customers " + \
+        "set income = " + str(newSaldo))
+      datosUsuario = connection.execute("select * " + \
+      "from customers where username = \'" + \
+      session['username'] + "\'").fetchone()
     return render_template('cuenta.html',log = datosUsuario)
   else:
     return render_template('cuenta.html',log = None)
@@ -201,7 +218,6 @@ def finalizarCompra():
 
 @app.route('/historialCompras/')
 def historialCompras():
-  films = json.load(open(app.root_path + '/data/catalogo.json'))['peliculas']
   if('username' in session):
     root=app.root_path +'/data/usuarios/'
     ruta = root+session['username']+"/historial.json"
@@ -217,7 +233,8 @@ def historialCompras():
 
 @app.route('/pelicula/<path:name>', methods = ['POST', 'GET'])
 def pelicula(name, methods = ['POST', 'GET']):
-  films = json.load(open(app.root_path + '/data/catalogo.json'))['peliculas']
+  #films = json.load(open(app.root_path + '/data/catalogo.json'))['peliculas']
+  films = connection.execute("select  * from imdb_movies").fetchall()
   if request.method=='GET':
     for film in films:
       if int(name) == film['id']:
@@ -234,27 +251,25 @@ def pelicula(name, methods = ['POST', 'GET']):
     for film in films:
       if(int(name) == film['id']):
         # Si no hay carrito
-        try:
-          carrito=session['carrito']
-        except KeyError:
+        #try:
+        #  carrito=session['carrito']
+        #except KeyError:
           # Si no hay carrito
-          session['carrito']=[]
-          carrito=session['carrito']
+        #  session['carrito']=[]
+        #  carrito=session['carrito']
         # Buscamos la pelicula en el carrito
 
-        for i in range(len(carrito)):
+        #for i in range(len(carrito)):
           # Si la encontramos en el carritos
-          if carrito[i][0]['id']==film['id']:
-            carrito[i][1]+=int(request.form['quantity'])
-            session['carrito']=carrito
-            return redirect(url_for("carrito"))
+        #  if carrito[i][0]['id']==film['id']:
+        #    carrito[i][1]+=int(request.form['quantity'])
+        #    session['carrito']=carrito
+        #    return redirect(url_for("carrito"))
 
           # Si no la hemos encontrado en el carrito
 
-        session['carrito']=carrito + [[film, int(request.form['quantity'])]]
+        #session['carrito']=carrito + [[film, int(request.form['quantity'])]]
         return redirect(url_for("carrito"))
-
-
 
     return redirect(url_for("carrito"))
 
@@ -281,9 +296,13 @@ def confirmar():
     #usuario = json.load(open(ruta))
     usuario = connection.execute("select * from customers where username = \'" + \
       session['username'] + "\';").fetchone()
+    historial = connection.execute("select * from imdb_movies," + \
+        "(select movieid from orders, orderdetails where customerid = \'" + \
+        usuario['customerid'] + "\' and orders.orderid = orderdetails.orderid)" + \
+        " as moviesOfUser where imdb_movies.movieid = moviesOfUser.movieid").fetchall()
     saldo = usuario['income']
     fecha = datetime.date.today()
-    films_cat = list
+    films_cat = connection.execute("select * from imdb_movies").fetchall()
     try:
         carrito = session['carrito']
     except KeyError:
@@ -295,7 +314,7 @@ def confirmar():
     for film in carrito:
         sumPrice += (film[0]['precio']*film[1])
         flag=0
-        for peli in historial['peliculas']:
+        for peli in historial:
           if film[0]['id'] == peli['id'] and peli['fechaCompra'] == str(fecha):
             peli['cantidad'] += film[1]
             flag=1
@@ -303,17 +322,16 @@ def confirmar():
         if flag== 0:
           film[0]['cantidad'] = film[1]
           film[0]['fechaCompra']=str(fecha)
-          historial['peliculas'].append(film[0])
+          #historial['peliculas'].append(film[0])
+          
         if sumPrice > saldo:
             return redirect(url_for("index"))
 
     saldo = saldo-sumPrice
     session['carrito']=[]
-    usuario['saldo'] = saldo
-    with open(ruta, "w") as jfile:
-        json.dump(usuario, jfile)
-    with open(rutaHistorial, "w") as jfile:
-        json.dump(historial, jfile)
+    connection.execute("update customers set income = " + str(saldo))
+    #with open(rutaHistorial, "w") as jfile:
+    #    json.dump(historial, jfile)
 
     return redirect(url_for("index"))
 

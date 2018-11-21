@@ -5,6 +5,8 @@
 UPDATE customers SET email = 'default@default.com' WHERE email IS NULL;
 ALTER TABLE customers
  ALTER COLUMN email SET NOT NULL,
+ ALTER COLUMN income TYPE numeric,
+ ALTER COLUMN income SET DEFAULT 0,
  DROP COLUMN address2,
  DROP COLUMN state,
  DROP COLUMN region,
@@ -28,6 +30,7 @@ ALTER TABLE productsAUX
 RENAME TO products;
 
 ALTER TABLE products
+   
    ADD CONSTRAINT products_pkey
    PRIMARY KEY (prod_id),
 
@@ -193,3 +196,42 @@ ALTER TABLE alertas
   ADD CONSTRAINT alertaid
   PRIMARY KEY (alertaid);
 
+ALTER TABLE imdb_movies
+   ADD COLUMN poster VARCHAR(100) NULL,
+   ADD COLUMN sinopsis VARCHAR(250) NULL;
+
+BEGIN;
+SELECT setval('customers_customerid_seq', COALESCE((SELECT MAX(customerid)+1 FROM customers), 1), false);
+
+SELECT setval('imdb_actors_actorid_seq', 
+   COALESCE((SELECT MAX(actorid)+1 FROM imdb_actors), 1), false);
+
+SELECT setval('imdb_directormovies_directorid_seq', 
+   COALESCE((SELECT MAX(directorid)+1 FROM imdb_directormovies), 1), false);
+
+SELECT setval('imdb_directormovies_movieid_seq', 
+   COALESCE((SELECT MAX(movieid)+1 FROM imdb_directormovies), 1), false);
+
+SELECT setval('imdb_directors_directorid_seq', 
+   COALESCE((SELECT MAX(directorid)+1 FROM imdb_directors), 1), false);
+
+SELECT setval('imdb_moviecountries_movieid_seq', 
+   COALESCE((SELECT MAX(movieid)+1 FROM imdb_moviecountries), 1), false);
+
+SELECT setval('imdb_moviegenres_movieid_seq', 
+   COALESCE((SELECT MAX(movieid)+1 FROM imdb_moviegenres), 1), false);
+
+SELECT setval('imdb_movies_movieid_seq', 
+   COALESCE((SELECT MAX(movieid)+1 FROM imdb_movies), 1), false);
+
+SELECT setval('orders_orderid_seq', 
+   COALESCE((SELECT MAX(orderid)+1 FROM orders), 1), false);
+
+SELECT setval('alertas_alertaid_seq', 
+   COALESCE((SELECT MAX(alertaid)+1 FROM alertas), 1), false);
+
+SELECT setval('products_prod_id_seq', 
+   COALESCE((SELECT MAX(prod_id)+1 FROM products), 1), false);
+
+
+COMMIT;

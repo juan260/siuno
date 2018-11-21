@@ -83,10 +83,11 @@
           {% if log %}
           <p>Qué tal {{log['name']}}, este es el resumen de tu cuenta:</p>
           <br> <strong>Usuario</strong>: {{ log['username'] }}
-          <br> <strong>Nombre</strong>: {{ log['name'] + " " +log['surname']}}
+          <br> <strong>Nombre</strong>: {{ log['firstname'] + " " +log['lastname']}}
           <br> <strong>Correo</strong>: {{ log['email'] }}
+          <br> <strong>Address</strong>: {{ log['address1'] }}, {{ log['city'] }}, {{ log['country'] }} {{ log['zip'] }}
           <br> <strong>Num tarjeta</strong>: {{ log['creditcard'] }}
-          <br> <strong>Saldo</strong>: {{ log['saldo'] }}€
+          <br> <strong>Saldo</strong>: {{ log['income'] }}€
           <form method='post'>
             <input type="number" name="quantity" min="1" value="1">
             <input type = "submit" value="Añadir saldo">

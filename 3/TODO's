@@ -1,5 +1,5 @@
-Añadir sinopsis a las movies
-Añadir imagen a las movies LLAMAR AL CAMPO 'poster'
-Cambiar el campo income de la 
-    tabla customers de integer
-    a numeric
+Al poblar las movies que haya sinopsis y poster
+Si no es muy complicated igual molaria cambiar el nombre del
+    campo income a saldo u algo parecido, si esto lo hace luis notificar a juan
+    para que realice los cambios pertinentes
+Paginacion

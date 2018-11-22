@@ -64,16 +64,16 @@ def index(methods = ['POST', 'GET']):
   #films = json.load(open(os.path.join(app.root_path,'data/catalogo.json')))['peliculas']
   #films = json.load(join(dirname(realpath(__file__)), 'data/catalogo.json'))
   #films=json.load(open('/data/catalogo.json'))
-  films = connection.execute("select * from imdb_movies;").fetchall()
-  genres = list(connection.execute("select distinct(movietype) from imdb_movies;"))
+  films = connection.execute("select * \
+        from products as p, imdb_movies as f\
+        where p.movieid=f.movieid;").fetchall()
+  genres = [genre[0] for genre in connection.execute("select genre from genres;").fetchall()]
   genres.sort()
   genre=request.args.get('filters')
   if(not(genre==None or genre=='-')):
-    genderedFilms = []
-    for film in films:
-      if film['genero']==genre:
-        genderedFilms.append(film)
-    films=genderedFilms
+    films = connection.execute("select * \
+          from products as p, imdb_movies as f, imdb_moviegenres AS g\
+          where genre='" + genre + "' AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()
   if('username' in session):
     return render_template('index.html', films = films, genres = genres, log = session['username'])
   else:
@@ -271,24 +271,25 @@ def historialCompras():
 
 @app.route('/pelicula/<path:name>', methods = ['POST', 'GET'])
 def pelicula(name, methods = ['POST', 'GET']):
-  #films = json.load(open(app.root_path + '/data/catalogo.json'))['peliculas']
-  films = connection.execute("select  * from imdb_movies").fetchall()
   if request.method=='GET':
-    for film in films:
-      if int(name) == film['id']:
+    film = connection.execute("select * \
+          from products as p, imdb_movies as f, imdb_moviegenres AS g\
+          where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()[0]
+    if film:
         if('username' in session):
           return render_template('pelicula.html', film = film, log = session['username'])
         else:
           return render_template('pelicula.html', film = film, log = None)
-    if('username' in session):
-      return render_template('pelicula.html', film = None, log = session['username'])
     else:
-      return render_template('pelicula.html', film = None, log = None)
+        if('username' in session):
+          return render_template('pelicula.html', film = None, log = session['username'])
+        else:
+          return render_template('pelicula.html', film = None, log = None)
 
   if request.method=='POST':
     for film in films:
       if(int(name) == film['prod_id']):
-        # Si el usuario no está loggeado, metemos el carrito en la sesion
+        # Si el usuario no esta loggeado, metemos el carrito en la sesion
         if('username' in session):
             # Si no hay carrito
             try:

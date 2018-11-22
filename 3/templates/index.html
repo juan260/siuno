@@ -123,13 +123,13 @@
           </div>
           <div id="filmtable">
             {% for film in films %}
-              <a href="{{ url_for('pelicula', name=film['movieid']) }}" class="film" data-title="{{ film['movietitle'] }}">
+              <a href="{{ url_for('pelicula', name=film['prod_id']) }}" class="film" data-title="{{ film['movietitle'] }}">
                 {% if film['poster'] %}
                 <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
                   alt="{{ film['movietitle'] }}"
                     height="250"
                     width="175">
-                
+
                 {% else %}
                 <img src="{{ url_for('static', filename='imgs/noImage.png')}}"
                 alt="{{ film['movietitle'] }}"
@@ -138,8 +138,9 @@
                 {% endif %}
                 <br>
                 <div class="filmtext">
-                  <b>{{ film['movietitle'] }}</b> ({{film['movierelease']}}) <br>
-                  {{ film['precio'] }}€
+                  <b>{{ film['movietitle'] }}</b> ({{film['year']}}) <br>
+                  Versión {{ film['description']}} <br>
+                  {{ film['price'] }}€
                 </div>
               </a>
               {% endfor %}

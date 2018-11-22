@@ -20,6 +20,12 @@ sys.path.append('~/apache2/var/www/html/')
 app.secret_key = 'teamoluis'
 app.root_path=os.path.dirname(os.path.abspath(__file__))
 
+# Funcion auxiliar para crear el carrito
+def createCarrito(customerid):
+    # Comprobar si existe el carrito
+    if(len(connection.execute("select 1 from orders where status = NULL and customerid = \'" +
+        str(customerid) + "\'"))==0):
+        connection.execute("select createCarrito(" + str(customerid) + ")")
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
@@ -249,26 +255,32 @@ def pelicula(name, methods = ['POST', 'GET']):
 
   if request.method=='POST':
     for film in films:
-      if(int(name) == film['id']):
-        # Si no hay carrito
-        #try:
-        #  carrito=session['carrito']
-        #except KeyError:
-          # Si no hay carrito
-        #  session['carrito']=[]
-        #  carrito=session['carrito']
-        # Buscamos la pelicula en el carrito
+      if(int(name) == film['prod_id']):
+        # Si el usuario no está loggeado, metemos el carrito en la sesion
+        if('username' in session):
+            # Si no hay carrito
+            try:
+              carrito=session['carrito']
+            except KeyError:
+              # Si no hay carrito
+              session['carrito']=[]
+              carrito=session['carrito']
+            # Buscamos la pelicula en el carrito
 
-        #for i in range(len(carrito)):
-          # Si la encontramos en el carritos
-        #  if carrito[i][0]['id']==film['id']:
-        #    carrito[i][1]+=int(request.form['quantity'])
-        #    session['carrito']=carrito
-        #    return redirect(url_for("carrito"))
+            for i in range(len(carrito)):
+              # Si la encontramos en el carrito
+              if carrito[i][0]['prod_id']==film['prod_id']:
+                carrito[i][1]+=int(request.form['quantity'])
+                session['carrito']=carrito
+                return redirect(url_for("carrito"))
 
-          # Si no la hemos encontrado en el carrito
+              # Si no la hemos encontrado en el carrito
 
-        #session['carrito']=carrito + [[film, int(request.form['quantity'])]]
+            session['carrito']=carrito + [[film, int(request.form['quantity'])]]
+        # Si el usuario esta loggeado metemos el carrito en la base de datos
+        else:
+            connection.execute("insert into orderdetails \
+                (prod_id, price, quantity)")
         return redirect(url_for("carrito"))
 
     return redirect(url_for("carrito"))

@@ -20,12 +20,44 @@ sys.path.append('~/apache2/var/www/html/')
 app.secret_key = 'teamoluis'
 app.root_path=os.path.dirname(os.path.abspath(__file__))
 
-# Funcion auxiliar para crear el carrito
-def createCarrito(customerid):
+# Funcion que se ejecuta cada vez que un usuario inicia session
+# o se registre, mueve el carrito actual al de la base de datos
+def loggedInAs(username):
+    session['username']=username
+    session['customerid']=connection.execute("select customerid from customers \
+        where username = \'" + username + "\'").fetchone()['customerid']
+    # Movemos el carrito actual a la base de datos
+    if 'carrito' in session:
+        carritoViejo = session['carrito']
+        #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
+        session['carrito'] = carrito(session['customerid'])
+        if len(carritoViejo)>0:
+            query = "insert into orderdetail (orderid, prod_id, price, quantity) values "
+            for producto in carritoViejo:
+                query.append("(" + str(session['carrito']) + ", " + \
+                    str(producto[0]['prod_id']) + ", " + \
+                    str(producto[0]['price']) + ", " + \
+                    str(producto[1]) +  "); ")
+            connection.execute(query)
+    else:
+        #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
+        session['carrito'] = carrito(session['customerid'])
+    
+
+
+# Funcion auxiliar para crear el carrito, o devolverlo en caso de que exista
+# DEVUELVE EL ORDERID DEL CARRITO
+def carrito(customerid):
     # Comprobar si existe el carrito
-    if(len(connection.execute("select 1 from orders where status = NULL and customerid = \'" +
-        str(customerid) + "\'"))==0):
+    carr=connection.execute("select orderid from orders where status = NULL and customerid = \'" +
+        str(customerid) + "\'").fetchall()
+    if(len(carr)==0):
         connection.execute("select createCarrito(" + str(customerid) + ")")
+        return connection.execute("select orderid from orders where status = NULL and customerid = \'" +
+            str(customerid) + "\'").fetchone()['orderid']
+    #Si existe el carrito
+    else:
+        return carr[0]['orderid']
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
@@ -98,7 +130,7 @@ def iniciosesion(methods = ['POST', 'GET']):
       if len(passwords) > 0:
         contrasenia=passwords[0][0]
         if contrasenia == md5.new(request.form.get('contrasenia')).hexdigest():
-          session['username']=username
+          loggedInAs(username)
           return redirect(url_for("index"))
         return render_template('iniciosesion.html', usrNoexiste=None, pswEquivocada=1)
       return render_template('iniciosesion.html', usrNoexiste=1, pswEquivocada=None)
@@ -141,7 +173,7 @@ def registro():
       # f = open(historialR, "w+")
       # f.write("{\n\t\"peliculas\": []\n}")
       # f = None
-      session['username']=username
+      loggedInAs(username)
       #Creamos data.json
       # with open(dataR,"w") as f:
       #   f.write("{\n\t\"username\": ")
@@ -279,7 +311,7 @@ def pelicula(name, methods = ['POST', 'GET']):
             session['carrito']=carrito + [[film, int(request.form['quantity'])]]
         # Si el usuario esta loggeado metemos el carrito en la base de datos
         else:
-            connection.execute("insert into orderdetails \
+            connection.execute("insert into orderdetail \
                 (prod_id, price, quantity)")
         return redirect(url_for("carrito"))
 
@@ -309,8 +341,8 @@ def confirmar():
     usuario = connection.execute("select * from customers where username = \'" + \
       session['username'] + "\';").fetchone()
     historial = connection.execute("select * from imdb_movies," + \
-        "(select movieid from orders, orderdetails where customerid = \'" + \
-        usuario['customerid'] + "\' and orders.orderid = orderdetails.orderid)" + \
+        "(select movieid from orders, orderdetail where customerid = \'" + \
+        usuario['customerid'] + "\' and orders.orderid = orderdetail.orderid)" + \
         " as moviesOfUser where imdb_movies.movieid = moviesOfUser.movieid").fetchall()
     saldo = usuario['income']
     fecha = datetime.date.today()

@@ -243,15 +243,16 @@ def pelicula(name, methods = ['POST', 'GET']):
     film = connection.execute("select * \
           from products as p, imdb_movies as f, imdb_moviegenres AS g\
           where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()[0]
-    print film
-    if('username' in session):
-      return render_template('pelicula.html', film = film, log = session['username'])
+    if film:
+        if('username' in session):
+          return render_template('pelicula.html', film = film, log = session['username'])
+        else:
+          return render_template('pelicula.html', film = film, log = None)
     else:
-      return render_template('pelicula.html', film = film, log = None)
-    if('username' in session):
-      return render_template('pelicula.html', film = None, log = session['username'])
-    else:
-      return render_template('pelicula.html', film = None, log = None)
+        if('username' in session):
+          return render_template('pelicula.html', film = None, log = session['username'])
+        else:
+          return render_template('pelicula.html', film = None, log = None)
 
   if request.method=='POST':
     for film in films:

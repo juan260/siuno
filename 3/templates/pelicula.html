@@ -101,10 +101,18 @@
             <tr>
                 <td>
                     <div class="big-film">
-                      <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
-                        alt="{{ film['titulo'] }}"
-                        height="400"
-                        width="250">
+                        {% if film['poster'] %}
+                        <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                          alt="{{ film['movietitle'] }}"
+                            height="250"
+                            width="175">
+
+                        {% else %}
+                        <img src="{{ url_for('static', filename='imgs/noImage.png')}}"
+                        alt="{{ film['movietitle'] }}"
+                          height="250"
+                          width="175">
+                        {% endif %}
                       <div class="filmtext">
                         <b>{{ film['titulo'] }}</b> ({{ film['anno'] }}) <br>
                         Género: {{ film['genero'] }} <br>

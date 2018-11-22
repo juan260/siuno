@@ -256,7 +256,7 @@ def pelicula(name, methods = ['POST', 'GET']):
   if request.method=='POST':
     for film in films:
       if(int(name) == film['prod_id']):
-        # Si el usuario no está loggeado, metemos el carrito en la sesion
+        # Si el usuario no esta loggeado, metemos el carrito en la sesion
         if('username' in session):
             # Si no hay carrito
             try:

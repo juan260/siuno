@@ -1,4 +1,4 @@
--- Funcion que recibe como primer argumento un id de un usuario
+﻿-- Funcion que recibe como primer argumento un id de un usuario
 -- y como segundo argumento un id de un pedido
 -- y busca si el usuario tiene otros pedidos en carrito 
 -- y los elimina
@@ -14,7 +14,12 @@
 --
   --  END;    
    -- $$ LANGUAGE 'plpgsql';
+  
 
+--DROP TRIGGER addOrdersTrig ON orderdetail;
+--DROP TRIGGER subOrdersTrig ON orderdetail;
+--DROP TRIGGER updAddOrdersTrig ON orderdetail;
+--DROP TRIGGER updSubOrdersTrig ON orderdetail;
 
 CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
     as $$
@@ -32,7 +37,7 @@ CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
 
 
 CREATE TRIGGER addOrdersTrig
-    BEFORE INSERT ON orderdetail
+    AFTER INSERT ON orderdetail
     FOR EACH ROW
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updAddOrders();
@@ -50,32 +55,24 @@ CREATE OR REPLACE FUNCTION updSubtractOrders () RETURNS TRIGGER
     $$ LANGUAGE 'plpgsql';
 
 
-<<<<<<< HEAD
-CREATE OR REPLACE TRIGGER updOrders
-    BEFORE INSERT ON orderdetail
-=======
 CREATE TRIGGER subOrdersTrig
-    BEFORE DELETE ON orderdetail
+    AFTER DELETE ON orderdetail
     FOR EACH ROW
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updSubtractOrders();
 
 
-
-
 CREATE TRIGGER updAddOrdersTrig
-    BEFORE UPDATE ON orderdetail
->>>>>>> 84395fa12797cfb8c0963826b4d5517e65974be6
+    AFTER UPDATE ON orderdetail
     FOR EACH ROW
-    WHERE OLD.quantity < NEW.quantity
+    WHEN (OLD.quantity < NEW.quantity)
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updAddOrders();
 
 CREATE TRIGGER updSubOrdersTrig
-    BEFORE UPDATE ON orderdetail
+    AFTER UPDATE ON orderdetail
     FOR EACH ROW
-    WHERE OLD.quantity > NEW.quantity
+    WHEN (OLD.quantity > NEW.quantity)
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
-    EXECUTE PROCEDURE updSubOrders();
-
+    EXECUTE PROCEDURE updSubtractOrders();
 

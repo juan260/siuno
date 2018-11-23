@@ -1,41 +1,22 @@
+﻿DROP TRIGGER updInventory ON orders;
 
-
-CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
+CREATE OR REPLACE FUNCTION updOrdersInventory() RETURNS TRIGGER
     as $$
-    BEGIN
-        
+    BEGIN 
 	update
-		orders as ORD
+		products as PROD
 	set
-		netamount=(ORD.netamount+NEW.price)
-	where ORD.orderid=new.orderid and ORD.status=NULL;
-    END;
+		stock = PROD.stock - orderdetail.quantity,
+		sales = PROD.sales + orderdetail.quantity
+	where orderdetail.orderid = NEW.orderid AND PROD.prod_id = orderdetail.prod_id;
+    END; 
+
     $$ LANGUAGE 'plpgsql';
 
 
-CREATE TRIGGER addOrdersTrig
-    BEFORE INSERT ON orderdetail
+
+CREATE TRIGGER updInventory
+    AFTER UPDATE ON orders
     FOR EACH ROW
-    --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
-    EXECUTE PROCEDURE updAddOrders();
-
-CREATE OR REPLACE FUNCTION updSubtractOrders () RETURNS TRIGGER
-    as $$
-    BEGIN
-        
-	update
-		orders as ORD
-	set
-		netamount=ORD.netamount-OLD.price
-	where ORD.orderid=OLD.orderid and ORD.status=NULL;
-    END;
-    $$ LANGUAGE 'plpgsql';
-
-
-CREATE TRIGGER subOrdersTrig
-    BEFORE DELETE ON orderdetail
-    FOR EACH ROW
-    --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
-    EXECUTE PROCEDURE updSubtractOrders();
-
-
+    WHEN ( NEW.status = 'Paid')
+    EXECUTE PROCEDURE updOrdersInventory();

@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW dateMovieQuantity as
+﻿CREATE OR REPLACE VIEW dateMovieQuantity as
 	select date_part, movietitle, sum(quantity) as quant
 		--      return query select 1 as caca
 							from (select extract(YEAR from orderdate), movieid, quantity
@@ -37,4 +37,4 @@ CREATE OR REPLACE FUNCTION getTopVentas (integer) RETURNS table(
 	$$ LANGUAGE 'plpgsql';
 
 
---select getTopVentas(2015);
+select * FROM getTopVentas(2015);

@@ -112,6 +112,9 @@ ALTER TABLE imdb_actormovies
   FOREIGN KEY (movieid)
   REFERENCES imdb_movies(movieid);
 
+--ALTER TABLE imdb_actors
+ -- ADD COLUMN poster VARCHAR(100) NULL;
+
 -- Create languages
 SELECT language
 INTO languages

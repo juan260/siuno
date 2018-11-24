@@ -46,10 +46,11 @@
             <img src="{{ url_for('static', filename='imgs/Peordede.png')}}" alt="Peordede" width="170" height="50"></div>
           </a>
           <div id="searchbar">
-            <form>
+            <form id="search" method = "get">
               <input type="text" name="busqueda" placeholder="película"
-              id="searchBarBar"  oninput="return updateSearch()">
-              <img  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
+              id="searchBarBar">
+              <input type="image" name="submit"  src="{{ url_for('static', filename='imgs/Search_icon.png')}}" height="30" alt="Buscar">
+
             </form>
           </div>
         {% if log==None %}
@@ -105,7 +106,7 @@
             <div>
               Géneros:
               <select class="filter" form="filters" name="filters">
-                <option value="-">-</option>
+                <option value="Todas">Todas las películas</option>
                 {% for genre in genres %}
                   <option value="{{genre}}">{{genre}}</option>
                 {% endfor %}
@@ -121,6 +122,17 @@
               width="554"><br>
             <h2> No hemos encontrado esa película, hemos enviado a Frank de la Jungla a buscarla </h2>
           </div>
+          {% if busqueda %}
+          <h2> Buscando películas por {{busqueda}}:</h2>
+          {% else %}
+            {% if top=="top" %}
+              <h2> Top películas vendidas desde 2016: </h2>
+            {% elif top == 0 %}
+              <h2> Todas las películas: </h2>
+            {% else %}
+              <h2> Películas con género: {{top}} </h2>
+            {% endif %}
+          {% endif %}
           <div id="filmtable">
             {% for film in films %}
               <a href="{{ url_for('pelicula', name=film['prod_id']) }}" class="film" data-title="{{ film['movietitle'] }}">

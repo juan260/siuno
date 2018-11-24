@@ -124,9 +124,10 @@
                     <b>Sinopsis:</b> <br><br>
                     {{ film['sinopsis'] }}
                     <br><br>
-                    <b>Director:</b> {{ film['director'] }}
-                    <br><br>
-                    <b>Valoración:</b> {{film['valoracion']}}/5
+                    <b>Director(s):</b>
+                    {% for director in directors %}
+                      {{ director['directorname'] }}
+                    {% endfor %}
                     <br><br>
                     <form method='post'>
                       <input type="number" name="quantity" min="1" value="1">
@@ -136,14 +137,23 @@
               </tr>
               </table>
               <div id=actors>
-                {% for actor in film['actores'] %}
+                {% for actor in actors %}
                   <div class=actor>
-                    <img src="{{ url_for('static', filename='imgs/'+actor['foto'])}}"
-                        alt="{{ actor['foto'] }}"
+                    {% if actor['poster'] %}
+                    <img src="{{ url_for('static', filename='imgs/'+ actor['poster'])}}"
+                      alt="{{ actor['actorname'] }}"
                         height="150"
-                        width="125"><br>
-                    <b>Nombre: </b>{{actor['nombre']}}<br>
-                    <b>Personaje: </b>{{actor['personaje']}}
+                        width="125">
+
+                    {% else %}
+                    <img src="{{ url_for('static', filename='imgs/noImage.png')}}"
+                    alt="{{ actor['actorname'] }}"
+                      height="150"
+                      width="125">
+                    {% endif %}
+
+                    <b>Nombre: </b>{{actor['actorname']}}<br>
+                    <b>Personaje: </b>{{actor['character']}}
                   </div>
                 {% endfor %}
               </div>

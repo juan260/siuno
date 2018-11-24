@@ -29,6 +29,6 @@ CREATE OR REPLACE FUNCTION getTopMonths (integer, integer) RETURNS table(
 
 select * from getTopMonths(1, 2);
 
-DROP FUNCTION gettopmonths(integer, integer);
+--DROP FUNCTION gettopmonths(integer, integer);
 
 

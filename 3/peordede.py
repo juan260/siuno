@@ -30,7 +30,7 @@ def loggedInAs(username):
     if 'carrito' in session:
         carritoViejo = session['carrito']
         #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
-        session['carrito'] = carrito(session['customerid'])
+        session['carrito'] = carritoaux(session['customerid'])
         if len(carritoViejo)>0:
             query = "insert into orderdetail (orderid, prod_id, price, quantity) values "
             for producto in carritoViejo:
@@ -41,43 +41,84 @@ def loggedInAs(username):
             connection.execute(query)
     else:
         #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
-        session['carrito'] = carrito(session['customerid'])
-    
+        session['carrito'] = carritoaux(session['customerid'])
+
 
 
 # Funcion auxiliar para crear el carrito, o devolverlo en caso de que exista
 # DEVUELVE EL ORDERID DEL CARRITO
-def carrito(customerid):
+def carritoaux(customerid):
     # Comprobar si existe el carrito
+    print("pues era aquie")
     carr=connection.execute("select orderid from orders where status = NULL and customerid = \'" +
         str(customerid) + "\'").fetchall()
+    print " EUR VIENE LE CARRITO"
+    print carr
     if(len(carr)==0):
-        connection.execute("select createCarrito(" + str(customerid) + ")")
-        return connection.execute("select orderid from orders where status = NULL and customerid = \'" +
-            str(customerid) + "\'").fetchone()['orderid']
+        #connection.execute("select createCarrito(" + str(customerid) + ")")
+        return connection.execute("select orderid from orders where status = NULL and customerid = " +
+            str(customerid) + ";").fetchone()
     #Si existe el carrito
     else:
         return carr[0]['orderid']
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
-  #films = json.load(open(os.path.join(app.root_path,'data/catalogo.json')))['peliculas']
-  #films = json.load(join(dirname(realpath(__file__)), 'data/catalogo.json'))
-  #films=json.load(open('/data/catalogo.json'))
-  films = connection.execute("select * \
-        from products as p, imdb_movies as f\
-        where p.movieid=f.movieid;").fetchall()
   genres = [genre[0] for genre in connection.execute("select genre from genres;").fetchall()]
   genres.sort()
+  search=request.args.get('busqueda')
   genre=request.args.get('filters')
-  if(not(genre==None or genre=='-')):
-    films = connection.execute("select * \
-          from products as p, imdb_movies as f, imdb_moviegenres AS g\
-          where genre='" + genre + "' AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()
-  if('username' in session):
-    return render_template('index.html', films = films, genres = genres, log = session['username'])
+  top = None
+  busqueda = None
+  # He intentado combinar generos y busqueda pero no h epodido :( BORRAR
+  if search != None:
+    busqueda=search
+    films = connection.execute("SELECT *\
+      FROM imdb_movies AS m , products as p\
+      WHERE m.movieid=p.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
   else:
-    return render_template('index.html', films = films, genres = genres, log = None)
+      if(not(genre==None or genre=='Todas')):
+        top = genre
+        if(search == None):
+            films = connection.execute("select * \
+                  from products as p, imdb_movies as f, imdb_moviegenres AS g\
+                  where genre='" + genre + "' AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()
+        #else:
+        #    busqueda=search
+        #    films = connection.execute("select * \
+        #          from products as p, imdb_movies as f, imdb_moviegenres AS g\
+        #          where genre='" + genre + "' AND f.movieid=g.movieid AND p.movieid=f.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
+      elif (genre == 'Todas'):
+        top = 0
+        if(search==None):
+            films = connection.execute("select * \
+            from products as p, imdb_movies as f\
+            where p.movieid=f.movieid;").fetchall()
+        #else:
+        #    busqueda=search
+        #    films = connection.execute("select * \
+        #    from products as p, imdb_movies as f\
+        #    where p.movieid=f.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
+        if('username' in session):
+            return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = session['username'])
+        else:
+            return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = None)
+      else:
+        top="top"
+        if(search == None):
+            films = connection.execute("SELECT *\
+                    FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
+                    WHERE p.movieid= s.movieid;").fetchall()
+        #else:
+        #    busqueda=search
+        #    films = connection.execute("SELECT *\
+        #        FROM imdb_movies AS m , products as p\
+        #        WHERE m.movieid=p.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
+  if('username' in session):
+    return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = session['username'])
+  else:
+    return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = None)
+
 
 @app.route('/carrito/', methods=['GET','POST'])
 def carrito(methods=['GET','POST']):
@@ -169,38 +210,8 @@ def registro():
         request.form.get('city') + \
         "\');")
 
-      #Creamos historial.json
-      # f = open(historialR, "w+")
-      # f.write("{\n\t\"peliculas\": []\n}")
-      # f = None
       loggedInAs(username)
-      #Creamos data.json
-      # with open(dataR,"w") as f:
-      #   f.write("{\n\t\"username\": ")
-      #   f.write("\""+username+"\",\n")
 
-      #   f.write("\t\"name\": ")
-      #   f.write("\""+request.form.get('nombre')+"\",\n")
-
-      #   f.write("\t\"surname\": ")
-      #   f.write("\""+request.form.get('apellidos')+"\",\n")
-
-      #   contraseniaCifrada = md5.new(request.form.get('contrasenia')).hexdigest()
-      #   f.write("\t\"password\": ")
-      #   f.write("\""+contraseniaCifrada+"\",\n")
-
-      #   f.write("\t\"email\": ")
-      #   f.write("\""+request.form.get('correo')+"\",\n")
-
-      #   f.write("\t\"creditcard\": ")
-      #   f.write("\""+request.form.get('tarjeta')+"\",\n")
-
-      #   f.write("\t\"secretno\": ")
-      #   f.write("\""+request.form.get('secretnum')+"\",\n")
-
-      #   f.write("\t\"saldo\": ")
-      #   f.write(str(random.randint(1,100))+"\n}")
-      #   session['username']=username
       return index()
 
 
@@ -212,9 +223,6 @@ def registro():
 @app.route('/cuenta/', methods = ['POST', 'GET'])
 def cuenta():
   if('username' in session):
-    #root=app.root_path + '/data/usuarios/'
-    #ruta = root+session['username']+"/data.json"
-    #datosUsuario = json.load(open(ruta))
     datosUsuario = connection.execute("select * " + \
       "from customers where username = \'" + \
       session['username'] + "\'").fetchone()
@@ -222,8 +230,6 @@ def cuenta():
     if(request.method=='POST'):
       incr=int(request.form.get('quantity'))
       newSaldo=datosUsuario['income']+incr
-      #with open(ruta, "w") as jfile:
-      #  json.dump(datosUsuario, jfile)
       connection.execute("update customers " + \
         "set income = " + str(newSaldo))
       datosUsuario = connection.execute("select * " + \
@@ -257,13 +263,13 @@ def finalizarCompra():
 @app.route('/historialCompras/')
 def historialCompras():
   if('username' in session):
-    root=app.root_path +'/data/usuarios/'
-    ruta = root+session['username']+"/historial.json"
-    historialUsuario = json.load(open(ruta))['peliculas']
+    historialUsuario = connection.execute("SELECT * \
+        FROM products as p, orders as o, orderdetail as od, imdb_movies as m\
+        WHERE p.prod_id=od.prod_id AND od.orderid=o.orderid AND o.customerid=" + str(session['customerid']) + " AND status IS NOT NULL AND m.movieid=p.movieid;").fetchall()
     fechas = []
     for film in historialUsuario:
-      if film['fechaCompra'] not in fechas:
-        fechas.append(film['fechaCompra'])
+      if film['orderdate'] not in fechas:
+        fechas.append(film['orderdate'])
 
     return render_template('historialCompras.html', films = historialUsuario, log = session['username'], fechas=fechas)
   else:
@@ -275,16 +281,22 @@ def pelicula(name, methods = ['POST', 'GET']):
     film = connection.execute("select * \
           from products as p, imdb_movies as f, imdb_moviegenres AS g\
           where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()[0]
+    directors = connection.execute("SELECT *\
+        FROM imdb_directors AS d, imdb_directormovies AS dm, products AS p\
+        WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall();
+    actors = connection.execute("SELECT *\
+        FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
+        WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall();
     if film:
         if('username' in session):
-          return render_template('pelicula.html', film = film, log = session['username'])
+          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = session['username'])
         else:
-          return render_template('pelicula.html', film = film, log = None)
+          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None)
     else:
         if('username' in session):
-          return render_template('pelicula.html', film = None, log = session['username'])
+          return render_template('pelicula.html', film = None, directors = None, actors = None, log = session['username'])
         else:
-          return render_template('pelicula.html', film = None, log = None)
+          return render_template('pelicula.html', film = None, directors = None, actors = None, log = None)
 
   if request.method=='POST':
     for film in films:

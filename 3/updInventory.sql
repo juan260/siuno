@@ -8,7 +8,9 @@ CREATE OR REPLACE FUNCTION updOrdersInventory() RETURNS TRIGGER
 	set
 		stock = PROD.stock - orderdetail.quantity,
 		sales = PROD.sales + orderdetail.quantity
+	from orderdetail
 	where orderdetail.orderid = NEW.orderid AND PROD.prod_id = orderdetail.prod_id;
+	RETURN NULL;
     END; 
 
     $$ LANGUAGE 'plpgsql';

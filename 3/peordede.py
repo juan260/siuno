@@ -50,8 +50,8 @@ def loggedInAs(username):
 def carritoaux(customerid):
     # Comprobar si existe el carrito
     print("pues era aquie")
-    carr=connection.execute("select orderid from orders where status = NULL and customerid = \'" +
-        str(customerid) + "\'").fetchall()
+    carr=connection.execute("select orderid from orders where status = NULL and customerid = " +
+        str(customerid) + ";").fetchall()
     print " EUR VIENE LE CARRITO"
     print carr
     if(len(carr)==0):

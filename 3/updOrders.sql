@@ -16,10 +16,10 @@
    -- $$ LANGUAGE 'plpgsql';
   
 
---DROP TRIGGER addOrdersTrig ON orderdetail;
---DROP TRIGGER subOrdersTrig ON orderdetail;
---DROP TRIGGER updAddOrdersTrig ON orderdetail;
---DROP TRIGGER updSubOrdersTrig ON orderdetail;
+DROP TRIGGER addOrdersTrig ON orderdetail;
+DROP TRIGGER subOrdersTrig ON orderdetail;
+DROP TRIGGER updAddOrdersTrig ON orderdetail;
+DROP TRIGGER updSubOrdersTrig ON orderdetail;
 
 CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
     as $$
@@ -29,8 +29,9 @@ CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
 	update
 		orders as ORD
 	set
-		netamount=(ORD.netamount+NEW.price)
-	where ORD.orderid=new.orderid and ORD.status=NULL;
+		netamount = netamount + NEW.price
+	where ORD.orderid=orderid and ORD.status=NULL;
+	RETURN NULL;
     END;
     $$ LANGUAGE 'plpgsql';
 
@@ -51,6 +52,7 @@ CREATE OR REPLACE FUNCTION updSubtractOrders () RETURNS TRIGGER
 	set
 		netamount=ORD.netamount-OLD.price
 	where ORD.orderid=OLD.orderid and ORD.status=NULL;
+	RETURN NULL;
     END;
     $$ LANGUAGE 'plpgsql';
 

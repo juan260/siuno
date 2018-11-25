@@ -123,31 +123,26 @@ def index(methods = ['POST', 'GET']):
 @app.route('/carrito/', methods=['GET','POST'])
 def carrito(methods=['GET','POST']):
   try:
-    jsonFile = open(app.root_path + '/data/catalogo.json')
-  except IOError:
-    return "No se pudieron cargar las peliculas"
-  films_cat=json.load(jsonFile)['peliculas']
-  try:
-    carrito = session['carrito']
+    carrito = 88699 #session['carrito']
   except KeyError:
-    carrito=[]
-    sumPrice=0
-  else:
-    sumPrice = 0
-    carrito = [x for x in carrito if x[0] in films_cat]
-    for film in carrito:
-      sumPrice += (film[0]['precio']*film[1])
+    carrito = 0
+
+    # BORRAR OJO, SI QUIERES PROBAR EL CARRITO, PON O.ORDERID = 88699
+
+  films = connection.execute("select *\
+        from products as p, orderdetail as od, orders as o, imdb_movies as m\
+        where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(carrito) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
   if(request.method=='POST'):
     del_film_id=request.form.get('id')
-    carrito = [x for x in carrito if x[0]['id'] != int(del_film_id)]
-    session['carrito']=carrito
+    connection.execute("DELETE FROM orderdetail\
+        WHERE orderid= " + str(carrito) + " and prod_id =" + del_film_id + ";")
     return redirect(url_for("carrito"))
 
 
   if('username' in session):
-    return render_template('carrito.html', films = carrito, sumPrice = sumPrice, log = session['username'])
+    return render_template('carrito.html', films = films, log = session['username'])
   else:
-    return render_template('carrito.html', films = carrito, sumPrice = sumPrice,log = None)
+    return render_template('carrito.html', films = films, log = None)
 
 @app.route('/contacto/')
 def contacto():
@@ -241,24 +236,24 @@ def cuenta():
 
 @app.route('/finalizarCompra/')
 def finalizarCompra():
-  films_cat = json.load(open(app.root_path + '/data/catalogo.json'))['peliculas']
   try:
-    carrito = session['carrito']
+    carrito = 88699 #session['carrito']
   except KeyError:
-    carrito=[]
-    sumPrice=0
-  else:
-    sumPrice = 0
-    carrito = [x for x in carrito if x[0] in films_cat]
-    for film in carrito:
-      sumPrice += (film[0]['precio']*film[1])
-  root=app.root_path + '/data/usuarios/'
-  ruta = root+session['username']+"/data.json"
-  saldo = json.load(open(ruta))['saldo']
+    carrito=0
+
+  films = connection.execute("select *\
+          from products as p, orderdetail as od, orders as o, imdb_movies as m\
+          where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(carrito) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
+
+
   if('username' in session):
-    return render_template('finalizarCompra.html', films = carrito, sumPrice = sumPrice, log = session['username'], saldo=saldo)
+    saldo = connection.execute("select income\
+            from customers\
+            where username= '" + session['username']+ "';").fetchall()
+    print "saldoooo" + str(saldo)
+    return render_template('finalizarCompra.html', films = films, log = session['username'], saldo=saldo)
   else:
-    return render_template('finalizarCompra.html', films = carrito, sumPrice = sumPrice, log = None, saldo=None)
+    return render_template('finalizarCompra.html', films = films, log = None, saldo=None)
 
 @app.route('/historialCompras/')
 def historialCompras():

@@ -101,6 +101,10 @@ ALTER TABLE orders
    FOREIGN KEY (customerid) 
    REFERENCES customers(customerid);
 
+update orders
+set netamount = 0 
+where netamount is null;
+
 -- ACTORS
 
 ALTER TABLE imdb_actormovies

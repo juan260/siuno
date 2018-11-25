@@ -16,10 +16,10 @@
    -- $$ LANGUAGE 'plpgsql';
   
 
-DROP TRIGGER addOrdersTrig ON orderdetail;
-DROP TRIGGER subOrdersTrig ON orderdetail;
-DROP TRIGGER updAddOrdersTrig ON orderdetail;
-DROP TRIGGER updSubOrdersTrig ON orderdetail;
+--DROP TRIGGER addOrdersTrig ON orderdetail;
+--DROP TRIGGER subOrdersTrig ON orderdetail;
+--DROP TRIGGER updAddOrdersTrig ON orderdetail;
+--DROP TRIGGER updSubOrdersTrig ON orderdetail;
 
 CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
     as $$
@@ -30,7 +30,7 @@ CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
 		orders as ORD
 	set
 		netamount = netamount + NEW.price
-	where ORD.orderid=NEW.orderid and ORD.status=NULL;
+	where ORD.orderid=NEW.orderid and ORD.status IS NULL;
 	RETURN NULL;
     END;
     $$ LANGUAGE 'plpgsql';
@@ -38,7 +38,7 @@ CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
 
 
 CREATE TRIGGER addOrdersTrig
-    BEFORE INSERT ON orderdetail
+    AFTER INSERT ON orderdetail
     FOR EACH ROW
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updAddOrders();
@@ -51,7 +51,7 @@ CREATE OR REPLACE FUNCTION updSubtractOrders () RETURNS TRIGGER
 		orders as ORD
 	set
 		netamount=ORD.netamount-OLD.price
-	where ORD.orderid=OLD.orderid and ORD.status=NULL;
+	where ORD.orderid=OLD.orderid and ORD.status IS NULL;
 	RETURN NULL;
     END;
     $$ LANGUAGE 'plpgsql';
@@ -65,14 +65,14 @@ CREATE TRIGGER subOrdersTrig
 
 
 CREATE TRIGGER updAddOrdersTrig
-    BEFORE UPDATE ON orderdetail
+    AFTER UPDATE ON orderdetail
     FOR EACH ROW
     WHEN (OLD.quantity < NEW.quantity)
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updAddOrders();
 
 CREATE TRIGGER updSubOrdersTrig
-    BEFORE UPDATE ON orderdetail
+    AFTER UPDATE ON orderdetail
     FOR EACH ROW
     WHEN (OLD.quantity > NEW.quantity)
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);

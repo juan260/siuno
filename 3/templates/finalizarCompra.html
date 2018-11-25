@@ -95,12 +95,12 @@
           {% else %}
           <ul>
             {% for film in films %}
-            <li> <b>{{ film[0]['titulo'] }}</b>: {{ film[0]['precio'] }}€ * {{ film[1] }} </li>
+            <li> <b>{{ film['movietitle'] }}</b>: {{ film['price'] }}€ Quantity: {{ film['quantity'] }} </li>
             {% endfor %}
           </ul>
-          <br> Suma: {{sumPrice}}€
-          <br> Saldo: {{saldo}}€<br>
-          {% if sumPrice > saldo %}
+          <br> Suma: {{films[0]['netamount']}}€
+          <br> Saldo: {{saldo[0]['income']}}€<br>
+          {% if films[0]['netamount'] > saldo[0]['income'] %}
           <button disabled type="button">Confirmar compra</button> Saldo insuficiente.
           {% else %}
           <button onclick="location.href='{{ url_for('confirmar') }}'" type="button">Confirmar compra</button>

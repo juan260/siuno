@@ -127,10 +127,12 @@
                     <b>Director(s):</b>
                     {% for director in directors %}
                       {{ director['directorname'] }}
-                    {% endfor %}
+                    {% endfor %} <br> <br>
+                    Stock: {{film['stock']}}<br>
+                    Ventas: {{film['sales']}}
                     <br><br>
                     <form method='post'>
-                      <input type="number" name="quantity" min="1" value="1">
+                      <input type="number" name="quantity" min="1" max= {{film['stock']}} value="1">
                       <input type = "submit" value="Añadir a carrito">
                     </form>
                   </div></td>

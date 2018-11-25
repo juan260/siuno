@@ -89,21 +89,29 @@
           <div id="filmtable">
             {% for film in films %}
             <div class="film">
-                <a href="{{ url_for('pelicula', name=film[0]['id']) }}">
-                  <img src="{{ url_for('static', filename='imgs/'+film[0]['poster'])}}"
-                    alt="{{ film[0]['titulo'] }}"
+                <a href="{{ url_for('pelicula', name=film['prod_id']) }}" data-title="{{ film['movietitle'] }}">
+                  {% if film['poster'] %}
+                  <img src="{{ url_for('static', filename='imgs/'+film['poster'])}}"
+                    alt="{{ film['movietitle'] }}"
                       height="250"
                       width="175">
+
+                  {% else %}
+                  <img src="{{ url_for('static', filename='imgs/noImage.png')}}"
+                  alt="{{ film['movietitle'] }}"
+                    height="250"
+                    width="175">
+                  {% endif %}
                     </a>
                   <br>
                   <div class="filmtext">
-                    <b>{{ film[0]['titulo'] }}</b> ({{film[0]['anno']}}) <br>
-                    Género: {{ film[0]['genero'] }} <br>
-                    {{ film[0]['precio'] }}€<br>
-                    Cantidad: {{film[1]}} <br>
+                    <b>{{ film['movietitle'] }}</b> ({{film['year']}}) <br>
+                    Versión {{ film['description']}} <br>
+                    {{ film['price'] }}€
+                    Cantidad: {{film['quantity']}} <br>
                     <div class="quitardiv">
                       <form class="quitarform" method = "POST">
-                        <input class="quitar" type="text" name="id" hidden value="{{film[0]['id']}}">
+                        <input class="quitar" type="text" name="id" hidden value="{{film['prod_id']}}">
                         <button class="quitar" type="submit">Quitar</button>
                       </form>
                     </div>
@@ -112,7 +120,7 @@
               {% endfor %}
             </div>
 
-          <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
+          <br> <h2 class="h2-left"> Suma: {{films[0]['netamount']}}€</h2>
           {% if not log %}
           <button disabled type="button">Finalizar compra</button> (Identifícate para continuar el proceso de compra)
           {% elif not films%}

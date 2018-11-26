@@ -10,7 +10,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from threading import Thread
 from time import sleep
-import sched, time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alumnodb@localhost/si1'
@@ -33,13 +32,13 @@ topFilms = connection.execute("SELECT *\
 def updateTopFilms():
     global topFilms
     while(1):
-        print("ACTUALIZANDO")
         topFilms = connection.execute("SELECT *\
                 FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
                 WHERE p.movieid= s.movieid;").fetchall()
-
-#thread = Thread(target = updateTopFilms)
-#thread.start()
+        sleep(1)
+thread = Thread(target = updateTopFilms)
+thread.daemon=True
+thread.start()
 #thread.join()
 
 
@@ -167,12 +166,12 @@ def carrito(methods=['GET','POST']):
 
   sumPrice=0
   if('username' in session):
-
-    films = connection.execute("select *\
+    # No cambiar el orden ni la posicion de las primeras dos columnas de la siguiente query
+    films = connection.execute("select p.price as prodPrice, od.price as orderPrice, m.*\
           from products as p, orderdetail as od, orders as o, imdb_movies as m\
           where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(session['carrito']) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
     for film in films:
-      sumPrice += film['price']
+      sumPrice += film[1]
     return render_template('carrito.html', films = films, log = session['username'], sumPrice=sumPrice)
   else:
     filmsEdited = []
@@ -324,20 +323,21 @@ def pelicula(name, methods = ['POST', 'GET']):
           where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()[0]
     directors = connection.execute("SELECT *\
         FROM imdb_directors AS d, imdb_directormovies AS dm, products AS p\
-        WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall();
+        WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall()
     actors = connection.execute("SELECT *\
         FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
-        WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall();
+        WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall()
+    
     if film:
         if('username' in session):
-          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = session['username'])
+          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = session['username'], listo=False)
         else:
-          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None)
+          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None, listo=False)
     else:
         if('username' in session):
-          return render_template('pelicula.html', film = None, directors = None, actors = None, log = session['username'])
+          return render_template('pelicula.html', film = None, directors = None, actors = None, log = session['username'], listo=False)
         else:
-          return render_template('pelicula.html', film = None, directors = None, actors = None, log = None)
+          return render_template('pelicula.html', film = None, directors = None, actors = None, log = None, listo=False)
 
   if request.method=='POST':
 
@@ -366,10 +366,18 @@ def pelicula(name, methods = ['POST', 'GET']):
             for i in range(len(carrito)):
               # Si la encontramos en el carrito
               if carrito[i][0]['prod_id']==film['prod_id']:
+                if(carrito[i][1]+int(request.form['quantity']) > film['stock']):
+                  directors = connection.execute("SELECT *\
+                        FROM imdb_directors AS d, imdb_directormovies AS dm, products AS p\
+                        WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall()
+                  actors = connection.execute("SELECT *\
+                        FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
+                        WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall()
+                                    
+                  return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None, listo=True)
 
                 carrito[i][1]+=int(request.form['quantity'])
                 session['carrito']=carrito
-                print(session['carrito'])
                 return redirect(url_for("carrito"))
 
               # Si no la hemos encontrado en el carrito
@@ -386,6 +394,15 @@ def pelicula(name, methods = ['POST', 'GET']):
                 newPrice = quantity * float(film['price'])
                 quantity += int(query[0]['quantity'])
                 newPrice += float(query[0]['price'])
+                if(quantity > film['stock']):
+                  directors = connection.execute("SELECT *\
+                        FROM imdb_directors AS d, imdb_directormovies AS dm, products AS p\
+                        WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall()
+                  actors = connection.execute("SELECT *\
+                        FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
+                        WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall()
+                      
+                  return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None, listo=True)
 
 
                 connection.execute("update orderdetail\

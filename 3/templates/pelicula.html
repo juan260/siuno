@@ -130,6 +130,13 @@
                     {% endfor %} <br> <br>
                     Stock: {{film['stock']}}<br>
                     Ventas: {{film['sales']}}
+                    {% if listo %}
+                    <br><br>
+                      <div class='red'>
+                        No puedes añadir mas copias de esta película, estás superando el stock.
+                      </div>
+                    {% endif %}
+
                     <br><br>
                     <form method='post'>
                       <input type="number" name="quantity" min="1" max= {{film['stock']}} value="1">

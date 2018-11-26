@@ -119,8 +119,9 @@
                 </div>
               {% endfor %}
             </div>
-
-          <br> <h2 class="h2-left"> Suma: {{films[0]['netamount']}}€</h2>
+          {% if films|length > 0 %}
+          <br> <h2 class="h2-left"> Suma: {{sumPrice}}€</h2>
+          {% endif %}
           {% if not log %}
           <button disabled type="button">Finalizar compra</button> (Identifícate para continuar el proceso de compra)
           {% elif not films%}

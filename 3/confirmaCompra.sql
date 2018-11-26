@@ -1,4 +1,4 @@
--- Funcion que confirma la compra de un usuario
+-- Funcion que confirma la compra de un usuario TODO
 CREATE OR REPLACE FUNCTION confirmaCompra (integer) RETURNS void
     as $$
     BEGIN

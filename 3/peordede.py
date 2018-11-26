@@ -34,10 +34,10 @@ def loggedInAs(username):
         if len(carritoViejo)>0:
             query = "insert into orderdetail (orderid, prod_id, price, quantity) values "
             for producto in carritoViejo:
-                query.append("(" + str(session['carrito']) + ", " + \
+                query +="(" + str(session['carrito']) + ", " + \
                     str(producto[0]['prod_id']) + ", " + \
                     str(producto[0]['price']) + ", " + \
-                    str(producto[1]) +  "); ")
+                    str(producto[1]) +  "); "
             connection.execute(query)
     else:
         #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
@@ -49,13 +49,12 @@ def loggedInAs(username):
 # DEVUELVE EL ORDERID DEL CARRITO
 def carritoaux(customerid):
     # Comprobar si existe el carrito
-    print("pues era aquie")
+
     carr=connection.execute("select orderid from orders where status = NULL and customerid = " +
         str(customerid) + ";").fetchall()
-    print " EUR VIENE LE CARRITO"
-    print carr
+
     if(len(carr)==0):
-        #connection.execute("select createCarrito(" + str(customerid) + ")")
+        connection.execute("select createCarrito(" + str(customerid) + ")")
         return connection.execute("select orderid from orders where status = NULL and customerid = " +
             str(customerid) + ";").fetchone()
     #Si existe el carrito
@@ -122,27 +121,53 @@ def index(methods = ['POST', 'GET']):
 
 @app.route('/carrito/', methods=['GET','POST'])
 def carrito(methods=['GET','POST']):
-  try:
-    carrito = 88699 #session['carrito']
-  except KeyError:
-    carrito = 0
+  #try:
+#    carrito = 88699 #session['carrito']
+#  except KeyError:
+#    carrito = 0
 
     # BORRAR OJO, SI QUIERES PROBAR EL CARRITO, PON O.ORDERID = 88699
 
-  films = connection.execute("select *\
-        from products as p, orderdetail as od, orders as o, imdb_movies as m\
-        where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(carrito) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
+
   if(request.method=='POST'):
     del_film_id=request.form.get('id')
-    connection.execute("DELETE FROM orderdetail\
-        WHERE orderid= " + str(carrito) + " and prod_id =" + del_film_id + ";")
+    if('username' in session):
+        connection.execute("DELETE FROM orderdetail\
+            WHERE orderid= " + str(carrito) + " and prod_id =" + del_film_id + ";")
+    else:
+        if('carrito' in session):
+            newCarrito = []
+            for film in session['carrito']:
+                if int(film[0]['prod_id'])!=int(del_film_id):
+                    print("SONIGUALESSSS????")
+                    print(film[0]['prod_id'])
+                    print(del_film_id)
+                    newCarrito.append(film)
+            session['carrito']=newCarrito
     return redirect(url_for("carrito"))
 
-
+  sumPrice=0
   if('username' in session):
-    return render_template('carrito.html', films = films, log = session['username'])
+
+    films = connection.execute("select *\
+          from products as p, orderdetail as od, orders as o, imdb_movies as m\
+          where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(session['carrito']) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
+    for film in films:
+      sumPrice += film['price']
+    return render_template('carrito.html', films = films, log = session['username'], sumPrice=sumPrice)
   else:
-    return render_template('carrito.html', films = films, log = None)
+    filmsEdited = []
+    if('carrito' in session):
+      films = session['carrito']
+      for film in films:
+        sumPrice += film[0]['price']*film[1]
+        film[0]['quantity']=film[1]
+        filmsEdited.append(film[0])
+    else:
+
+      sumPrice=0
+
+    return render_template('carrito.html', films = filmsEdited, log = None, sumPrice=sumPrice)
 
 @app.route('/contacto/')
 def contacto():
@@ -250,7 +275,7 @@ def finalizarCompra():
     saldo = connection.execute("select income\
             from customers\
             where username= '" + session['username']+ "';").fetchall()
-    print "saldoooo" + str(saldo)
+    print("saldoooo" + str(saldo))
     return render_template('finalizarCompra.html', films = films, log = session['username'], saldo=saldo)
   else:
     return render_template('finalizarCompra.html', films = films, log = None, saldo=None)
@@ -294,10 +319,18 @@ def pelicula(name, methods = ['POST', 'GET']):
           return render_template('pelicula.html', film = None, directors = None, actors = None, log = None)
 
   if request.method=='POST':
+
+    films = connection.execute("select * \
+          from products as p, imdb_movies as f\
+          where p.movieid=f.movieid;").fetchall()
+
     for film in films:
+      film = dict(film)
       if(int(name) == film['prod_id']):
+
         # Si el usuario no esta loggeado, metemos el carrito en la sesion
-        if('username' in session):
+        if('username' not in session):
+
             # Si no hay carrito
             try:
               carrito=session['carrito']
@@ -305,13 +338,18 @@ def pelicula(name, methods = ['POST', 'GET']):
               # Si no hay carrito
               session['carrito']=[]
               carrito=session['carrito']
+
             # Buscamos la pelicula en el carrito
 
+
             for i in range(len(carrito)):
+              print("AQUI SIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII6")
               # Si la encontramos en el carrito
               if carrito[i][0]['prod_id']==film['prod_id']:
+
                 carrito[i][1]+=int(request.form['quantity'])
                 session['carrito']=carrito
+                print(session['carrito'])
                 return redirect(url_for("carrito"))
 
               # Si no la hemos encontrado en el carrito
@@ -321,6 +359,7 @@ def pelicula(name, methods = ['POST', 'GET']):
         else:
             connection.execute("insert into orderdetail \
                 (prod_id, price, quantity)")
+        print(session['carrito'])
         return redirect(url_for("carrito"))
 
     return redirect(url_for("carrito"))

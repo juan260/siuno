@@ -34,9 +34,9 @@ def updateTopFilms():
                 WHERE p.movieid= s.movieid;").fetchall()
         sleep(100)
 
-thread = Thread(target = updateTopFilms)
-thread.start()
-thread.join()
+#thread = Thread(target = updateTopFilms)
+#thread.start()
+#thread.join()
 
 # Funcion que se ejecuta cada vez que un usuario inicia session
 # o se registre, mueve el carrito actual al de la base de datos
@@ -393,7 +393,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                 connection.execute("insert into orderdetail \
                     (prod_id, orderid, price, quantity) \
                     VALUES ("+ str(film['prod_id'])+ ", "+ str(session['carrito']) +\
-                    ", "+ str(float(film['price'])*request.form['quantity']) + ", " + str(request.form['quantity']) + ")")
+                    ", "+ str(float(film['price'])*int(request.form['quantity'])) + ", " + str(request.form['quantity']) + ")")
 
         return redirect(url_for("carrito"))
 
@@ -401,9 +401,10 @@ def pelicula(name, methods = ['POST', 'GET']):
 
 @app.route('/logout/')
 def logout():
-  session.clear()
   # Borramos el carrito
   connection.execute("DELETE from orderdetail where orderid = " + str(session['carrito']) +";")
+  session.clear()
+
   return redirect(url_for("index"))
 
 @app.route('/contador', methods=['POST'])

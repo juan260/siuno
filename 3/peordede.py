@@ -8,6 +8,8 @@ import datetime
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
+from threading import Thread
+from time import sleep
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alumnodb@localhost/si1'
@@ -19,6 +21,22 @@ connection = engine.connect()
 sys.path.append('~/apache2/var/www/html/')
 app.secret_key = 'teamoluis'
 app.root_path=os.path.dirname(os.path.abspath(__file__))
+topFilms = connection.execute("SELECT *\
+        FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
+        WHERE p.movieid= s.movieid;").fetchall()
+# Funcion en un thread separado que actualiza las top ventas
+def updateTopFilms():
+    global topFilms
+    while(1):
+        print("ACTUALIZANDO")
+        topFilms = connection.execute("SELECT *\
+                FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
+                WHERE p.movieid= s.movieid;").fetchall()
+        sleep(100)
+
+#thread = Thread(target = updateTopFilms)
+#thread.start()
+#thread.join()
 
 # Funcion que se ejecuta cada vez que un usuario inicia session
 # o se registre, mueve el carrito actual al de la base de datos
@@ -63,6 +81,7 @@ def carritoaux(customerid):
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
+  global topFilms
   genres = [genre[0] for genre in connection.execute("select genre from genres;").fetchall()]
   genres.sort()
   search=request.args.get('busqueda')
@@ -105,9 +124,7 @@ def index(methods = ['POST', 'GET']):
       else:
         top="top"
         if(search == None):
-            films = connection.execute("SELECT *\
-                    FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
-                    WHERE p.movieid= s.movieid;").fetchall()
+            films = topFilms
         #else:
         #    busqueda=search
         #    films = connection.execute("SELECT *\
@@ -376,7 +393,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                 connection.execute("insert into orderdetail \
                     (prod_id, orderid, price, quantity) \
                     VALUES ("+ str(film['prod_id'])+ ", "+ str(session['carrito']) +\
-                    ", "+ str(float(film['price'])*request.form['quantity']) + ", " + str(request.form['quantity']) + ")")
+                    ", "+ str(float(film['price'])*int(request.form['quantity'])) + ", " + str(request.form['quantity']) + ")")
 
         return redirect(url_for("carrito"))
 
@@ -384,9 +401,10 @@ def pelicula(name, methods = ['POST', 'GET']):
 
 @app.route('/logout/')
 def logout():
-  session.clear()
   # Borramos el carrito
   connection.execute("DELETE from orderdetail where orderid = " + str(session['carrito']) +";")
+  session.clear()
+
   return redirect(url_for("index"))
 
 @app.route('/contador', methods=['POST'])

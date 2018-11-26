@@ -36,7 +36,7 @@ def loggedInAs(username):
             for producto in carritoViejo:
                 query +="(" + str(session['carrito']) + ", " + \
                     str(producto[0]['prod_id']) + ", " + \
-                    str(producto[0]['price']) + ", " + \
+                    str(float(producto[0]['price'])*producto[1]) + ", " + \
                     str(producto[1]) +  "); "
             connection.execute(query)
     else:
@@ -133,15 +133,12 @@ def carrito(methods=['GET','POST']):
     del_film_id=request.form.get('id')
     if('username' in session):
         connection.execute("DELETE FROM orderdetail\
-            WHERE orderid= " + str(carrito) + " and prod_id =" + del_film_id + ";")
+            WHERE orderid= " + str(session['carrito']) + " and prod_id =" + str(del_film_id) + ";")
     else:
         if('carrito' in session):
             newCarrito = []
             for film in session['carrito']:
                 if int(film[0]['prod_id'])!=int(del_film_id):
-                    print("SONIGUALESSSS????")
-                    print(film[0]['prod_id'])
-                    print(del_film_id)
                     newCarrito.append(film)
             session['carrito']=newCarrito
     return redirect(url_for("carrito"))
@@ -345,7 +342,6 @@ def pelicula(name, methods = ['POST', 'GET']):
 
 
             for i in range(len(carrito)):
-              print("AQUI SIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII6")
               # Si la encontramos en el carrito
               if carrito[i][0]['prod_id']==film['prod_id']:
 
@@ -360,13 +356,19 @@ def pelicula(name, methods = ['POST', 'GET']):
         # Si el usuario esta loggeado metemos el carrito en la base de datos
         else:
             # Comprobamos si esta ya el producto en el carrito
-            query=connection.execute("select quantity from orderdetail \
+            query=connection.execute("select quantity, price from orderdetail \
                     where orderid = "+ str(session['carrito']) + \
                     " and prod_id = "+ str(film['prod_id']) + ";").fetchall()
             if len(query) > 0:
-                quantity = int(request.form['quantity']) + int(query[0]['quantity'])
+                quantity =int(request.form['quantity'])
+                newPrice = quantity * float(film['price'])
+                quantity += int(query[0]['quantity'])
+                newPrice += float(query[0]['price'])
+
+                
                 connection.execute("update orderdetail\
                     set quantity = " + str(quantity) + \
+                    ", price = "+ str(newPrice) + \
                     "where orderid = "+ str(session['carrito']) + \
                     " and prod_id = "+ str(film['prod_id']) + ";")
             #Si no esta en el carrito
@@ -374,7 +376,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                 connection.execute("insert into orderdetail \
                     (prod_id, orderid, price, quantity) \
                     VALUES ("+ str(film['prod_id'])+ ", "+ str(session['carrito']) +\
-                    ", "+ str(film['price']) + ", " + str(request.form['quantity']) + ")")
+                    ", "+ str(float(film['price'])*request.form['quantity']) + ", " + str(request.form['quantity']) + ")")
 
         return redirect(url_for("carrito"))
 

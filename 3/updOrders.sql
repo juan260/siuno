@@ -1,20 +1,20 @@
 ﻿-- Funcion que recibe como primer argumento un id de un usuario
 -- y como segundo argumento un id de un pedido
--- y busca si el usuario tiene otros pedidos en carrito 
+-- y busca si el usuario tiene otros pedidos en carrito
 -- y los elimina
 -- INNECESARIA
 --CREATE OR REPLACE FUNCTION checkOrders (integer, integer) RETURNS void
 --	as $$
 --	declare
 --	BEGIN
-  --      DELETE FROM orders 
+  --      DELETE FROM orders
     --        where orders.customerid=$1 and
       --          orders.orderid <> $2 and
        --         orders.status = NULL
 --
-  --  END;    
+  --  END;
    -- $$ LANGUAGE 'plpgsql';
-  
+
 
 --DROP TRIGGER addOrdersTrig ON orderdetail;
 --DROP TRIGGER subOrdersTrig ON orderdetail;
@@ -25,7 +25,22 @@ CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
     as $$
     BEGIN
 
-        
+
+	update
+		orders as ORD
+	set
+		netamount = netamount + NEW.price - OLD.price
+	where ORD.orderid=NEW.orderid and ORD.status IS NULL;
+	RETURN NULL;
+    END;
+    $$ LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION AddOrders () RETURNS TRIGGER
+    as $$
+    BEGIN
+
+
 	update
 		orders as ORD
 	set
@@ -36,17 +51,16 @@ CREATE OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER
     $$ LANGUAGE 'plpgsql';
 
 
-
 CREATE TRIGGER addOrdersTrig
     AFTER INSERT ON orderdetail
     FOR EACH ROW
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
-    EXECUTE PROCEDURE updAddOrders();
+    EXECUTE PROCEDURE AddOrders();
 
 CREATE OR REPLACE FUNCTION updSubtractOrders () RETURNS TRIGGER
     as $$
     BEGIN
-        
+
 	update
 		orders as ORD
 	set
@@ -77,4 +91,3 @@ CREATE TRIGGER updSubOrdersTrig
     WHEN (OLD.quantity > NEW.quantity)
     --EXECUTE PROCEDURE checkOrders(NEW.customerid, NEW.orderid);
     EXECUTE PROCEDURE updSubtractOrders();
-

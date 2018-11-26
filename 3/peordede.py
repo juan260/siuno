@@ -417,10 +417,9 @@ def contador():
 @app.route('/confirmar/')
 def confirmar():
     user_id = connection.execute("SELECT customerid FROM customers WHERE username= '" + session['username'] + "';").fetchall()[0]['customerid']
-    print user_id
     totalAmount = connection.execute("SELECT totalamount FROM orders WHERE orderid = " + str(session['carrito']) + ";").fetchall()[0]['totalamount']
-    connection.execute("confirmaCompra (" + str(user_id) +  ", " + str(totalAmount) + ");").fetchone()
-    session['carrito'] = carritoaux()
+    connection.execute("SELECT confirmaCompra (" + str(user_id) +  ", " + str(totalAmount) + ");").fetchone()
+    session['carrito'] = carritoaux(user_id)
     return redirect(url_for("index"))
 
 

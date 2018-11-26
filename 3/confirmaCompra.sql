@@ -6,8 +6,7 @@ CREATE OR REPLACE FUNCTION confirmaCompra (integer, integer) RETURNS void
       update
         orders
       set
-        status = 'Paid',
-        totalamount=$2
+        status = 'Paid'
       where customerid = $1 and status is NULL;
 
       update

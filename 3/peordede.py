@@ -259,7 +259,7 @@ def cuenta():
 @app.route('/finalizarCompra/')
 def finalizarCompra():
   try:
-    carrito = 88699 #session['carrito']
+    carrito = session['carrito']
   except KeyError:
     carrito=0
 
@@ -365,7 +365,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                 quantity += int(query[0]['quantity'])
                 newPrice += float(query[0]['price'])
 
-                
+
                 connection.execute("update orderdetail\
                     set quantity = " + str(quantity) + \
                     ", price = "+ str(newPrice) + \
@@ -396,45 +396,11 @@ def contador():
 
 @app.route('/confirmar/')
 def confirmar():
-    usuario = connection.execute("select * from customers where username = \'" + \
-      session['username'] + "\';").fetchone()
-    historial = connection.execute("select * from imdb_movies," + \
-        "(select movieid from orders, orderdetail where customerid = \'" + \
-        usuario['customerid'] + "\' and orders.orderid = orderdetail.orderid)" + \
-        " as moviesOfUser where imdb_movies.movieid = moviesOfUser.movieid").fetchall()
-    saldo = usuario['income']
-    fecha = datetime.date.today()
-    films_cat = connection.execute("select * from imdb_movies").fetchall()
-    try:
-        carrito = session['carrito']
-    except KeyError:
-        carrito=[]
-        sumPrice=0
-    else:
-        sumPrice = 0
-        carrito = [x for x in carrito if x[0] in films_cat]
-    for film in carrito:
-        sumPrice += (film[0]['precio']*film[1])
-        flag=0
-        for peli in historial:
-          if film[0]['id'] == peli['id'] and peli['fechaCompra'] == str(fecha):
-            peli['cantidad'] += film[1]
-            flag=1
-            break
-        if flag== 0:
-          film[0]['cantidad'] = film[1]
-          film[0]['fechaCompra']=str(fecha)
-          #historial['peliculas'].append(film[0])
-
-        if sumPrice > saldo:
-            return redirect(url_for("index"))
-
-    saldo = saldo-sumPrice
-    session['carrito']=[]
-    connection.execute("update customers set income = " + str(saldo))
-    #with open(rutaHistorial, "w") as jfile:
-    #    json.dump(historial, jfile)
-
+    user_id = connection.execute("SELECT customerid FROM customers WHERE username= '" + session['username'] + "';").fetchall()[0]['customerid']
+    print user_id
+    totalAmount = connection.execute("SELECT totalamount FROM orders WHERE orderid = " + str(session['carrito']) + ";").fetchall()[0]['totalamount']
+    connection.execute("confirmaCompra (" + str(user_id) +  ", " + str(totalAmount) + ");").fetchone()
+    session['carrito'] = carritoaux()
     return redirect(url_for("index"))
 
 

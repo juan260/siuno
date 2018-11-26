@@ -270,15 +270,17 @@ def finalizarCompra():
           from products as p, orderdetail as od, orders as o, imdb_movies as m\
           where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(carrito) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
 
-
   if('username' in session):
+    totalAmount = films[0]['netamount']*(1 + (films[0]['tax']/100))
+    connection.execute("update orders\
+            set totalamount = "+ str(totalAmount) + "\
+            where orderid= " + str(carrito) + ";")
     saldo = connection.execute("select income\
             from customers\
             where username= '" + session['username']+ "';").fetchall()
-    print("saldoooo" + str(saldo))
-    return render_template('finalizarCompra.html', films = films, log = session['username'], saldo=saldo)
+    return render_template('finalizarCompra.html', films = films, totalAmount=totalAmount, log = session['username'], saldo=saldo)
   else:
-    return render_template('finalizarCompra.html', films = films, log = None, saldo=None)
+    return render_template('finalizarCompra.html', films = films, totalAmount = None, log = None, saldo=None)
 
 @app.route('/historialCompras/')
 def historialCompras():
@@ -378,13 +380,6 @@ def contador():
 
 @app.route('/confirmar/')
 def confirmar():
-    # films_cat = json.load(open(app.root_path +'/data/catalogo.json'))['peliculas']
-    # root=app.root_path +'/data/usuarios/'
-    # ruta = root+session['username']+"/data.json"
-    # rutaHistorial = root+session['username']+"/historial.json"
-    #saldo = list(connection.execute("select income from customers where username = \'" + \
-    #  session['username'] + "\';"))[0]
-    #usuario = json.load(open(ruta))
     usuario = connection.execute("select * from customers where username = \'" + \
       session['username'] + "\';").fetchone()
     historial = connection.execute("select * from imdb_movies," + \

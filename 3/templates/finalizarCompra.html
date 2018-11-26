@@ -98,9 +98,9 @@
             <li> <b>{{ film['movietitle'] }}</b>: {{ film['price'] }}€ Quantity: {{ film['quantity'] }} </li>
             {% endfor %}
           </ul>
-          <br> Suma: {{films[0]['netamount']}}€
+          <br> Suma: {{films[0]['netamount']}}€ (+ taxes of {{films[0]['tax']}}%) = {{totalAmount}} €
           <br> Saldo: {{saldo[0]['income']}}€<br>
-          {% if films[0]['netamount'] > saldo[0]['income'] %}
+          {% if totalAmount > saldo[0]['income'] %}
           <button disabled type="button">Confirmar compra</button> Saldo insuficiente.
           {% else %}
           <button onclick="location.href='{{ url_for('confirmar') }}'" type="button">Confirmar compra</button>

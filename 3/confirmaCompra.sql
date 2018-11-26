@@ -1,5 +1,5 @@
 -- Funcion que confirma la compra de un usuario TODO
-CREATE OR REPLACE FUNCTION confirmaCompra (integer) RETURNS void
+CREATE OR REPLACE FUNCTION confirmaCompra (integer, integer) RETURNS void
     as $$
     BEGIN
 
@@ -7,7 +7,13 @@ CREATE OR REPLACE FUNCTION confirmaCompra (integer) RETURNS void
         orders
       set
         status = 'Paid',
-        totalamount=netamount + tax
+        totalamount=$2
+      where customerid = $1 and status is NULL;
+
+      update
+        customers
+      set
+       income = income - $2
       where customerid = $1;
 
     END;

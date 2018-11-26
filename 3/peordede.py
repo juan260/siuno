@@ -37,7 +37,7 @@ def loggedInAs(username):
                 query +="(" + str(session['carrito']) + ", " + \
                     str(producto[0]['prod_id']) + ", " + \
                     str(float(producto[0]['price'])*producto[1]) + ", " + \
-                    str(producto[1]) +  "); "
+                    str(producto[1]) + ");"
             connection.execute(query)
     else:
         #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
@@ -365,7 +365,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                 quantity += int(query[0]['quantity'])
                 newPrice += float(query[0]['price'])
 
-                
+
                 connection.execute("update orderdetail\
                     set quantity = " + str(quantity) + \
                     ", price = "+ str(newPrice) + \
@@ -385,6 +385,8 @@ def pelicula(name, methods = ['POST', 'GET']):
 @app.route('/logout/')
 def logout():
   session.clear()
+  # Borramos el carrito
+  connection.execute("DELETE from orderdetail where orderid = " + str(session['carrito']) +";")
   return redirect(url_for("index"))
 
 @app.route('/contador', methods=['POST'])

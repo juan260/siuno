@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION createCarrito (integer) RETURNS void
       insert into orders
         (orderdate, customerid, netamount,
         tax, totalamount, status)
-        values (NOW(), $1, 0, 0, 0, NULL);
+        values (NOW(), $1, 0, 21, 0, NULL);
 
     END;
     $$ LANGUAGE 'plpgsql';

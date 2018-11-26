@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from threading import Thread
 from time import sleep
+import sched, time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alumnodb@localhost/si1'
@@ -24,6 +25,10 @@ app.root_path=os.path.dirname(os.path.abspath(__file__))
 topFilms = connection.execute("SELECT *\
         FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
         WHERE p.movieid= s.movieid;").fetchall()
+
+
+
+
 # Funcion en un thread separado que actualiza las top ventas
 def updateTopFilms():
     global topFilms
@@ -32,11 +37,11 @@ def updateTopFilms():
         topFilms = connection.execute("SELECT *\
                 FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
                 WHERE p.movieid= s.movieid;").fetchall()
-        sleep(100)
 
 #thread = Thread(target = updateTopFilms)
 #thread.start()
 #thread.join()
+
 
 # Funcion que se ejecuta cada vez que un usuario inicia session
 # o se registre, mueve el carrito actual al de la base de datos

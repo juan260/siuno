@@ -21,3 +21,5 @@ cat getTopMonths.sql | psql -U alumnodb si1
 cat getTopVentas.sql | psql -U alumnodb si1
 
 cat createCarrito.sql | psql -U alumnodb si1
+
+echo 'select setOrderAmount();' | psql -U alumnodb si1

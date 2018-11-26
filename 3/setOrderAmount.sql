@@ -18,7 +18,7 @@ CREATE OR REPLACE FUNCTION setOrderAmount () RETURNS void
             orders as ORD
         set
             netamount=total,
-            totalamount=total+tax
+            totalamount=total*(1+(tax/100))
         from
             ordersWithPrices
         where ORD.orderid=ordersWithPrices.orderid;

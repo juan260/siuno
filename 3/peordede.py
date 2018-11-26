@@ -49,14 +49,14 @@ def loggedInAs(username):
 # DEVUELVE EL ORDERID DEL CARRITO
 def carritoaux(customerid):
     # Comprobar si existe el carrito
-
-    carr=connection.execute("select orderid from orders where status = NULL and customerid = " +
+    #print("CREANDO CARRITO PARA USUARIO " + str(customerid))
+    carr=connection.execute("select orderid from orders where status is NULL and customerid = " +
         str(customerid) + ";").fetchall()
 
     if(len(carr)==0):
         connection.execute("select createCarrito(" + str(customerid) + ")")
-        return connection.execute("select orderid from orders where status = NULL and customerid = " +
-            str(customerid) + ";").fetchone()
+        return connection.execute("select orderid from orders where status is NULL and customerid = " +
+            str(customerid) + ";").fetchone()['orderid']
     #Si existe el carrito
     else:
         return carr[0]['orderid']
@@ -357,9 +357,23 @@ def pelicula(name, methods = ['POST', 'GET']):
             session['carrito']=carrito + [[film, int(request.form['quantity'])]]
         # Si el usuario esta loggeado metemos el carrito en la base de datos
         else:
-            connection.execute("insert into orderdetail \
-                (prod_id, price, quantity)")
-        print(session['carrito'])
+            # Comprobamos si esta ya el producto en el carrito
+            query=connection.execute("select quantity from orderdetail \
+                    where orderid = "+ str(session['carrito']) + \
+                    " and prod_id = "+ str(film['prod_id']) + ";").fetchall()
+            if len(query) > 0:
+                quantity = int(request.form['quantity']) + int(query[0]['quantity'])
+                connection.execute("update orderdetail\
+                    set quantity = " + str(quantity) + \
+                    "where orderid = "+ str(session['carrito']) + \
+                    " and prod_id = "+ str(film['prod_id']) + ";")
+            #Si no esta en el carrito
+            else:
+                connection.execute("insert into orderdetail \
+                    (prod_id, orderid, price, quantity) \
+                    VALUES ("+ str(film['prod_id'])+ ", "+ str(session['carrito']) +\
+                    ", "+ str(film['price']) + ", " + str(request.form['quantity']) + ")")
+
         return redirect(url_for("carrito"))
 
     return redirect(url_for("carrito"))

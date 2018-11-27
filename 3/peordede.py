@@ -35,7 +35,7 @@ def updateTopFilms():
         topFilms = connection.execute("SELECT *\
                 FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
                 WHERE p.movieid= s.movieid;").fetchall()
-        sleep(1)
+        sleep(60)
 thread = Thread(target = updateTopFilms)
 thread.daemon=True
 thread.start()
@@ -327,7 +327,7 @@ def pelicula(name, methods = ['POST', 'GET']):
     actors = connection.execute("SELECT *\
         FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
         WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall()
-    
+
     if film:
         if('username' in session):
           return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = session['username'], listo=False)
@@ -373,7 +373,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                   actors = connection.execute("SELECT *\
                         FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
                         WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall()
-                                    
+
                   return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None, listo=True)
 
                 carrito[i][1]+=int(request.form['quantity'])
@@ -401,7 +401,7 @@ def pelicula(name, methods = ['POST', 'GET']):
                   actors = connection.execute("SELECT *\
                         FROM imdb_actors AS a, imdb_actormovies AS am, products AS p\
                         WHERE am.movieid = p.movieid AND p.prod_id=" + str(name) + " AND am.actorid=a.actorid;").fetchall()
-                      
+
                   return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None, listo=True)
 
 

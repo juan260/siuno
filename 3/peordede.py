@@ -167,7 +167,7 @@ def carrito(methods=['GET','POST']):
   sumPrice=0
   if('username' in session):
     # No cambiar el orden ni la posicion de las primeras dos columnas de la siguiente query
-    films = connection.execute("select p.price as prodPrice, od.price as orderPrice, od.quantity, p.prod_id, m.*\
+    films = connection.execute("select p.price as prodPrice, od.price as orderPrice, od.quantity, p.prod_id, p.description, m.*\
           from products as p, orderdetail as od, orders as o, imdb_movies as m\
           where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(session['carrito']) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
     for film in films:
@@ -318,9 +318,13 @@ def historialCompras():
 @app.route('/pelicula/<path:name>', methods = ['POST', 'GET'])
 def pelicula(name, methods = ['POST', 'GET']):
   if request.method=='GET':
-    film = connection.execute("select * \
+    films = connection.execute("select * \
           from products as p, imdb_movies as f, imdb_moviegenres AS g\
-          where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()[0]
+          where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()
+    film = films[0]
+    genres = []
+    for f in films:
+        genres.append(f['genre'])
     directors = connection.execute("SELECT *\
         FROM imdb_directors AS d, imdb_directormovies AS dm, products AS p\
         WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall()
@@ -330,9 +334,9 @@ def pelicula(name, methods = ['POST', 'GET']):
 
     if film:
         if('username' in session):
-          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = session['username'], listo=False)
+          return render_template('pelicula.html', film = film, genres= genres, directors = directors, actors = actors, log = session['username'], listo=False)
         else:
-          return render_template('pelicula.html', film = film, directors = directors, actors = actors, log = None, listo=False)
+          return render_template('pelicula.html', film = film, genres= genres, directors = directors, actors = actors, log = None, listo=False)
     else:
         if('username' in session):
           return render_template('pelicula.html', film = None, directors = None, actors = None, log = session['username'], listo=False)

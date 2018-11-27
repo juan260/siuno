@@ -127,7 +127,13 @@
                     <b>Director(s):</b>
                     {% for director in directors %}
                       {{ director['directorname'] }}
-                    {% endfor %} <br> <br>
+                    {% endfor %} <br>
+                    <b> Géneros: </b>
+                    {% for genre in genres %}
+                    {{genre}}
+                    {% endfor %}
+                    <br><br>
+
                     Stock: {{film['stock']}}<br>
                     Ventas: {{film['sales']}}
                     {% if listo %}

@@ -107,7 +107,12 @@
                   <div class="filmtext">
                     <b>{{ film['movietitle'] }}</b> ({{film['year']}}) <br>
                     Versión {{ film['description']}} <br>
-                    {{ film[0] }}€
+                    {% if log==None %}
+                      {{ film['price'] }}
+                    {% else %}
+                      {{ film[0] }}
+                    {% endif %}
+                    €
                     Cantidad: {{film['quantity']}} <br>
                     <div class="quitardiv">
                       <form class="quitarform" method = "POST">

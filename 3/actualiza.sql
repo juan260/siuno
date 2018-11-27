@@ -1,6 +1,8 @@
 ﻿
--- CUSTOMER
--- Queremos que la columna de email no sea NULL y borramos las que no usemos
+-- CUSTOMERS
+-- Queremos que la columna de email no sea NULL y borramos las que 
+-- no usemos, por otro lado aniadimos algunos defaults a campos 
+-- obligatorios en nuestro formulario, pero no en el script de poblacion
 
 UPDATE customers SET email = 'default@default.com' WHERE email IS NULL;
 ALTER TABLE customers
@@ -16,7 +18,7 @@ ALTER TABLE customers
 
 -- INVENTORY
 
--- Fusion de inventory y orders
+-- Fusion de inventory y products
 
 SELECT p.prod_id, movieid, price, description, stock, sales
 INTO productsAUX

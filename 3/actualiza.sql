@@ -209,6 +209,12 @@ ALTER TABLE imdb_movies
    ADD COLUMN poster VARCHAR(100) NULL,
    ADD COLUMN sinopsis VARCHAR(250) NULL;
 
+
+-- Reajustamos todas las secuencias, ya que en el script
+-- de poblacion, como se aniadian indicando el identificador,
+-- y como ademas algunas secuencias se creaban mas tarde 
+-- que propios campos, las secuencias no aumentaban 
+-- correctamente siempre
 BEGIN;
 SELECT setval('customers_customerid_seq', COALESCE((SELECT MAX(customerid)+1 FROM customers), 1), false);
 

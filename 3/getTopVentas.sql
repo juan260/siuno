@@ -37,4 +37,5 @@ CREATE OR REPLACE FUNCTION getTopVentas (integer) RETURNS table(
 	$$ LANGUAGE 'plpgsql';
 
 
-select * FROM getTopVentas(2015);
+--select * FROM getTopVentas(2015);
+

@@ -167,7 +167,7 @@ def carrito(methods=['GET','POST']):
   sumPrice=0
   if('username' in session):
     # No cambiar el orden ni la posicion de las primeras dos columnas de la siguiente query
-    films = connection.execute("select p.price as prodPrice, od.price as orderPrice, m.*\
+    films = connection.execute("select p.price as prodPrice, od.price as orderPrice, od.quantity, p.prod_id, m.*\
           from products as p, orderdetail as od, orders as o, imdb_movies as m\
           where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(session['carrito']) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
     for film in films:

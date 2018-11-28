@@ -1,3 +1,5 @@
+-- Juan Riera y Luis Cárabe
+
 update
 	orderdetail as DET
 set

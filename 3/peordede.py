@@ -1,3 +1,5 @@
+# Juan Riera, Luis Carabe
+
 from flask import Flask, request, render_template, redirect, session, url_for
 import json
 import os
@@ -12,15 +14,19 @@ from threading import Thread
 from time import sleep
 
 app = Flask(__name__)
+
+# Configuramos la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alumnodb@localhost/si1'
-#db = SQLAlchemy(app)
 Base = automap_base()
 engine = create_engine("postgres://alumnodb@localhost/si1")
 Base.prepare(engine, reflect=True)
 connection = engine.connect()
+
 sys.path.append('~/apache2/var/www/html/')
 app.secret_key = 'teamoluis'
 app.root_path=os.path.dirname(os.path.abspath(__file__))
+
+# Guardamos el topFilms como variable global para tener una experiencia mas fluida
 topFilms = connection.execute("SELECT *\
         FROM products as p,  (imdb_movies AS m INNER JOIN getTopVentas(2015) AS t ON m.movietitle=t.movietitle1) as s\
         WHERE p.movieid= s.movieid;").fetchall()
@@ -28,7 +34,7 @@ topFilms = connection.execute("SELECT *\
 
 
 
-# Funcion en un thread separado que actualiza las top ventas
+# Funcion en un thread separado que actualiza las top ventas cada minuto
 def updateTopFilms():
     global topFilms
     while(1):
@@ -39,20 +45,21 @@ def updateTopFilms():
 thread = Thread(target = updateTopFilms)
 thread.daemon=True
 thread.start()
-#thread.join()
 
 
 # Funcion que se ejecuta cada vez que un usuario inicia session
 # o se registre, mueve el carrito actual al de la base de datos
 def loggedInAs(username):
+    # Guardamos el username y el customerid en sesion
     session['username']=username
     session['customerid']=connection.execute("select customerid from customers \
         where username = \'" + username + "\'").fetchone()['customerid']
     # Movemos el carrito actual a la base de datos
     if 'carrito' in session:
         carritoViejo = session['carrito']
-        #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
+        # Miramos si este usuario ya tenia otro carrito
         session['carrito'] = carritoaux(session['customerid'])
+        # Pasamos el carrito guardado mientras el usuario no estaba registrado a la base de datos, asociandolo con su usuario
         if len(carritoViejo)>0:
             query = "insert into orderdetail (orderid, prod_id, price, quantity) values "
             for producto in carritoViejo:
@@ -61,8 +68,8 @@ def loggedInAs(username):
                     str(float(producto[0]['price'])*producto[1]) + ", " + \
                     str(producto[1]) + ");"
             connection.execute(query)
+    # Si no habia como usuario no registrado, miramos si tenia uno como usuario registrado
     else:
-        #ESTA LINEA SIGUIENTE ES IMPORTANTE QUE ESTE AQUI
         session['carrito'] = carritoaux(session['customerid'])
 
 
@@ -71,69 +78,62 @@ def loggedInAs(username):
 # DEVUELVE EL ORDERID DEL CARRITO
 def carritoaux(customerid):
     # Comprobar si existe el carrito
-    #print("CREANDO CARRITO PARA USUARIO " + str(customerid))
     carr=connection.execute("select orderid from orders where status is NULL and customerid = " +
         str(customerid) + ";").fetchall()
 
+    # Si no existe, lo creamos
     if(len(carr)==0):
         connection.execute("select createCarrito(" + str(customerid) + ")")
         return connection.execute("select orderid from orders where status is NULL and customerid = " +
             str(customerid) + ";").fetchone()['orderid']
-    #Si existe el carrito
+    #Si existe el carrito, lo devolvemos
     else:
         return carr[0]['orderid']
 
 @app.route('/', methods = ['POST', 'GET'])
 def index(methods = ['POST', 'GET']):
   global topFilms
+  # Buscamos todos los generos
   genres = [genre[0] for genre in connection.execute("select genre from genres;").fetchall()]
   genres.sort()
+  # Cogemos los parametros del request
   search=request.args.get('busqueda')
   genre=request.args.get('filters')
   top = None
   busqueda = None
-  # He intentado combinar generos y busqueda pero no h epodido :( BORRAR
+  # Si estamos buscando una pelicula...
   if search != None:
-    busqueda=search
+    busqueda=search # Guardamos la cadena que estamos buscando
+    # Buscamos las peliculas
     films = connection.execute("SELECT *\
       FROM imdb_movies AS m , products as p\
       WHERE m.movieid=p.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
+  # Si no estamos buscando una pelicula por nombre
   else:
+      # Miramos si estamos filtrando por genero
       if(not(genre==None or genre=='Todas')):
         top = genre
         if(search == None):
+            # Filtramos por genero
             films = connection.execute("select * \
                   from products as p, imdb_movies as f, imdb_moviegenres AS g\
                   where genre='" + genre + "' AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()
-        #else:
-        #    busqueda=search
-        #    films = connection.execute("select * \
-        #          from products as p, imdb_movies as f, imdb_moviegenres AS g\
-        #          where genre='" + genre + "' AND f.movieid=g.movieid AND p.movieid=f.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
       elif (genre == 'Todas'):
+        # Cargamos todas las peliculas
         top = 0
         if(search==None):
             films = connection.execute("select * \
             from products as p, imdb_movies as f\
             where p.movieid=f.movieid;").fetchall()
-        #else:
-        #    busqueda=search
-        #    films = connection.execute("select * \
-        #    from products as p, imdb_movies as f\
-        #    where p.movieid=f.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
         if('username' in session):
             return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = session['username'])
         else:
             return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = None)
       else:
+        # Cargamos el top de peliculas (no estamos buscando ni por genero ni por nombre)
         top="top"
         if(search == None):
             films = topFilms
-        #else:
-        #    busqueda=search
-        #    films = connection.execute("SELECT *\
-        #        FROM imdb_movies AS m , products as p\
-        #        WHERE m.movieid=p.movieid AND UPPER(movietitle) LIKE UPPER('%%" +  str(search) +"%%');").fetchall()
   if('username' in session):
     return render_template('index.html', films = films, genres = genres, top = top, busqueda=busqueda, log = session['username'])
   else:
@@ -142,19 +142,15 @@ def index(methods = ['POST', 'GET']):
 
 @app.route('/carrito/', methods=['GET','POST'])
 def carrito(methods=['GET','POST']):
-  #try:
-#    carrito = 88699 #session['carrito']
-#  except KeyError:
-#    carrito = 0
-
-    # BORRAR OJO, SI QUIERES PROBAR EL CARRITO, PON O.ORDERID = 88699
-
-
+  # POST para eliminar del carrito
   if(request.method=='POST'):
+    # El id del producto a eliminar sera el pasado por el post
     del_film_id=request.form.get('id')
+    # Si tenemos usuario registrado, lo eliminamos mediante la base de datos
     if('username' in session):
         connection.execute("DELETE FROM orderdetail\
             WHERE orderid= " + str(session['carrito']) + " and prod_id =" + str(del_film_id) + ";")
+    # Si no estamos logeados, recordamos que manejamos el carrito localmente
     else:
         if('carrito' in session):
             newCarrito = []
@@ -166,14 +162,16 @@ def carrito(methods=['GET','POST']):
 
   sumPrice=0
   if('username' in session):
-    # No cambiar el orden ni la posicion de las primeras dos columnas de la siguiente query
+    # Buscamos todas las peliculas del carrito del usuario logueado
     films = connection.execute("select p.price as prodPrice, od.price as orderPrice, od.quantity, p.prod_id, p.description, m.*\
           from products as p, orderdetail as od, orders as o, imdb_movies as m\
           where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(session['carrito']) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
     for film in films:
+      # Sumamos el precio
       sumPrice += film[1]
     return render_template('carrito.html', films = films, log = session['username'], sumPrice=sumPrice)
   else:
+    # Si no estamos logueados, hacemos la busqueda de las peliculas del carrito y la suma del precio localmente
     filmsEdited = []
     if('carrito' in session):
       films = session['carrito']
@@ -182,7 +180,6 @@ def carrito(methods=['GET','POST']):
         film[0]['quantity']=film[1]
         filmsEdited.append(film[0])
     else:
-
       sumPrice=0
 
     return render_template('carrito.html', films = filmsEdited, log = None, sumPrice=sumPrice)
@@ -208,6 +205,7 @@ def iniciosesion(methods = ['POST', 'GET']):
       # Si existe la password, existe el usuario
       if len(passwords) > 0:
         contrasenia=passwords[0][0]
+        # Si el md5 coincide, llamamos a la funcion que realiza lo necesario para establecer la sesion de usuario
         if contrasenia == md5.new(request.form.get('contrasenia')).hexdigest():
           loggedInAs(username)
           return redirect(url_for("index"))
@@ -223,13 +221,13 @@ def registro():
   if(request.method=='POST'):
     username=request.form.get('usuario')
     if (username!=None):
-
+      # Miramos si ya existe el username
       existeUser = len(list(connection\
         .execute("select username from customers where username = \'" + \
         username + "\';")))
       if existeUser > 0:
         return render_template('registro.html', existe=1)
-
+      # Si no existe, lo insertamos en la base de datos
       connection.execute("insert into customers "
         "(username, firstname, lastname, password, "
         "email, creditcard, creditcardtype, creditcardexpiration, address1, "
@@ -247,7 +245,7 @@ def registro():
         request.form.get('zip') + "\', \'" + \
         request.form.get('city') + \
         "\');")
-
+      # Llamamos a la funcion que realiza lo necesario para establecer la sesion de usuario
       loggedInAs(username)
 
       return index()
@@ -261,11 +259,13 @@ def registro():
 @app.route('/cuenta/', methods = ['POST', 'GET'])
 def cuenta():
   if('username' in session):
+    # Buscamos los datos del usuario en la base de datos
     datosUsuario = connection.execute("select * " + \
       "from customers where username = \'" + \
       session['username'] + "\'").fetchone()
 
     if(request.method=='POST'):
+      # Incrementamos el saldo del usuario en cuestion
       incr=int(request.form.get('quantity'))
       newSaldo=datosUsuario['income']+incr
       connection.execute("update customers " + \
@@ -279,20 +279,24 @@ def cuenta():
 
 @app.route('/finalizarCompra/')
 def finalizarCompra():
+  # Si no hay carrito, ponemos de orderid=0
   try:
     carrito = session['carrito']
   except KeyError:
     carrito=0
-
+  # Buscamos el carrito del usuario
   films = connection.execute("select *\
           from products as p, orderdetail as od, orders as o, imdb_movies as m\
           where p.prod_id = od.prod_id and o.orderid = od.orderid and o.orderid = " + str(carrito) + " and o.status is NULL and m.movieid=p.movieid;").fetchall()
 
   if('username' in session):
+    # Calculamos el precio final contando impuestos
     totalAmount = films[0]['netamount']*(1 + (films[0]['tax']/100))
+    # Ajustamos el totalamount en la base de datos
     connection.execute("update orders\
             set totalamount = "+ str(totalAmount) + "\
             where orderid= " + str(carrito) + ";")
+    # Buscamos el saldo del usuario
     saldo = connection.execute("select income\
             from customers\
             where username= '" + session['username']+ "';").fetchall()
@@ -303,9 +307,11 @@ def finalizarCompra():
 @app.route('/historialCompras/')
 def historialCompras():
   if('username' in session):
+    # Buscamos el historial del usuario
     historialUsuario = connection.execute("SELECT * \
         FROM products as p, orders as o, orderdetail as od, imdb_movies as m\
         WHERE p.prod_id=od.prod_id AND od.orderid=o.orderid AND o.customerid=" + str(session['customerid']) + " AND status IS NOT NULL AND m.movieid=p.movieid;").fetchall()
+    # Cogemos el conjunto de fechas del historial
     fechas = []
     for film in historialUsuario:
       if film['orderdate'] not in fechas:
@@ -318,13 +324,16 @@ def historialCompras():
 @app.route('/pelicula/<path:name>', methods = ['POST', 'GET'])
 def pelicula(name, methods = ['POST', 'GET']):
   if request.method=='GET':
+    # Buscamos la pelicula en la base de datos
     films = connection.execute("select * \
           from products as p, imdb_movies as f, imdb_moviegenres AS g\
           where p.prod_id=" + str(name) + " AND f.movieid=g.movieid AND p.movieid=f.movieid;").fetchall()
     film = films[0]
+    # Buscamos todos los generos asociados a la pelicula
     genres = []
     for f in films:
         genres.append(f['genre'])
+    # Buscamos sus directores y actores
     directors = connection.execute("SELECT *\
         FROM imdb_directors AS d, imdb_directormovies AS dm, products AS p\
         WHERE dm.movieid = p.movieid AND p.prod_id=" + str(name) + " AND d.directorid=dm.directorid;").fetchall()
@@ -343,6 +352,7 @@ def pelicula(name, methods = ['POST', 'GET']):
         else:
           return render_template('pelicula.html', film = None, directors = None, actors = None, log = None, listo=False)
 
+  # Si nos llega una peticion de aniadir al carrito...
   if request.method=='POST':
 
     films = connection.execute("select * \
@@ -442,6 +452,7 @@ def contador():
 
 @app.route('/confirmar/')
 def confirmar():
+    # Cogemos el user_id, el precio total y con esto ya podemos ejecutar confirmaCompra
     user_id = connection.execute("SELECT customerid FROM customers WHERE username= '" + session['username'] + "';").fetchall()[0]['customerid']
     totalAmount = connection.execute("SELECT totalamount FROM orders WHERE orderid = " + str(session['carrito']) + ";").fetchall()[0]['totalamount']
     connection.execute("SELECT confirmaCompra (" + str(user_id) +  ", " + str(totalAmount) + ");").fetchone()

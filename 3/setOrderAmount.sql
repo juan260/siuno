@@ -1,3 +1,5 @@
+-- Juan Riera y Luis Cárabe
+
 -- NOTA: esta funcion supone que se
 -- ha llamado a setPrize antes, o que
 -- al menos, los campos price de orderdetail

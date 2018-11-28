@@ -7,7 +7,7 @@ update
   products as PROD
 set
   stock = PROD.stock - orderdetail.quantity,
-  -- Restamos el stock0
+  -- Restamos el stock
   sales = PROD.sales + orderdetail.quantity -- Sumamos las sales
 from
   orderdetail

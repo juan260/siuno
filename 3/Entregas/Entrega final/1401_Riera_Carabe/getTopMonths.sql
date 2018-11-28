@@ -1,5 +1,4 @@
 -- Juan Riera y Luis Cárabe
-﻿
 -- Funcion que dados dos enteros, una cantidad primero
 -- y una cantidad de dinero como segundo argumento,
 -- devuelve el mes de los anios en los que se supero
@@ -39,4 +38,3 @@ where
   or OrdersWithPrizesAndQuantities.quantity > $1;
 END;
 $$ LANGUAGE 'plpgsql';
->>>>>>> 4cde5b24af89ec913f8a129b8d46f795aaad157c

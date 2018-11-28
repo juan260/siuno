@@ -39,4 +39,3 @@ where
   or OrdersWithPrizesAndQuantities.quantity > $1;
 END;
 $$ LANGUAGE 'plpgsql';
->>>>>>> 4cde5b24af89ec913f8a129b8d46f795aaad157c

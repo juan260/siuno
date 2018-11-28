@@ -1,5 +1,7 @@
 -- Juan Riera y Luis Cárabe
-
+-- Script que calcula el precio que tenia cada producto
+-- en la fecha en la que se vendio y guarda ese valor en la
+-- tabla orderdetail
 update
 	orderdetail as DET
 set

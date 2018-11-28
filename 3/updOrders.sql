@@ -3,6 +3,7 @@
 --DROP TRIGGER subOrdersTrig ON orderdetail;
 --DROP TRIGGER updAddOrdersTrig ON orderdetail;
 --DROP TRIGGER updSubOrdersTrig ON orderdetail;
+
 -- Funcion que suma el precio nuevo cuando se actualiza un producto a un order aniadiendo mas cantidades
 CREATE
 OR REPLACE FUNCTION updAddOrders () RETURNS TRIGGER as $$ BEGIN

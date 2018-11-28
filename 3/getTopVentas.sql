@@ -1,3 +1,5 @@
+-- Vista que contiene un anio, un titulo de una pelicula 
+-- y la cantidad de copias vendidas de esa pelicula en ese anio
 CREATE
 OR REPLACE VIEW dateMovieQuantity as
 select
@@ -6,7 +8,7 @@ select
   sum(quantity) as quant
 from
   (
-  	-- Tabla con las peliculas y la cantidad que se han
+  	-- Tabla con el identificador de las peliculas y la cantidad que se han
 	-- vendido en cada anio
     select
       extract(
@@ -18,6 +20,8 @@ from
       quantity
     from
       (
+      	-- Tabla que contiene la fecha de venta, el identificador de cada
+      	-- producto vendido en esa fecha y la cantidad del producto en la venta
         select
           ORD.orderdate,
           ORDET.prod_id,

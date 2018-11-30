@@ -19,13 +19,18 @@ explain select extract(YEAR from orderdate) as anio,
 DROP INDEX orders_date_index;
 
 CREATE INDEX orders_date_index
-ON orders(orderdate);
+ON orders(orderdate); -- Este no hace na
 
 DROP INDEX orders_totamount_index;
 
 CREATE INDEX orders_totamount_index
-ON orders(totalamount);
+ON orders(totalamount); -- Este reduce un poquito en explain, no en pgadmin
 
+
+DROP INDEX orders_id_index;
+
+CREATE INDEX orders_id_index
+ON orders(orderid);
 
 explain select extract(YEAR from orderdate) as anio,
 	     extract(MONTH from orderdate) as mes,

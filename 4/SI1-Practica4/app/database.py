@@ -14,30 +14,37 @@ def dbConnect():
 def dbCloseConnect(db_conn):
     db_conn.close()
 
-def getListaCliMes(db_conn, mes, anio, iumbral, iintervalo, use_prepare, break0, niter):
+db_conn=dbConnect()
+
+def getListaCliMes(mes, anio, iumbral, iintervalo, use_prepare, break0, niter):
 
     # TODO: implementar la consulta; asignar nombre 'cc' al contador resultante
-    consulta = " ... "
+    if use_prepare == True:
+        db_conn.execute("PREPARE clientDistPrep (int) AS \
+                    SELECT clientesDistintos($1, " + str(anio) + str(mes) +") as cc;")
 
-    # TODO: ejecutar la consulta
-    # - mediante PREPARE, EXECUTE, DEALLOCATE si use_prepare es True
-    # - mediante db_conn.execute() si es False
-
+    consulta = "SELECT clientesDistintos(1,2) as cc;"
     # Array con resultados de la consulta para cada umbral
     dbr=[]
 
     for ii in range(niter):
-
-        # TODO: ...
-
+        if use_prepare==True:
+            res = db_conn.execute("EXECUTE clientDistPrep ( " + str(iumbral) +\
+                ");").fetchone()
+        else:
+            res = db_conn.execute("SELECT clientesDistintos (" + str(iumbral) +", " +\
+                str(anio) + str(mes) +")").fetchone()
         # Guardar resultado de la query
         dbr.append({"umbral":iumbral,"contador":res['cc']})
 
-        # TODO: si break0 es True, salir si contador resultante es cero
+        if break0==True and res['cc']==0:
+            break;
 
         # Actualizacion de umbral
         iumbral = iumbral + iintervalo
 
+    if use_prepare == True:
+        db_conn.execute("DEALLOCATE clientDistPrep;")
     return dbr
 
 def getMovies(anio):

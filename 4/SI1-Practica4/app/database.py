@@ -97,11 +97,13 @@ def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
 
     try:
         # TODO: ejecutar consultas
-
+        print("err")
     except Exception as e:
+        print("err")
         # TODO: deshacer en caso de error
 
     else:
+        print("err")
         # TODO: confirmar cambios si todo va bien
 
 

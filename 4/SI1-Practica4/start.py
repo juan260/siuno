@@ -12,7 +12,7 @@ sys.path.append('~/apache2/var/www/html/')
 def index(methods = ['POST', 'GET']):
     if request.method == 'GET':
         return render_template('index.html')
-        
+
     if request.method == 'POST':
         mes = request.form.get('mes')
         anio = request.form.get('anio')
@@ -22,6 +22,7 @@ def index(methods = ['POST', 'GET']):
         break0 = request.form.get('break0')
         niter = request.form.get('niter')
         results = db.getListaCliMes(int(mes), int(anio), int(iumbral), int(iintervalo), int(use_prepare), int(break0), int(niter))
+        print(results)
         return render_template('lista.html', results=results)
 
 if __name__ == '__main__':

@@ -16,21 +16,25 @@ explain select extract(YEAR from orderdate) as anio,
 	having (extract(YEAR from orderdate) = 2015 and
 	extract(MONTH from orderdate) = 04);
 
+-- Creaciones de índices
+
 DROP INDEX orders_date_index;
-
-CREATE INDEX orders_date_index
-ON orders(orderdate); -- Este no hace na
-
 DROP INDEX orders_totamount_index;
+DROP INDEX orders_totalamountdate_index;
+DROP INDEX orders_totalamountdate2_index;
 
 CREATE INDEX orders_totamount_index
-ON orders(totalamount); -- Este reduce un poquito en explain, no en pgadmin
+ON orders(totalamount); 
 
+CREATE INDEX orders_date_index
+ON orders(orderdate);
 
-DROP INDEX orders_id_index;
+CREATE INDEX orders_totalamountdate_index
+ON orders(totalamount, orderdate);
 
-CREATE INDEX orders_id_index
-ON orders(orderid);
+CREATE INDEX orders_totalamountdate2_index
+ON orders(orderdate, totalamount);
+
 
 explain select extract(YEAR from orderdate) as anio,
 	     extract(MONTH from orderdate) as mes,
@@ -41,7 +45,7 @@ explain select extract(YEAR from orderdate) as anio,
 	having (extract(YEAR from orderdate) = 2015 and
 	extract(MONTH from orderdate) = 04);
 
-	CREATE OR REPLACE FUNCTION clientesDistintos(amount integer, date1 integer) RETURNS table(
+CREATE OR REPLACE FUNCTION clientesDistintos(amount integer, date1 integer) RETURNS table(
 		  year1 double precision, month1 double precision,
 		  count1 bigint
 		) as $$

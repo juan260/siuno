@@ -32,8 +32,8 @@ def getListaCliMes(mes, anio, iumbral, iintervalo, use_prepare, break0, niter):
             query="EXECUTE clientDistPrep ( " + str(iumbral) +\
                 ");"
             res = db_conn.execute(query).fetchone()
-                
-                
+
+
         else:
             query = "SELECT clientesDistintos (" + str(iumbral) +", " +\
                 "{0:0=4d}".format(anio) + "{0:0=2d}".format(mes) +") as cc;"
@@ -119,12 +119,19 @@ def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
     # - suspender la ejecución 'duerme' segundos en el punto adecuado para forzar deadlock
     # - ir guardando trazas mediante dbr.append()
 
-    queryOrderdetail = "DELETE FROM orderdetail WHERE orderid in (SELECT orderid FROM orders WHERE cutomerid = " + customerid + ");"
+    print "customerid: "+ str(customerid)
+    print "bfallo "+ str(bFallo)
+    print "bSQL " + str(bSQL)
+    print "duerme " + str(duerme)
+    print "bCommit " + str(bCommit)
+
+    queryOrderdetail = "DELETE FROM orderdetail WHERE orderid in (SELECT orderid FROM orders WHERE customerid = " + customerid + ");"
     queryOrders = "DELETE FROM orders WHERE customerid=" + customerid + ";"
     queryCustomers = "DELETE FROM customers WHERE customerid =" + customerid + ";"
     try:
-        if bSQL == 1:
+        if bSQL == 0:
             trans = db_conn.begin()
+            print 1
             if bFallo == 1:
                 trans.execute(queryOrderdetail)
                 if bCommit == 1: # Forzamos commit intermedio
@@ -137,29 +144,35 @@ def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
                 trans.execute(queryOrders)
                 trans.execute(queryCustomers)
         else:
+            print 2
             db_conn.execute("BEGIN")
             if bFallo == 1:
+                print 3
                 db_conn.execute(queryOrderdetail)
                 if bCommit == 1: # Forzamos commit intermedio
                     db_conn.execute("COMMIT")
                     db_conn.execute("BEGIN")
+                    print 4
                 db_conn.execute(queryCustomers) # Invertimos el orden
                 db_conn.execute(queryOrders)
             else:
+                print 5
                 db_conn.execute(queryOrderdetail)
+                print 6
                 db_conn.execute(queryOrders)
+                print 7
                 db_conn.execute(queryCustomers)
 
-                db_conn.execute()
     except Exception as e:
         print "EXCEPTION"
-        if bSQL == 1:
+        print e
+        if bSQL == 0:
             trans.rollback()
         else:
             db_conn.execute("ROLLBACK")
 
     else:
-        if bSQL == 1:
+        if bSQL == 0:
             trans.commit()
         else:
             db_conn.execute("COMMIT")

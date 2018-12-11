@@ -9,6 +9,7 @@ import time
 
 @app.route('/borraCliente', methods=['POST','GET'])
 def borraCliente():
+    print request.form
     if 'customerid' in request.form:
         customerid = request.form["customerid"]
         bSQL       = request.form["txnSQL"]
@@ -41,32 +42,17 @@ def xLoginInjection():
 
 @app.route('/listaClientesMes', methods=['GET', 'POST'])
 def listaClientesMes():
-    if 'fecha' in request.form:
-        fecha  = request.form['fecha']
-        mes    = request.form['mes']
-        anio   = request.form['anio']
-        umbral = request.form['minimo']
-        intervalo = request.form['intervalo']
-        use_prepare = 'prepare'  in request.form
-        break0 = 'break0' in request.form
-        niter  = request.form['iter']
-        # connect fuera para comparar tiempos con más precisión
-        db_conn = database.dbConnect()
-        t0=round(time.time() * 1000)
-        dbr = database.getListaCliMes(db_conn, mes, anio, int(umbral), int(intervalo), use_prepare, break0, int(niter))
-        t1=round(time.time() * 1000)
-        database.dbCloseConnect(db_conn)
+    if request.method == 'GET':
+        return render_template('index.html')
 
-        return render_template('listaClientesMes.html',
-            fecha = fecha,
-            mes   = mes,
-            anio  = anio,
-            umbral = int(umbral),
-            intervalo = int(intervalo),
-            use_prepare = use_prepare,
-            break0 = break0,
-            tiempo = str(int(t1-t0)),
-            dbr=dbr
-           )
-    else:
-        return render_template('listaClientesMes.html')
+    if request.method == 'POST':
+        mes = request.form.get('mes')
+        anio = request.form.get('anio')
+        iumbral = request.form.get('iumbral')
+        iintervalo = request.form.get('iintervalo')
+        use_prepare = request.form.get('use_repare')
+        break0 = request.form.get('break0')
+        niter = request.form.get('niter')
+        results, time = db.getListaCliMes(int(mes), int(anio), int(iumbral), int(iintervalo), int(use_prepare), int(break0), int(niter))
+
+        return render_template('lista.html', results=results, time=time)

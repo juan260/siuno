@@ -3,18 +3,21 @@ ALTER TABLE customers
 
 CREATE TRIGGER updPromoTrig 
 AFTER
-    UPDATE ON customers FOR EACH ROW
-    WHEN OLD.promo != NEW.promo
+    UPDATE of promo ON customers FOR EACH ROW
     EXECUTE PROCEDURE updPromo();
+
 
 CREATE
 OR REPLACE FUNCTION updPromo () RETURNS TRIGGER as $$ 
-declare 
-
 BEGIN
 update orderdetail 
-set orderdetail.price = products.price*(NEW.promo/100)
-FROM products
+set price = products.price*(1-NEW.promo/100)
+FROM products, orders
 WHERE products.prod_id=orderdetail.prod_id
+and  orderdetail.orderid = orders.orderdetail
+and orders.status IS NULL
+and orders.customerid = NEW.customerid;
+SELECT pg_sleep(5);
 END;
 $$ LANGUAGE 'plpgsql';
+

@@ -1,0 +1,7 @@
+A.  un indice que reduce puede ser:
+    CREATE INDEX orders_totamount_index
+    ON orders(totalamount);
+    el resto no parece que hagan algo
+
+C.  i) Las tres??
+    ii) las dos últimas, la segunda por hacer dos seq scan en paralelo y la tercera por hacer subconsultas

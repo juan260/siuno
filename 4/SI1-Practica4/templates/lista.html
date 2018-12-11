@@ -12,6 +12,16 @@
         {% for res in results %}
           <tr><td>{{ res['umbral'] }} </td> <td>{{ res['contador'] }} </td> </tr>
         {% endfor %}
+        {% if time == None %}
+        Time could not be displayed
+        {% else %}
+          {% if time > 1000 %}
+
+            <tr>Total time: {{ time/1000 }} s</tr>
+          {% else %}
+            <tr>Total time: {{ time }} ms</tr>
+          {% endif %}
+        {% endif %}
       </table>
     </div>
   </body>

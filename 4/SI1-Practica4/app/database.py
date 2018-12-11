@@ -2,6 +2,7 @@
 
 import os
 import sys, traceback, time
+import re
 
 from sqlalchemy import create_engine
 
@@ -25,20 +26,41 @@ def getListaCliMes(mes, anio, iumbral, iintervalo, use_prepare, break0, niter):
 
     # Array con resultados de la consulta para cada umbral
     dbr=[]
-
+    time=0
     for ii in range(niter):
         if use_prepare==True:
-            res = db_conn.execute("EXECUTE clientDistPrep ( " + str(iumbral) +\
-                ");").fetchone()
-
+            query="EXECUTE clientDistPrep ( " + str(iumbral) +\
+                ");"
+            res = db_conn.execute(query).fetchone()
+                
+                
         else:
-            res = db_conn.execute("SELECT clientesDistintos (" + str(iumbral) +", " +\
-                str(anio) + str(mes) +");").fetchone()
+            query = "SELECT clientesDistintos (" + str(iumbral) +", " +\
+                "{0:0=4d}".format(anio) + "{0:0=2d}".format(mes) +") as cc;"
+            print(query)
+            res = db_conn.execute(query).fetchone()
+
+        if time!= None:
+            timeres=db_conn.execute("EXPLAIN ANALYZE " + query).fetchall()
+            try:
+                timetmp = float(re.findall("\d+\.\d+", timeres[-1][0])[0].encode("utf-8"))
+                if timeres[-1][0][-2:] == 'ms':
+                    time+=timetmp
+                    print(str(timetmp) + "ms")
+                elif timeres[-1][0][-1] == 's':
+                    time+=timetmp*1000
+                    print(str(timetmp) + "s")
+                elif timeres[-1][0][-1] == 'm':
+                    time+=timetmp*6000
+                    print(str(timetmp) + "m")
+            except Exception:
+                time=None
+
         # Guardar resultado de la query
         dbr.append({"umbral":iumbral,"contador":res['cc']})
 
         if break0==True and res['cc']==None:
-            break;
+            break
 
         # Actualizacion de umbral
         iumbral = iumbral + iintervalo
@@ -46,7 +68,7 @@ def getListaCliMes(mes, anio, iumbral, iintervalo, use_prepare, break0, niter):
     if use_prepare == True:
         db_conn.execute("DEALLOCATE clientDistPrep;")
     dbCloseConnect(db_conn)
-    return dbr
+    return dbr, time
 
 def getMovies(anio):
     # conexion a la base de datos

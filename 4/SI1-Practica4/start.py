@@ -21,9 +21,9 @@ def index(methods = ['POST', 'GET']):
         use_prepare = request.form.get('use_repare')
         break0 = request.form.get('break0')
         niter = request.form.get('niter')
-        results = db.getListaCliMes(int(mes), int(anio), int(iumbral), int(iintervalo), int(use_prepare), int(break0), int(niter))
-        print(results)
-        return render_template('lista.html', results=results)
+        results, time = db.getListaCliMes(int(mes), int(anio), int(iumbral), int(iintervalo), int(use_prepare), int(break0), int(niter))
+        
+        return render_template('lista.html', results=results, time=time)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)

@@ -107,27 +107,62 @@ def getCustomer(username, password):
         return {'firstname': res['firstname'], 'lastname': res['lastname']}
 
 def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
-
     # Array de trazas a mostrar en la página
     dbr=[]
+    print "perp emtras o que"
+    db_conn = dbConnect()
 
-    # TODO: Ejecutar consultas de borrado
+    # Ejecutar consultas de borrado
     # - ordenar consultas según se desee provocar un error (bFallo True) o no
     # - ejecutar commit intermedio si bCommit es True
     # - usar sentencias SQL ('BEGIN', 'COMMIT', ...) si bSQL es True
     # - suspender la ejecución 'duerme' segundos en el punto adecuado para forzar deadlock
     # - ir guardando trazas mediante dbr.append()
 
+    queryOrderdetail = "DELETE FROM orderdetail WHERE orderid in (SELECT orderid FROM orders WHERE cutomerid = " + customerid + ");"
+    queryOrders = "DELETE FROM orders WHERE customerid=" + customerid + ";"
+    queryCustomers = "DELETE FROM customers WHERE customerid =" + customerid + ";"
     try:
-        # TODO: ejecutar consultas
-        print("err")
+        if bSQL == 1:
+            trans = db_conn.begin()
+            if bFallo == 1:
+                trans.execute(queryOrderdetail)
+                if bCommit == 1: # Forzamos commit intermedio
+                    trans.commit()
+                    trans = db_conn.begin()
+                trans.execute(queryCustomers) # Invertimos el orden
+                trans.execute(queryOrders)
+            else:
+                trans.execute(queryOrderdetail)
+                trans.execute(queryOrders)
+                trans.execute(queryCustomers)
+        else:
+            db_conn.execute("BEGIN")
+            if bFallo == 1:
+                db_conn.execute(queryOrderdetail)
+                if bCommit == 1: # Forzamos commit intermedio
+                    db_conn.execute("COMMIT")
+                    db_conn.execute("BEGIN")
+                db_conn.execute(queryCustomers) # Invertimos el orden
+                db_conn.execute(queryOrders)
+            else:
+                db_conn.execute(queryOrderdetail)
+                db_conn.execute(queryOrders)
+                db_conn.execute(queryCustomers)
+
+                db_conn.execute()
     except Exception as e:
-        print("err")
-        # TODO: deshacer en caso de error
+        print "EXCEPTION"
+        if bSQL == 1:
+            trans.rollback()
+        else:
+            db_conn.execute("ROLLBACK")
 
     else:
-        print("err")
-        # TODO: confirmar cambios si todo va bien
+        if bSQL == 1:
+            trans.commit()
+        else:
+            db_conn.execute("COMMIT")
 
 
     return dbr

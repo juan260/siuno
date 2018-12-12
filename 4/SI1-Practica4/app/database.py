@@ -109,7 +109,6 @@ def getCustomer(username, password):
 def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
     # Array de trazas a mostrar en la página
     dbr=[]
-    print "perp emtras o que"
     db_conn = dbConnect()
 
     # Ejecutar consultas de borrado
@@ -131,51 +130,65 @@ def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
     try:
         if bSQL == 0:
             trans = db_conn.begin()
-            print 1
+            dbr.append("BEGIN")
             if bFallo == 1:
-                trans.execute(queryOrderdetail)
+                ret = db_conn.execute(queryOrderdetail)
+                dbr.append("EXECUTE " + queryOrderdetail + " rows affected: " + str(ret.rowcount))
                 if bCommit == 1: # Forzamos commit intermedio
                     trans.commit()
+                    dbr.append("COMMIT")
                     trans = db_conn.begin()
-                trans.execute(queryCustomers) # Invertimos el orden
-                trans.execute(queryOrders)
+                    dbr.append("BEGIN")
+                ret = db_conn.execute(queryCustomers) # Invertimos el orden
+                dbr.append("EXECUTE " + queryCustomers + " rows affected: " + str(ret.rowcount))
+                ret = db_conn.execute(queryOrders)
+                dbr.append("EXECUTE " + queryOrders + " rows affected: " + str(ret.rowcount))
             else:
-                trans.execute(queryOrderdetail)
-                trans.execute(queryOrders)
-                trans.execute(queryCustomers)
+                ret = db_conn.execute(queryOrderdetail)
+                dbr.append("EXECUTE " + queryOrderdetail + " rows affected: " + str(ret.rowcount))
+                ret = db_conn.execute(queryOrders)
+                dbr.append("EXECUTE " + queryOrders + " rows affected: " + str(ret.rowcount))
+                ret = db_conn.execute(queryCustomers)
+                dbr.append("EXECUTE " + queryCustomers + " rows affected: " + str(ret.rowcount))
         else:
-            print 2
             db_conn.execute("BEGIN")
+            dbr.append("BEGIN")
             if bFallo == 1:
-                print 3
-                db_conn.execute(queryOrderdetail)
+                ret = db_conn.execute(queryOrderdetail)
+                dbr.append("EXECUTE " + queryOrderdetail + " rows affected: " + str(ret.rowcount))
                 if bCommit == 1: # Forzamos commit intermedio
                     db_conn.execute("COMMIT")
+                    dbr.append("COMMIT")
                     db_conn.execute("BEGIN")
-                    print 4
-                db_conn.execute(queryCustomers) # Invertimos el orden
-                db_conn.execute(queryOrders)
+                    dbr.append("BEGIN")
+                ret = db_conn.execute(queryCustomers) # Invertimos el orden
+                dbr.append("EXECUTE " + queryCustomers + " rows affected: " + str(ret.rowcount))
+                ret = db_conn.execute(queryOrders)
+                dbr.append("EXECUTE " + queryOrders + " rows affected: " + str(ret.rowcount))
             else:
-                print 5
-                db_conn.execute(queryOrderdetail)
-                print 6
-                db_conn.execute(queryOrders)
-                print 7
-                db_conn.execute(queryCustomers)
+                ret = db_conn.execute(queryOrderdetail)
+                dbr.append("EXECUTE " + queryOrderdetail + " rows affected: " + str(ret.rowcount))
+                ret = db_conn.execute(queryOrders)
+                dbr.append("EXECUTE " + queryOrders + " rows affected: " + str(ret.rowcount))
+                ret = db_conn.execute(queryCustomers)
+                dbr.append("EXECUTE " + queryCustomers + " rows affected: " + str(ret.rowcount))
 
     except Exception as e:
-        print "EXCEPTION"
-        print e
+        dbr.append("EXCEPTION")
         if bSQL == 0:
             trans.rollback()
+            dbr.append("ROLLBACK")
         else:
             db_conn.execute("ROLLBACK")
+            dbr.append("ROLLBACK")
 
     else:
         if bSQL == 0:
             trans.commit()
+            dbr.append("COMMIT")
         else:
             db_conn.execute("COMMIT")
+            dbr.append("COMMIT")
 
 
     return dbr

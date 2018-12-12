@@ -11,3 +11,7 @@ cat clientesDistintosFunc.sql | psql -U alumnodb si1
 
 cat turnOnStats.sql | psql -U alumnodb si1
 
+cat updOrders.sql | psql -U alumnodb si1
+
+cat updPromo.sql | psql -U alumnodb si1
+
